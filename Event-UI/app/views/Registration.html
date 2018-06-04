@@ -1,0 +1,434 @@
+<uib-tabset active="$ctrl.current">
+    <uib-tab index="0" heading="1 Event Causes" active="$ctrl.current = 0">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Event Details
+            </div>
+            <div class="panel-body">
+                <div class="row" style="padding:0.5%">
+                    <div class="col-sm-3">*Type Of Event</div>
+                    <div class="col-sm-3">
+                        <select ng-model="$ctrl.event.typeOfEvent">
+                            <option value="Certification">Certification</option>
+                            <option value="Decertification">Decertification</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">*Is this Drug & alcohol Event ?</div>
+                    <div class="col-sm-3">
+                        <input type="radio" class="form-inputcontrol" name="drug" value="YES" ng-model="$ctrl.event.isDrugOrAlcohol"/> YES
+                        <input type="radio" class="form-inputcontrol" name="drug" value="NO" ng-model="$ctrl.event.isDrugOrAlcohol"/>NO</div>
+                </div>
+                <!-- <br>
+            <br> -->
+                <div class="row" style="padding:0.5%">
+                    <div class="col-sm-3">*Event Date</div>
+                    <div class="col-sm-3">
+                        <input type="date" ng-model="$ctrl.event.eventDate" class="form-inputcontrol" />
+                    </div>
+                    <div class="col-sm-1">*Event time</div>
+                    <div class="col-sm-1">
+                        <input type="time" ng-model="$ctrl.event.eventTime" class="form-inputcontrol" />
+                    </div>
+                    <div class="col-sm-1">*Time Zone</div>
+                    <div class="col-sm-2">
+                        <select ng-model="$ctrl.event.timeZone">
+                            <option value="PST">PST</option>
+                            <option value="MST">MST</option>
+                            <option value="CST">CST</option>
+                            <option value="EST">EST</option>
+                            <option value="HST">HST</option>
+                            <option value="AKST">AKST</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- <br>
+            <br> -->
+                <div class="row" style="padding:0.5%">
+                    <div class="col-sm-3">*Date Of Knowledge</div>
+                    <div class="col-sm-3">
+                        <input type="date" ng-model="$ctrl.event.eventOfKnowledge" class="form-inputcontrol" />
+                    </div>
+                    <div class="col-sm-2">*Crew Description Of Incident</div>
+                    <div class="col-sm-3">
+                        <textarea class="form-control" ng-model="$ctrl.event.crewDescriptionOfIncident" rows="5"></textarea>
+                    </div>
+                </div>
+                <!-- <br>
+            <br> -->
+                <div class="row" style="padding:0.5%">
+                    <div class="col-sm-3">*Result Of Event</div>
+                    <div class="col-sm-3">
+                        <select ng-model="$ctrl.event.resultOfEvent">
+                            <option value="FRA">FRA</option>
+                            <option value="None">None</option>
+                            <option value="Deraliment">Deraliment</option>
+                            <option value="Collision">Collision</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">*Manager Comments</div>
+                    <div class="col-sm-3">
+                        <textarea class="form-control" ng-model="$ctrl.event.managerComments" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr> Fields denoted with * are required
+        <!-- <br>
+        <br> -->
+        <button class="btn btn-primary pull-right" style="margin-right:2%" ng-click="$ctrl.goToTab2()">next</button>
+    </uib-tab>
+    <uib-tab index="1" heading="2 Event Information" active="$ctrl.current = 1">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Train Details
+            </div>
+            <div class="row" style="padding:0.5%">
+                <div class="col-sm-2">*Train Id</div>
+                <div class="col-sm-2">
+                    <!-- <input type="text" ng-model="$ctrl.event.trainId" class="form-inputcontrol"> -->
+                    <input type="text" ng-model="$ctrl.trainSection" class="form-inputcontrol" style="width:7%">
+                    <input type="text" ng-model="$ctrl.trainId" class="form-inputcontrol" style="width:33%">
+                    <input type="text" ng-model="$ctrl.trainDate" class="form-inputcontrol" style="width:37%">
+                    <button class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal"></button>
+                </div>
+
+
+                <div class="col-sm-2">*Loads</div>
+                <div class="col-sm-2">
+                    <input type="text" ng-model="$ctrl.event.loads" class="form-inputcontrol">
+                </div>
+
+                <div class="col-sm-2">*Lead Locomotive</div>
+                <div class="col-sm-2">
+                    <input type="number" ng-model="$ctrl.event.locomotiveId" class="form-inputcontrol">
+                </div>
+            </div>
+            <div class="row" style="padding:0.5%">
+                <div class="col-sm-2">*Empties</div>
+                <div class="col-sm-2">
+                    <input type="number" ng-model="$ctrl.event.empties" class="form-inputcontrol">
+                </div>
+
+                <div class="col-sm-2">*Tonnage</div>
+                <div class="col-sm-2">
+                    <input type="number" ng-model="$ctrl.event.tonnage" class="form-inputcontrol">
+                </div>
+
+                <div class="col-sm-2">*Length</div>
+                <div class="col-sm-2">
+                    <input type="number" ng-model="$ctrl.event.length" class="form-inputcontrol">
+                </div>
+            </div>
+            <div class="row" style="padding:0.5%">
+                <div class="col-sm-2">*Max Authorized Speed</div>
+                <div class="col-sm-2">
+                    <input type="number" ng-model="$ctrl.event.maxAuthorizedSpeed" class="form-inputcontrol">
+                </div>
+
+                <div class="col-sm-2">*Speed at the time of Incident</div>
+                <div class="col-sm-2">
+                    <input type="number" ng-model="$ctrl.event.speedAtTheTimeOfIncident" class="form-inputcontrol">
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Location Details
+            </div>
+
+            <div class="row" style="padding:0.5%">
+                <div class="col-sm-2">*Sub division</div>
+                <div class="col-sm-2">
+
+                    <input type="text" class="form-inputcontrol autocomplete" ng-model="$ctrl.getSubDivision.subDivisionName" uib-typeahead="temp for temp in $ctrl.subDivision | filter:$viewValue | limitTo:8"
+                        ng-change="$ctrl.getRegion()">
+                </div>
+                <div class="col-sm-2">*Mile-Post</div>
+                <div class="col-sm-2">
+                    <input type="number" ng-model="$ctrl.regionDetails.milePost" class="form-inputcontrol">
+                </div>
+
+                <div class="col-sm-2">*Region</div>
+                <div class="col-sm-2">
+                    <!-- <select ng-options="temp as temp for temp in $ctrl.region" data-required="true" ng-model="$ctrl.regionDetails.regionName" class="slds-select">
+                    <option value="">Select Region</option>
+                  </select> -->
+                    <input type="text" class="form-inputcontrol autocomplete" ng-model="$ctrl.regionDetails.regionName" uib-typeahead="temp for temp in $ctrl.region | filter:$viewValue | limitTo:8">
+                </div>
+            </div>
+            <div class="row" style="padding:0.5%">
+                <div class="col-sm-2">*Service Unit</div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-inputcontrol autocomplete" ng-model="$ctrl.regionDetails.serviceUnitName" uib-typeahead="temp for temp in $ctrl.serviceUnit | filter:$viewValue | limitTo:8">
+                </div>
+
+                <div class="col-sm-2">*Signal Territory</div>
+                <div class="col-sm-2">
+                    <input type="number" ng-model="$ctrl.event.signalTerritory" class="form-inputcontrol">
+                </div>
+
+                <div class="col-sm-2">*Type of track</div>
+                <div class="col-sm-2">
+                    <input type="text" ng-model="$ctrl.event.typeOfTrack" class="form-inputcontrol">
+                </div>
+            </div>
+            <div class="row" style="padding:0.5%">
+                <div class="col-sm-2">*Type of Authority</div>
+                <div class="col-sm-2">
+                    <input type="text" ng-model="$ctrl.event.typeOfAuthority" class="form-inputcontrol">
+                </div>
+
+                <div class="col-sm-2">Rail road</div>
+                <div class="col-sm-2">
+                    <input type="number" ng-model="$ctrl.event.railRoad" class="form-inputcontrol">
+                </div>
+
+                <div class="col-sm-2">*Within 10 miles of terminal ?</div>
+                <div class="col-sm-2">
+                    <input type="radio" class="form-inputcontrol" name="miles" value="YES" ng-model="$ctrl.event.withinTenMilesOfTerminal" /> YES
+                    <input type="radio" class="form-inputcontrol" name="miles" value="NO" ng-model="$ctrl.event.withinTenMilesOfTerminal" />NO
+                </div>
+            </div>
+            <div class="row" style="padding:0.5%">
+                <div class="col-sm-2">*Initial or Final terminal</div>
+                <div class="col-sm-2">
+                    <input type="radio" class="form-inputcontrol" name="terminal" value="initial" ng-model="$ctrl.event.isInitialOrFinal" />Initial
+                    <input type="radio" class="form-inputcontrol" name="terminal" value="final" ng-model="$ctrl.event.isInitialOrFinal"/>Final
+                </div>
+
+                <div class="col-sm-2">*Nearest Station</div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-inputcontrol" ng-model="$ctrl.event.nearestStation">
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Other Details
+            </div>
+            <div class="row" style="padding:0.5%">
+                <div class="col-sm-2">Crew type</div>
+                <div class="col-sm-2">
+                    <input type="text" ng-model="$ctrl.event.crewType" class="form-inputcontrol">
+                </div>
+
+                <div class="col-sm-2">*Operation</div>
+                <div class="col-sm-2">
+                    <input type="text" ng-model="$ctrl.event.operation" class="form-inputcontrol">
+                </div>
+
+                <div class="col-sm-2">*weather</div>
+                <div class="col-sm-2">
+                    <input type="text" ng-model="$ctrl.event.weather" class="form-inputcontrol">
+                </div>
+            </div>
+            <div class="row" style="padding:0.5%">
+                <div class="col-sm-2">Visibility</div>
+                <div class="col-sm-2">
+                    <input type="text" ng-model="$ctrl.event.visibility" class="form-inputcontrol">
+                </div>
+
+                <div class="col-sm-2">Grade</div>
+                <div class="col-sm-2">
+                    <input type="text" ng-model="$ctrl.event.grade" class="form-inputcontrol">
+                </div>
+
+                <div class="col-sm-2">Curvature</div>
+                <div class="col-sm-2">
+                    <input type="text" ng-model="$ctrl.event.curvature" class="form-inputcontrol">
+                </div>
+            </div>
+            <div class="row" style="padding:0.5%">
+                <div class="col-sm-1">*FTX Event</div>
+                <div class="col-sm-2">
+                    <input type="radio" class="form-inputcontrol" name="FTXEvent" value="yes" ng-model="$ctrl.event.ftxEvent"/>Yes
+                    <input type="radio" class="form-inputcontrol" name="FTXEvent" value="no" ng-model="$ctrl.event.ftxEvent"/>No
+                </div>
+                <div class="col-sm-1">*Technology</div>
+                <div class="col-sm-2">
+                    <input type="radio" class="form-inputcontrol" name="Technology" value="yes" ng-model="$ctrl.event.technology"/>Yes
+                    <input type="radio" class="form-inputcontrol" name="Technology" value="no" ng-model="$ctrl.event.technology"/>No
+                </div>
+                <div class="col-sm-1">*Blue Flag</div>
+                <div class="col-sm-2">
+                    <input type="radio" class="form-inputcontrol" name="blueFlag" value="yes" ng-model="$ctrl.event.blueFlag"/>Yes
+                    <input type="radio" class="form-inputcontrol" name="blueFlag" value="no" ng-model="$ctrl.event.blueFlag"/>No
+                </div>
+                <div class="col-sm-2">*PTC Engaged</div>
+                <div class="col-sm-1">
+                    <input type="radio" class="form-inputcontrol" name="PTC" value="yes" ng-model="$ctrl.event.ptcEngaged"/>Yes
+                    <input type="radio" class="form-inputcontrol" name="PTC" value="no" ng-model="$ctrl.event.ptcEngaged"/>No
+                </div>
+            </div>
+        </div>
+        <hr> Fields denoted with * are required
+        <button class="btn btn-primary pull-left" style="margin-left:2%" ng-click="$ctrl.goToTab1()">back</button>
+        <button class="btn btn-primary pull-right" style="margin-right:2%" ng-click="$ctrl.goToTab3()">next</button>
+    </uib-tab>
+
+    <uib-tab index="2" heading="3 Employee Information" active="$ctrl.current = 2">
+
+        Employee Id:
+        <input type="text" class="form-inputcontrol autocomplete" ng-model="$ctrl.employeeSelected" uib-typeahead="temp for temp in $ctrl.employee | filter:$viewValue | limitTo:4">
+        <button class="btn btn-primary" ng-click="$ctrl.addEmployeeToTable()">Add</button>
+
+        <table class="table table-condensed table-bordered table-striped">
+            <tr>
+                <th>
+                    EMP#
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Position
+                </th>
+                <th>
+                    Date on Duty
+                </th>
+                <th>
+                    Time on Duty
+                </th>
+                <th>
+                    Time Zone
+                </th>
+                <th>
+                    Hours on Duty
+                </th>
+                <th>
+                    Previous Rest
+                </th>
+                <th>
+                    Direction
+                </th>
+                <th>
+                    Last job briefing
+                </th>
+                <th>
+                    Suspended
+                </th>
+                <th>
+                    Regulation
+                </th>
+                <th>
+                    Has been operating longer than 6 months?
+                </th>
+                <th>
+                    Delete
+                </th>
+                <tr ng-repeat="temp in $ctrl.employeeToTable">
+                    <td>{{temp.employeeId}}</td>
+                    <td>{{temp.employeeName}}</td>
+                    <td>
+                        <select ng-model="temp.position">
+                            <option value="YardMen">Yard Men</option>
+                            <option value="Engineer">Engineer</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="date" ng-model="temp.dateOnDuty">
+                    </td>
+                    <td>
+                            <input id="time" type="time" ng-model="temp.timeOnDuty ">
+                       
+                    </td>
+                    </td>
+                    <td>
+                        <select ng-model="temp.timeZone">
+                            <option value="PST">PST</option>
+                            <option value="MST">MST</option>
+                            <option value="CST">CST</option>
+                            <option value="EST">EST</option>
+                            <option value="HST">HST</option>
+                            <option value="AKST">AKST</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="time" placeholder="HH:mm"ng-model="temp.hoursOnDuty">
+                    </td>
+                    <td>
+                        <input type="time" placeholder="HH:mm" ng-model="temp.previousRest">
+                    </td>
+                    <td>
+                        <select ng-model="temp.direction">
+                            <option value="NORTH">NORTH</option>
+                            <option value="EAST">EAST</option>
+                            <option value="WEST">WEST</option>
+                            <option value="SOUTH">SOUTH</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select ng-model="temp.lastJobBreifing">
+                            <option value="on duty">On duty</option>
+                            <option value="off duty">Off duty</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select ng-model="temp.suspended">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select ng-options="temp as temp for temp in $ctrl.regulation" ng-model="temp.regulation" data-required="true" class="slds-select">
+                            <option value="">Select Regulation</option>
+                        </select>
+                    </td>
+
+                    <td align="center">
+                        <select ng-model="temp.isHeOperatingLongerThanSixMonths">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </td>
+                    </td>
+                    <td>
+                        <button class="glyphicon glyphicon-trash" ng-click="$ctrl.deleteEmployee(temp.employeeId)"></button>
+                    </td>
+                    <tr>
+                    </tr>
+        </table>
+        <hr> Fields denoted with * are required
+        <button class="btn btn-primary pull-left" style="margin-left:2%" ng-click="$ctrl.goToTab2()">back</button>
+        <button class="btn btn-primary pull-right" style="margin-right:2%" ng-click="$ctrl.submitEvent()">Submit</button>
+    </uib-tab>
+</uib-tabset>
+
+
+<!-- Modal  Train-->
+<div class="modal fade" id="myModal" role="dialog" style="">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Train Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    Train ID:
+                    <input type="text" class="form-inputcontrol" ng-model="$ctrl.searchTrain">
+                    <button type="button" ng-click="$ctrl.searchTrains()">search</button>
+                </div>
+                <table ng-table="$ctrl.tableData" class="table table-condensed table-bordered table-striped">
+                    <tr>
+                        <th>
+                            Select
+                        </th>
+                        <th>
+                            Train Id
+                        </th>
+                        <th>
+                            Train date
+                        </th>
+                    </tr>
+                    <tr ng-repeat="temp in $ctrl.trains">
+                        <td><input type="radio" name="trainId" ng-click="$ctrl.getTrainId($index)"></td>
+                        <td>{{temp.trainId}}</td>
+                        <td>{{temp.trainDate}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end of modal-->
