@@ -1,0 +1,24 @@
+.smediv{
+    height:569px;;
+    width: 20%;
+    margin-left: -230px;
+    z-index: 1;
+    left: 0;
+    background-color: whitesmoke;
+    overflow-x: hidden;
+}
+.btn-default{
+   height: 114.5px;   
+}
+
+.empdiv{
+    height:569px;;
+    width: 20%;
+    margin-left: -230px;
+    background-color: whitesmoke;
+    overflow-x: hidden;
+}
+
+.empdiv .btn-default{
+    height: 142.5px;   
+ }

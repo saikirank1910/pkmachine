@@ -1,0 +1,79 @@
+<!doctype html>
+<html >
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/Main.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/ngstorage/0.3.6/ngStorage.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+
+
+   
+
+
+    <script src="scripts/login/LoginModule.js"></script>
+    <script src="scripts/app.component.js"></script>
+    <script src="scripts/login/LoginRouter.js"></script>
+    <script src="scripts/controllers/login/UserLogin.js"></script>
+    <script src="directives/EditProfileDirective.js"></script>
+    <script src="scripts/controllers/login/CreateProfile.js"></script>
+    <script src="scripts/controllers/login/PasswordValidation.js"></script>
+
+
+    <script src="directives/DashboardDirective.js"></script>
+    <script src="scripts/controllers/dashboard/EditProfileController.js"></script>
+    <script src="scripts/controllers/search/searchController.js"></script>
+    <script src="scripts/controllers/viewPosts/viewPostsController.js"></script>
+    <script src="directives/QueryIterator.js"></script>
+    <script src="scripts/controllers/SME/SMEController.js"></script>
+    <script src="scripts/controllers/postQuery/PostqueryController.js"></script>
+    <script src="scripts/controllers/Admin/AdminController.js"></script>
+    <script src="filters/Capitalize.js"></script>
+</head>
+
+<body ng-app='myApp'>
+        <div style="background-image:url('images/image.jpg');background-size:auto;flex-wrap: wrap;">
+            <div class="pageheader" style="height: 80px;">
+                <!--  -->
+                <img src="images/PK.png" class="img-responsive" alt="PK LOGO">
+                <header>
+                    <div class="my-font-size-class" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">ASK PORTAL</div>
+                   <div>Knowledge Sharing & Exploring Ideas</div> 
+                </header>
+               </div>
+               </div>
+    <div class="space"></div>
+        
+            <div ng-view id="mainClass"></div>
+    </body>
+    <footer style="background-color:rgba(158, 141, 141, 0.452);text-align:center;left:0;bottom:0;position:fixed;width:100%;margin-top:0;background-image:url('images/image.jpg');background-repeat: no-repeat; background-size:auto">
+        <strong><p style="color:black"> Copyright &copy; www.prokarma.com </p></strong>
+        <a style="color:black" href="https://www.prokarma.com">About Us</a>
+            <a style="color:black" href="#">Contact Us</a>
+        
+</footer>
+
+</html>

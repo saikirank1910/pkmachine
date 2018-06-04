@@ -1,0 +1,84 @@
+<div style="width:100%">
+    <div style="width:10%;float:left;">
+        <side-nav-directive></side-nav-directive>
+    </div>
+    <div style="width:90%;margin:10px 0 0 130px" ng-controller="PostQueryController" class="container">
+
+        <form id="queryform"  name="queryform" >
+            <fieldset style="margin:10px;float:Center;border:1px solid black;padding:20px; border-radius: 6px;">
+                <legend style="margin:10px;width:150px;border-bottom:0px solid black">
+                    <i>Post your query</i>
+                </legend>
+                <center>
+                    <div class="alert alert-success" role="alert" id="postAlert" style="display:none;width:50%">
+                        <strong>{{responseMssg}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </center>
+                <center>
+                    <div class="alert alert-warning" role="alert" id="catAlert" style="display:none;width:50%">
+                        <strong>Category already exist</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </center>
+                <center>
+                    <div class="alert alert-warning" role="alert" id="selectAlert" style="display:none;width:50%">
+                        <strong>Please enter category name</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </center>
+                <div id="postQuery">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <b>Select Category:</b>
+                        </div>
+                        <div class="col-sm-3">
+                            <span class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-list" aria-hidden="true"></i>
+                                </span>
+                                <select id="categorySelect" class="form-control" ng-model="categorySelect" ng-options="x as (x|uppercase) for x in userData| orderBy:'toString()'" required>
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row" style="display:none" id="otherbox">
+                        <div class="col-sm-2">
+                            <b>If other:</b>
+                        </div>
+                        <div class="col-sm-3">
+                            <input class="form-inputcontrol col-sm-12" type="text" name="oCategory" ng-model="oCategory" maxlength=15 >
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <b>Query:</b>
+                        </div>
+                        <div class="col-sm-3">
+                            <textarea class="col-sm-12" rows="5" cols="50" ng-model="PostingQuery" name="PostingQuery" maxlength=400   required></textarea>
+                            <span style="color:red" ng-show="queryform.PostingQuery.$touched || (queryform.PostingQuery.$dirty && queryform.PostingQuery.$invalid)">
+                                   
+                                    <span ng-show="queryform.PostingQuery.$error.pattern">Special characters not allowed</span>
+                                </span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-3">
+                            <button  type="submit" class="btn btn-primary" ng-disabled="queryform.$invalid" ng-click="postingquery()">Post Query</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

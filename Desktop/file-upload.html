@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html data-ng-app='myApp'>
+<head>
+  <meta charset='utf-8'>
+  <title>Index</title>
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js'></script>
+  <script src='https://rawgit.com/ghostbar/angular-file-uploader/master/angular-file-uploader.js?v=5'></script>
+
+  <script type="text/javascript" charset="utf-8">
+    var app = angular.module('myApp', ['file-uploader']);
+
+    app.controller('DemoCtrl', function ($scope, FileUploader) {
+      function success (msg) {
+        console.log('Success got fired!');
+        console.log(msg);
+      }
+      
+      function error (err) {
+        if (err.statusText)
+          $scope.error = err.statusText
+        else
+          $scope.error = err;
+        console.log('Got an error!')
+        console.log(err);
+      }
+      
+      function errorE (err) {
+        if (err.statusText)
+          $scope.errorE = err.statusText;
+        else
+          $scope.errorE = err;
+        
+        console.log('Got an error!');
+        console.log(err);
+      }
+      
+      function errorM (err) {
+        $scope.errorM = err.statusText;
+      }
+      
+      function notify (percent) {
+        $scope.percent = percent;
+        console.log('Got notified the percent of upload is:' + percent);
+      }
+      
+     
+      
+      $scope.uploadSimple = function () {
+        FileUploader.post(
+          'http://localhost:1910/SHW-rest/rest/candidate/upload,
+          document.getElementById('simple-file').files
+        ).then(success, error, notify);
+      };
+        
+     
+    
+        
+    });
+  </script> 
+</head>
+<body data-ng-controller='DemoCtrl'>
+
+  
+  <h2>Simple upload</h2>
+  <span ng-if='error'>Errors: {{ error }}</span><br>
+  <span ng-if='percent'>Percentage being uploaded: {{ percent }}</span>
+  <form data-ng-submit='uploadSimple()'>
+    <input type='file' id='simple-file'>
+    <input type='submit' value='Upload only file'>
+  </form>
+  
+  
+  
+</body>
+</html>

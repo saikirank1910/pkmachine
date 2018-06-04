@@ -1,0 +1,18 @@
+
+//traits
+[{"pid":"100","cid":"28","skillId":2,"ratingId":"4"},{"pid":"100","cid":"28","skillId":3,"ratingId":"3"},{"pid":"100","cid":"28","skillId":4,"ratingId":"5"},{"pid":"100","cid":"28","skillId":5,"ratingId":"3"}]
+
+
+
+
+///evaluation
+
+{
+	"panelId":"1",
+	"candidateId":"1",
+	"comment":"sdfasdfasdf",
+	"final_results":"sdf",
+	"overall_rating":1,
+	"status":"dasf"
+}
+

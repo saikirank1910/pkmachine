@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="styles/sourcerer.css">
+</head>
+
+<body>
+  <ng-outlet></ng-outlet>
+  <div id="myLogin" class="container" style="width:50%;height:75%;border-radius:5px;margin-top:1%">
+    <div class="container" style="background-color:#2eb8b3;border-radius:5px;width:100%;margin:3% 0%">
+      <form name="loginForm">
+        <fieldset style="background-color:whitesmoke;border-radius:5px;float:center;text-align:center">
+          <legend>
+            <img class="img-rounded" style="border-radius:50%;width:20%" src="../images/prokarma.png" alt="Avatar">
+          </legend>
+          <div class="form-group" style=" width:90%; text-align:center">
+            <label for="username">
+              <b>Username
+                <span style="color:red">*</span> : </b>
+            </label>
+            <input type="text" placeholder="Eg:John" ng-model="$ctrl.userName" name="username">
+            <br>
+
+            <span class="has-error" style="color:red;font-size:15px;text-align:center" ng-show="loginForm.$dirty">
+
+              <span ng-show="loginForm.username.$error.required">User Name is Required </span>
+
+            </span>
+          </div>
+          <div class="form-group" style="width:90%; text-align:center">
+            <label for="password">
+              <b>Password
+                <span style="color:red">*</span> : </b>
+            </label>
+            <input type="password" placeholder="Eg:password" ng-model="$ctrl.password" name="password" ng-minlength="5" ng-maxlength="15">
+            <br>
+            <span class="has-error" style="color:red;font-size:15px;text-align:center" ng-show="loginForm.$dirty">
+
+              <span ng-show="loginForm.password.$error.required">Password is Required </span>
+
+              <span ng-show="loginForm.password.$error.minlength">Password too short!!</span>
+
+              <span ng-show="loginForm.password.$error.maxlength">Password Length should be between 8 and 15</span>
+
+            </span>
+          </div>
+          <input type="submit" class="btn btn-primary" style="padding:10px 20px" ng-click="$ctrl.submitLogin()" ng-disabled="loginform.$invalid"
+            value="Login">
+        </fieldset>
+        <a href="" data-toggle="modal" data-target="#myModal">ForgotPassword?</a>
+      </form>
+
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Forgot Password?</h3>
+            </div>
+            <div class="modal-body">
+              <form name="forgotForm" role="form" novalidate>
+                <fieldset style="background-color:whitesmoke;border-radius:5px;height:350px;margin:10px;float:center;text-align:center">
+                  <legend>
+                    <img class="img-rounded" style="border-radius:50%;width:20%" src="../images/prokarma.png" alt="Avatar">
+                  </legend>
+                  <div class="container" style=" width:90%; text-align:center" ng-class="{ 'has-error': forgotform.username.$dirty && forgotform.username.$error.required }">
+                    <label style="text-align:left" for="username">
+                      <b>Username
+                        <span style="color:red">*</span> :</b>
+                    </label>
+                    <input type="text" class="form-control" placeholder="Eg:John" ng-model="$ctrl.userName" name="username" required>
+                    <br>
+                    <span class="has-error" style="color:red;font-size:15px;text-align:center" ng-show="forgotForm.$dirty">
+
+                    <span ng-show="forgotForm.username.$error.required">User Name is Required </span>
+
+                    </span>
+                  </div>
+                  <div class="container" style="width:90%; text-align:center" ng-class="{ 'has-error': forgotform.password.$dirty && forgotform.password.$error.required }">
+                    <label for="password">
+                      &nbsp;&nbsp;&nbsp;<b>Email ID
+                        <span style="color:red">*</span> :</b>
+                    </label>
+                    <input type="email" class="form-control" id="forgotPassword" placeholder="Eg:abc@prokarma.com" ng-model="$ctrl.email"
+                      name="email" required>
+                    <br>
+                    <span class="has-error" style="color:red;font-size:15px;text-align:center" ng-show="forgotForm.$dirty">
+
+                      <span ng-show="forgotForm.email.$error.required">Email Id is Required </span>
+
+                      <span ng-show="forgotForm.email.$error.email">Invalid Email Format</span>
+
+                    </span>
+                  </div>
+                  <input type="button" id="submit" class="btn btn-primary" style="padding:6px;float:center;width:20%" data-dismiss="modal"
+                    value="Submit" ng-click="$ctrl.forgotPassword()">
+                </fieldset>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" style="padding:6px;float:center;width:20%" ng-click="$ctrl.reset()" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

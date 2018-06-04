@@ -1,0 +1,142 @@
+<div class="container-fluid" ng-repeat="roundOneResultHtml in $ctrl.roundOneResult">
+
+<b>{{$index+1}} Opinion</b>
+<fieldset class="scheduler-border">
+    <legend class="scheduler-border">Skill Score</legend>
+    <div class="row">
+      <div class="btn-group col-sm-4 " ng-repeat="list in roundOneResultHtml.lists track by $index">
+        <br>
+        <div>
+          <b>{{list.subtechnology}}</b>
+        </div>
+        <br>
+        <label class="btn btn-primary btn-radio" ng-class="{'active': list.rating == '5'}">
+          <input type="radio" data-ng-model="list.rating" value="5" disabled> EX
+        </label>
+        <label class="btn btn-primary btn-radio" ng-class="{'active': list.rating == '4'}">
+          <input type="radio" data-ng-model="list.rating" value="4" disabled> ADV
+        </label>
+        <label class="btn btn-primary btn-radio" ng-class="{'active': list.rating == '3'}">
+          <input type="radio" data-ng-model="list.rating" value="3" disabled> IN
+        </label>
+        <label class="btn btn-primary btn-radio" ng-class="{'active': list.rating == '2'}">
+          <input type="radio" data-ng-model="list.rating" value="2" disabled> BG
+        </label>
+        <label class="btn btn-primary btn-radio" ng-class="{'active': list.rating == '1'}">
+          <input type="radio" data-ng-model="list.rating" value="1" disabled> NA
+        </label>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border">Personal Traits</legend>
+    <div class="row">
+      <div class="btn-group col-sm-4 " ng-repeat="traits in roundOneResultHtml.personalTraits track by $index">
+        <br>
+        <div>
+          <b>{{traits.name}}</b>
+        </div>
+        <label class="btn btn-primary btn-radio" ng-class="{'active': traits.rating == '5'}">
+          <input type="radio" data-ng-model="traits.rating" value="5" disabled> EX
+        </label>
+        <label class="btn btn-primary btn-radio" ng-class="{'active': traits.rating == '4'}">
+          <input type="radio" data-ng-model="traits.rating" value="4" disabled> ADV
+        </label>
+        <label class="btn btn-primary btn-radio" ng-class="{'active': traits.rating == '3'}">
+          <input type="radio" data-ng-model="traits.rating" value="3" disabled> IN
+        </label>
+        <label class="btn btn-primary btn-radio" ng-class="{'active': traits.rating == '2'}">
+          <input type="radio" data-ng-model="traits.rating" value="2" disabled> BG
+        </label>
+        <label class="btn btn-primary btn-radio" ng-class="{'active': traits.rating == '1'}">
+          <input type="radio" data-ng-model="traits.rating" value="1" disabled> NA
+        </label>
+      </div>
+    </div>
+  </fieldset>
+  <div style="width:100%" ng-repeat="evaluationList in roundOneResultHtml.evaluation">
+    <div style="width:48%;float:left">
+      <fieldset class="scheduler-border">
+        <legend class="scheduler-border">
+          <i>Overall Details</i>
+        </legend>
+        <div>
+          <b>SkillLevel:</b>
+          <input type="text" ng-model="evaluationList.skillLevel" disabled></input> 
+        </div>
+        <div class="row" style="padding:20px">
+          <div>
+            <b>OverAll Rating</b>
+          </div>
+          <br>
+          <div class="btn-group col-sm-6">
+            <label class="btn btn-primary btn-radio" ng-class="{'active': evaluationList.overall_rating == 'EX'}">
+              <input type="radio" data-ng-model="evaluationList.overall_rating" value="EX" disabled> EX
+            </label>
+            <label class="btn btn-primary btn-radio" ng-class="{'active': evaluationList.overall_rating == 'GOOD'}">
+              <input type="radio" data-ng-model="evaluationList.overall_rating" value="GOOD" disabled> GOOD
+            </label>
+            <label class="btn btn-primary btn-radio" ng-class="{'active': evaluationList.overall_rating == 'AVG'}">
+              <input type="radio" data-ng-model="evaluationList.overall_rating" value="AVG"> AVG
+            </label>
+            <label class="btn btn-primary btn-radio" ng-class="{'active': evaluationList.overall_rating == 'POOR'}">
+              <input type="radio" data-ng-model="evaluationList.overall_rating" value="POOR"> POOR
+            </label>
+          </div>
+        </div>
+        <div>
+          <div>
+            <b>Status</b>
+          </div>
+          <br>
+          <div class="btn-group col-sm-9">
+            <label class="btn btn-primary btn-radio" ng-class="{'active': evaluationList.status == 'select'}">
+              <input type="radio" data-ng-model="evaluationList.status" value="select" disabled> Select
+            </label>
+            <label class="btn btn-primary btn-radio" ng-class="{'active': evaluationList.status == 'waitlist'}">
+              <input type="radio" data-ng-model="evaluationList.status" value="waitlist" disabled> Waitlist
+            </label>
+            <label class="btn btn-primary btn-radio" ng-class="{'active': evaluationList.status == 'reject'}">
+              <input type="radio" data-ng-model="evaluationList.status" value="reject" disabled> Reject
+            </label>
+            <label class="btn btn-primary btn-radio" ng-class="{'active': evaluationList.status == 'database for future'}">
+              <input type="radio" data-ng-model="evaluationList.status" value="database for future" disabled> Database for future
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <div style="width:50%;float:right">
+      <fieldset class="scheduler-border">
+        <legend class="scheduler-border">
+          <i>Final Comments</i>
+        </legend>
+        <label>Comments</label>
+        <textarea data-ng-model="evaluationList.comment" rows="10" cols="90" disabled></textarea>
+      </fieldset>
+    </div>
+  </div>
+</div>
+<style>
+  .btn-radio>input[type=radio] {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    pointer-events: none;
+  }
+
+  legend.scheduler-border {
+    width: inherit;
+    /* Or auto */
+    padding: 0 10px;
+    /* To give a bit of padding on the left and right */
+    border-bottom: none;
+  }
+
+  fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow: 0px 0px 0px 0px #000;
+    box-shadow: 0px 0px 0px 0px #000;
+  }
+</style>

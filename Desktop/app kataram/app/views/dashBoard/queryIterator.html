@@ -1,0 +1,77 @@
+<div class="overflow" style="margin-right:110px">
+    <uib-accordion close-others="oneAtATime">
+        <div uib-accordion-group class="panel-default" ng-repeat="data in Categories" style=" overflow-wrap: break-word;">
+            <div uib-accordion-heading class="myClass" style=" overflow-wrap: break-word;padding-bottom:10px">
+                {{data.postQueryObj.postedMsg | capitalizeWord}}
+                <span class="accordianheading" style="padding-bottom:10px">
+
+                    <i>
+                        <strong>Post Category : </strong>
+                    </i>{{data.postQueryObj.ctgryName}} |
+                    <i>
+                        <strong>Posted On : </strong>
+                    </i> {{data.postQueryObj.postedDate}} |
+                    <i>
+                        <strong>Posted By : </strong>
+                    </i> {{data.postQueryObj.crtdByName}}
+
+                </span>
+            </div>
+            <div class="postdelete">
+                <button ng-if="sme=='true'" class="btn btn-danger btn-xs" ng-click="DeletePost($index,data.postQueryObj.postId,$event)">Delete post</button>
+                <button class="btn btn-primary btn-xs" ng-click="postreplyboxhide=(postreplyboxhide?false:true )">Reply to post</button>
+            </div>
+
+            <br>
+            <br>
+
+
+            <div id="text-area-close" ng-show="postreplyboxhide" class="rplybox" style="margin-top:5px;">
+                <textarea class="form-control" rows="2" cols="85" maxlength=1000 ng-model="textreply" name="Number" placeholder="Enter your reply...!!! here"></textarea>
+                <section ng-if="!textreply">Max Length:1000</section>
+                <br>
+
+                <button id="buttonarea" type="submit" class="btn btn-primary btn-xs" ng-click="PostReply(data.postQueryObj.postId, textreply)">Post Reply</button>
+
+                <br>
+            </div>
+            <div ng-hide="reply.hidden" style=" overflow-wrap: break-word;" ng-repeat="reply in data.rplyQueriesInfosSet|orderBy:'reply.replyedDate'">
+                <span>
+                    <i>
+                        <strong>Replied On: </strong>
+                    </i>{{reply.replyedDate}}</span>|
+                <i>
+                    <strong>Replied By: </strong>
+                </i>{{reply.rpldByName}}
+
+                <blockquote>
+                    {{reply.repliesMsgs}}
+                </blockquote>
+                <br>
+
+                <div class="reply">
+                    <button ng-if="sme=='true'" class="btn btn-danger btn-xs" ng-click="DeleteReply(reply.replyId,reply)">Delete</button>
+                    <button class="btn btn-primary btn-xs" ng-click="replyboxhide=(replyboxhide?false:true )">Reply</button>
+                </div>
+                <br>
+                </span>
+                <div class=rplybox ng-show="replyboxhide" id="inner-text-area-close" style="margin-top:5px;">
+                    <textarea class="form-control" rows="2" cols="85" maxlength=1000 ng-model="textreply" name="Number" placeholder="Enter your reply...!!! here"></textarea>
+                    <section ng-if="!textreply">Max Length:1000</section>
+                    <br>
+
+                    <button id="buttonarea" type="submit" class="btn btn-primary btn-xs" ng-click="PostReply(data.postQueryObj.postId, textreply)">Post Reply</button>
+                    <br>
+                </div>
+
+            </div>
+        </div>
+</div>
+</div>
+
+</uib-accordion>
+
+</div>
+</div>
+</div>
+</div>

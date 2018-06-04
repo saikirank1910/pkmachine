@@ -1,0 +1,80 @@
+<div style="width:100%">
+    <div style="width:10%;float:left;">
+        <side-nav-directive></side-nav-directive>
+    </div>
+    <div style="width:90%;margin:10px 0 0 130px" calss="container" ng-controller="AdminController">
+        <fieldset style="margin-left:25px;float:Center;border:1px solid black; border-radius: 6px;">
+            <legend style="margin:10px;width:173px;border-bottom:0px solid black">
+                <i>Admin Dashboard</i>
+            </legend>
+            <center>
+                <div class="alert alert-info" role="alert" id="infoAlert" style="display:none;width:50%">
+                    <strong>{{respMeg}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </center>
+            <center>
+                <div class="alert alert-warning" role="alert" id="catAlert" style="display:none;width:50%">
+                    <strong>Please choose atleast one category</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </center>
+            <div class="row">
+                <div class="form-element multi-field name">
+                    <form name="myForm" id="myForm">
+                        <div class="form-group col-sm-5">
+                            <label class="control-label col-sm-5" for="searchByEmpId" style="padding-left:100px">Employee:</label>
+                            <div class="col-sm-5">
+                                <span class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+                                    </span>
+                                   
+                                        <select id="categorySelec" class=" form-control"   ng-model="categorySelec" ng-options="x  for x in categorySelect" required>
+                                        </select>
+                                </span>
+                              
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div>
+                        
+                    <span ng-repeat="employee in categories">
+                        <span class="col-sm-2" class="action-checkbox">
+                            <input id="{{employee}}" type="checkbox" value="{{employee}}" ng-checked="selection.indexOf(employee) > -1" ng-click="toggleSelection(employee)"
+                            />
+                           
+                            <label for="{{employee}}"></label>
+                            {{employee}}
+                        </span>
+                       
+                    </span>
+                </div>
+                <div style="padding-top:30px;padding-left:15%;">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <span style="color:black;" class="selected-item">
+                        <b>Selected Categories:</b>
+                    </span>
+                    <span ng-repeat="employee in selection" class="selected-item">
+                        {{employee}} ,
+                    </span>
+                </div>
+            </div>
+ 
+            <center>
+                <button type="submit" style="margin-top:30px;margin-bottom:30px;" class="btn btn-primary" ng-disabled="myForm.$invalid"
+                    ng-click="addAsSME();">Add as SME</button>
+            </center>
+            </form>
+
+        </fieldset>
+    </div>
+</div>

@@ -1,0 +1,225 @@
+<div class="container" style="width:70%;margin-top:15px">
+    <div class="panel panel-default">
+        <div ng-if="logged=='false'" class="panel-heading"><b>REGISTER HERE</b></div>
+        <div ng-if="logged=='true'" class="panel-heading"><b>User Profile</b></div>
+        <center>
+        <div class="alert alert-success" role="alert" id="updateAlert" style="display:none;text-align:center">
+           
+                <strong>Profile Updated Successfully !</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </div>
+            </center>
+
+      
+       
+        </center>   <div class="alert alert-warning" role="alert" id="unRegisteredAlert" style="display:none;text-align:center">
+            <center>
+                <strong> {{profileResponseMsg}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>   </div>
+     
+
+     
+        <center>  <div class="alert alert-success" role="alert" id="RegisteredAlert" style="display:none;text-align:center">
+         
+                <strong> {{profileResponseMsg}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>   </div>  
+            </center>
+
+     <center>
+        <div class="alert alert-warning" role="alert" id="namesAlert" style="display:none;text-align:center">
+          
+                <strong>This Combination of firstname and lastname already exist ! please try another</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span> </div>
+            </center>
+
+       
+        <div class="panel-body">
+            <div class="form-element multi-field name">
+                <form name="myForm" ng-submit="addToDb();">
+
+
+
+                    <div class="col-xs-12 col-md-6">
+                        <label for="firstname">
+                            <span class="req">*</span>First Name:</label>
+                        <span class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" class="form-control" name="firstname" placeholder="First Name" minlength=3 maxlength=15 ng-pattern="/^[a-zA-Z\s]*$/"
+                                ng-model="firstname" required/>
+                        </span>
+
+                        <span style="color:red" ng-show="myForm.firstname.$touched || (myForm.firstname.$dirty && myForm.firstname.$invalid)">
+                            <span ng-show="myForm.firstname.$error.required">First Name is required.</span>
+                            <span ng-show="myForm.firstname.$error.minlength">Too short</span>
+                            <span ng-show="myForm.firstname.$error.pattern">Only alphabets expected</span>
+                        </span>
+
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+
+                        <label for="lastname">
+                            <span class="req">*</span>Last Name:</label>
+                        <span class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" name="lastname" class="form-control " placeholder="Last Name" minlength=3 maxlength=15 ng-pattern="/^[a-zA-Z\s]*$/"
+                                ng-model="lastname" required/>
+                        </span>
+
+
+                        <span style="color:red" ng-show="myForm.lastname.$touched || (myForm.lastname.$dirty && myForm.lastname.$invalid)">
+                            <span ng-show="myForm.lastname.$error.required">Last Name is required.</span>
+                            <span ng-show="myForm.lastname.$error.minlength">Too short</span>
+                            <span ng-show="myForm.lastname.$error.pattern">Only alphabets expected</span>
+                        </span>
+
+
+                    </div>
+
+                    <div class="col-xs-12 col-md-6">
+                        <label for="employeId">
+                            <span class="req">*</span>Employee Id:</label>
+                        <span class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" name="employeId" class="form-control" ng-model="employeId" placeholder="Employee Id" ng-pattern="/^([0-9])/"
+                                maxlength=6 ng-disabled="model.isDisabled" required/>
+                        </span>
+
+                        <span style="color:red" ng-show="myForm.employeId.$touched || (myForm.employeId.$dirty && myForm.employeId.$invalid)">
+                            <span ng-show="myForm.employeId.$error.required">Enter Employee Id </span>
+                            <span style="color:red" ng-show="myForm.employeId.$error.pattern">Invalid Id</span>
+
+                        </span>
+
+                    </div>
+
+                    <div class="col-xs-12 col-md-6">
+
+                        <label for="username">
+                            <span class="req">*</span>Choose your username: </label>
+                        <span class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-lock" aria-hidden="true"></i>
+                            </span>
+
+                            <input type="text" name="username" ng-model="username" class="form-control " placeholder="alphanumeric($#@&)" ng-pattern="/^[(a-zA-Z)(0-9)($#@&)]*$/"
+                                minlength=6 maxlength=8 ng-disabled="model.isDisabled" required/>
+                        </span>
+
+
+                        <span style="color:red" ng-show="myForm.username.$touched || (myForm.username.$dirty && myForm.username.$invalid)">
+                            <span ng-show="myForm.username.$error.required">Username is required.</span>
+                            <span ng-show="myForm.username.$error.minlength">Too short</span>
+                            <span ng-show="myForm.username.$error.maxlength"></span>
+                            <span ng-show="myForm.username.$error.pattern">Special character not allowed</span>
+                        </span>
+
+                    </div>
+
+
+                    <div class="col-xs-12 col-md-6">
+                        <label for="password">
+                            <span class="req">*</span>Create a Password: </label>
+                        <span class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-lock" aria-hidden="true"></i>
+                            </span>
+                            <input type="password" name="thePwd" class="form-control " ng-model="thePwd " placeholder="Enter Password" ng-pattern="/^[(a-zA-Z)(0-9)($#@&)]*$/"
+                                maxlength=8 required/>
+                        </span>
+
+
+                        <span ng-show="myForm.thePwd.$error.minlength">Too short</span>
+                        <span ng-show="myForm.thePwd.$error.pattern">Special character not allowed</span>
+
+                    </div>
+
+                    <div class="col-xs-12 col-md-6">
+                        <label for="reenter">
+                            <span class="req">*</span>Confirm Password: </label>
+                        <span class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-lock" aria-hidden="true"></i>
+                            </span>
+                            <input type="password" id="password" class="form-control" name="reenter" ng-model="reenter" placeholder="Re-Enter Password"
+                                maxlength=8 ng-pattern="/^[(a-zA-Z)(0-9)($#@&)]*$/" validation-error="reenter != thePwd ? 'Passwords don\'t match' : ''"
+                                required/>
+                        </span>
+
+                        <span style="color:red" ng-show="myForm.reenter.$touched || (myForm.reenter.$dirty && myForm.reenter.$invalid)">
+                            <span ng-show="myForm.reenter.$error.required">Please confirm password.</span>
+                            <span ng-show="myForm.reenter.$error.wj-validation-error">Not Matched</span>
+                            <span ng-show="myForm.reenter.$error.pattern">Special character not allowed</span>
+                        </span>
+
+                    </div>
+
+                    <div class="col-xs-12 col-md-6">
+
+                        <label for="email">
+                            <span class="req">*</span>Email</label>
+                        <span class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>
+                            </span>
+
+                            <input type="email" name="usremail" class="form-control " ng-model="usremail" placeholder="example@gmail.com" ng-disabled="model.isDisabled"  required/>
+                        </span>
+                        <span style="color:red" ng-show="myForm.usremail.$touched || (myForm.usremail.$dirty && myForm.usremail.$invalid)">
+                            <span ng-show="myForm.usremail.$error.required">Email is required.</span>
+                            <span ng-show="myForm.usremail.$error.email">Invalid email address.</span>
+
+                        </span>
+
+
+                    </div>
+
+
+
+
+                    <div class="col-xs-12 col-md-6">
+                        <label for="phoneno">Phone Number:</label>
+                        <span class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-phone" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" name="phone" class="form-control" placeholder="Phone Number" ng-model="phone" ng-pattern="/^([7-9]{1}[0-9]{9})/"
+                                minlength=0 maxlength=10 />
+                        </span>
+
+                        <span style="color:red" ng-show="myForm.phone.$error.pattern">Invalid number-must be numeric type </span>
+                        <span style="color:red" ng-show="myForm.phone.$error.minlength">Insufficient digits</span>
+                        <span style="color:red" ng-show="myForm.phone.$error.maxlength">okay</span>
+
+                    </div>
+
+
+
+
+
+
+                    <center>
+                        <button style="margin-top:10px;" ng-if="logged=='false'" type="submit" class="btn btn-primary" ng-disabled="myForm.$invalid">Register</button>
+                        <i class="fa fa-spinner fa-spin" id="profileProgress" style="font-size:25px;display:none;"></i>
+                    </center>
+                    <center>
+                        <button ng-if="logged=='true'" style="margin-top:10px" type="submit" class="btn btn-primary" ng-disabled="myForm.$invalid">Submit</button>
+                        <i class="fa fa-spinner fa-spin" id="profileProgressSubmit" style="font-size:25px;display:none;"></i>
+                    </center>
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

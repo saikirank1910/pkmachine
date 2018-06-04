@@ -1,0 +1,107 @@
+<div style="width:100%;">
+    <div style="width:10%;float:left ;">
+        <side-nav-directive></side-nav-directive>
+    </div>
+    <div style="width:90%;margin:10px 0 0 130px" class="container" ng-controller="SearchController">
+        <fieldset style="margin:10px;float:Center;border:1px solid black; border-radius: 6px;">
+            <legend style="margin:10px;width:130px;border-bottom:0px solid black">
+                <i style="white-space: nowrap;">Search query</i>
+            </legend>
+            <center>
+                    <div class="alert alert-success" role="alert" id="postAlert" style="display:none;width:40%">
+                        <strong>{{postresponse|capitalizeWord}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </center>
+                <center>
+                    <div class="alert alert-warning" role="alert" id="deletePostAlert" style="display:none;width:40%">
+                        <strong>{{deletepostresponse|capitalizeWord}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </center>
+                <center>
+                    <div class="alert alert-warning" role="alert" id="deleteReplyAlert" style="display:none;width:40%">
+                        <strong>Successfully deleted posted reply</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </center>
+            <center>
+                <div class="alert alert-info" role="alert" id="catAlert" style="display:none;width:50%">
+                    <strong>No posts found !</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </center>
+            <div class="row">
+                <div class="form-group col-sm-5">
+                    <label class="control-label col-sm-6" for="searchby" style="padding-left:100px">Search By </label>
+                    <div class="col-sm-6">
+                        <span class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-list" aria-hidden="true"></i>
+                            </span>
+                            <select id="searchby" class="form-control" placeholder="SelectCategory" ng-model="searchby">
+                                <option value="" disabled selected>Select</option>
+                                <option value="ByID">Employee ID </option>
+                                <option value="ByCat">Category</option>
+                            </select>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-element multi-field name">
+                    <form name="myForm" id="myForm" style="display:none">
+                        <div class="form-group col-sm-5">
+                            <label class="control-label col-sm-5" for="searchByEmpId" style="padding-left:100px">Employee ID </label>
+                            <div class="col-sm-5">
+                                <span class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+                                    </span>
+                                    <input type="text" class="form-control" name="searchByEmpId" minlength=1 maxlength=5 ng-pattern="/^[0-9]{1,5}$/" placeholder="Enter Employee ID"
+                                        ng-model="searchByEmpId" required>
+                                </span>
+                                <span style="color:red" ng-show="myForm.empId.$dirty && myForm.empId.$invalid">
+                                    <span ng-show="myForm.empId.$error.pattern">Not a valid ID!</span>
+                                    <span ng-show="myForm.empId.$error.required">This field is required!</span>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" ng-disabled="myForm.$invalid" ng-click="searchByID();">Search</button>
+                    </form>
+                </div>
+                <div class="form-element multi-field name">
+                    <form name="myForm1" id="myForm1" style="display:none">
+                        <div class="form-group col-sm-6">
+                            <label class="control-label col-sm-5" for="category" style="padding-left:100px">Category</label>
+                            <div class="col-sm-6">
+                                <span class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-list" aria-hidden="true"></i>
+                                    </span>
+                                    <select class="form-control" ng-options="x as (x|uppercase) for x in categories| orderBy:'toString()'" placeholder="SelectCategory"
+                                        name="category" id="category" ng-model="category" required>
+                                        <option value="">Select</option>
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" ng-disabled="myForm1.$invalid" ng-click="searchByCategory();">Search</button>
+                    </form>
+                </div>
+                <div class="row">
+                    <div id="searchedQueries" style="display:none">
+                        <query-iterator></query-iterator>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+</div>

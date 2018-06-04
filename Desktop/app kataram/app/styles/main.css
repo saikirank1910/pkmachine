@@ -1,0 +1,115 @@
+html, body{
+  height: 100%;
+  width: 100%;
+}
+
+.overflow {
+  /* height: 420px; */
+  max-height: 570px;
+  width: 85%;
+  overflow-y: auto;
+  float: right;
+}
+
+.reply {
+  float: right;
+}
+
+.postdelete {
+  float: right;
+}
+
+.caption {
+  float: right;
+  margin-right: 25px;
+}
+
+.space {
+  height: 25px;
+}
+
+section {
+  float: left;
+}
+
+#buttonarea {
+  float: right;
+}
+
+.accordianheading {
+  float: right;
+  font-size: 12px;
+}
+
+.req {
+  color: red;
+}
+
+
+/* 
+------------------------------logo css------------------------------- */
+
+
+
+.header {
+  display: flex;
+  /* Spread out the elements inside the header. */
+  justify-content: space-between;
+  /* Align items vertically in the center. */
+  align-items: center;
+}
+
+/* -----------------------DashBoardCss------------------ */
+
+
+.pageheader {
+  -moz-align-items: center;
+  -webkit-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  --moz-justify-content: center;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  max-height: 120px;
+}
+
+.img-responsive {
+  width: 20%;
+}
+
+header {
+  width: 60%;
+}
+
+.my-font-size-class {
+  font-size: 40px;
+}
+
+@media (max-width: 768px) {
+  .my-font-size-class {
+      font-size: 17px;
+  }
+}
+
+.my-nav-buttons a{
+  white-space: nowrap;
+}
+
+.my-nav-buttons a:visited { 
+  color: black;
+  font-weight: bold;
+}
+
+.my-nav-buttons a:hover {
+  background-color: grey;
+  color: white;
+}
+
+    .req {
+        color: red;
+    }

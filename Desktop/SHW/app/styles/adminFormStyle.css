@@ -1,0 +1,11 @@
+/* input[type=text], input[type=password] {
+    width: 40%;
+     padding: 7px 0;
+    display: inline-block;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+label{
+    font-size:medium;
+} */

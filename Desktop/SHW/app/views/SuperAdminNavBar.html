@@ -1,0 +1,23 @@
+  <!---<ul class="nav nav-tabs" style="background-color:#2a3742">
+   <li role="presentation" class="active"><a ng-link="['Admin']" >Admin</a></li>
+   <li role="presentation"><a ng-link="['Panel']">Panel</a></li>
+   <li role="presentation"><a ng-link="['Skill']">Skill</a></li>
+ </ul> ---->
+
+<nav class="navbar navbar-inverseTab"> 
+    <div class="container-fluid"> 
+        
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9"> 
+            <ul class="nav navbar-nav"> 
+                <li class="active">
+                    <a ng-link="['Admin']" class="aFont">Admin</a></li>
+                </li> 
+                <li><a ng-link="['Panel']" class="aFont">Panel</a></li>
+                <li><a ng-link="['Skill']" class="aFont">Skill</a></li>
+                <li><a ng-link="['Trait']" class="aFont">Trait</a></li>
+                <li><a ng-link="['SkillLevel']" class="aFont">Skill Level</a></li>
+            </ul> 
+            <ul style="float:right"><a ng-click="$ctrl.logout()" class="aFont"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Logout</a></ul>
+        </div> 
+    </div> 
+</nav><ng-outlet></ng-outlet>

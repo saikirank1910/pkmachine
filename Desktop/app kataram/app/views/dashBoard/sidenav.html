@@ -1,0 +1,28 @@
+<div ng-controller="dashBoardController">
+        <div class="btn-group-vertical my-nav-buttons" style="width:100%;">
+                <a data-toggle="tab" type="button" class="btn btn-default" style="height:87px; white-space:normal !important;
+                word-wrap: break-word; " href="#!viewPost">
+                        <br/>All Posts</a>
+                <a data-toggle="tab" type="button" class="btn btn-default" style="height:87px; white-space:normal !important;
+                word-wrap: break-word; " href="#!postQuery">
+                        <br/>Post Your Query</a>
+                <a data-toggle="tab" type="button" class="btn btn-default" style="height:87px; white-space:normal !important;
+                word-wrap: break-word; " href="#!search">
+                        <br/>Search </a>
+                <a data-toggle="tab" type="button" class="btn btn-default" style="height:87px; white-space:normal !important;
+                word-wrap: break-word; " href="#!profile">
+                        <br/>Edit Profile</a>
+                <a data-toggle="tab" type="button" class="btn btn-default" ng-if="sme=='true'" style="height:87px; white-space:normal !important;
+                word-wrap: break-word; " href="#!smeBoard">
+                        <br/>SME</a>
+                <a data-toggle="tab" type="button" class="btn btn-default" ng-if="admin=='true'" style="height:87px; white-space:normal !important;
+                word-wrap: break-word; " href="#!adminBoard">
+                        <br/>Admin</a>
+        </div>
+        <div class="nav navbar-nav navbar-right" >
+                <button class="btn btn-info btn-lg" style="margin-top:10px;margin-right:8px;position:absolute;top:0; right:0;font-size:16px">{{uFullName}}
+                        <br>
+                        <a href="" ng-click="logOut()">Logout</a>
+                </button>
+        </div>
+</div>

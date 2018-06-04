@@ -1,0 +1,39 @@
+<div style="width:100%">
+    <div style="width:10%;float:left;">
+        <side-nav-directive></side-nav-directive>
+    </div>
+    <div ng-controller="viewPostController" style="width:90%;margin:8px 0 0 140px;height:100%" class="container">
+        <center>
+            <div class="alert alert-success" role="alert" id="postAlert" style="display:none;width:40%">
+                <strong>{{postresponse|capitalizeWord}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </center>
+        <center>
+            <div class="alert alert-warning" role="alert" id="deletePostAlert" style="display:none;width:40%">
+                <strong>{{deletepostresponse|capitalizeWord}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </center>
+        <center>
+            <div class="alert alert-warning" role="alert" id="deleteReplyAlert" style="display:none;width:40%">
+                <strong>Successfully deleted posted reply</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </center>
+        <fieldset style="margin:10px;float:Center;border:1px solid black; border-radius: 6px;">
+            <legend style="margin:10px;width:84px;border-bottom:0px solid black">
+                <i style="white-space: nowrap;">All posts</i>
+            </legend>
+            <div style="width:100%;margin-left:30px">
+                <query-iterator></query-iterator>
+            </div>
+        </fieldset>
+    </div>
+</div>
