@@ -1,0 +1,23 @@
+package com.sai.bestCodingPractices.seven;
+import java.math.BigDecimal;
+import java.util.*;
+public class Order{
+	String orderId;
+	Restaurant placeRestaurantOrder;
+	Customer placeCustomerOrder;
+	//"H":delivertohomeaddressofthecustomer.
+	//"W":delivertoworkaddressofthecustomer.
+	//"O":delivertotheaddressspecifiedhere.
+	String addressType;
+	String otherAddress;
+	HashMap orderItems;
+	public double getTotalAmount(){
+		BigDecimal totalAmount=new BigDecimal("0.00");
+		Iterator iter=orderItems.values().iterator();
+		while(iter.hasNext()){
+			OrderItem addAmount=(OrderItem)iter.next();
+			totalAmount=totalAmount.add(new BigDecimal(String.valueOf(addAmount.getAmount())));
+		}
+		return totalAmount.doubleValue();
+	}
+}

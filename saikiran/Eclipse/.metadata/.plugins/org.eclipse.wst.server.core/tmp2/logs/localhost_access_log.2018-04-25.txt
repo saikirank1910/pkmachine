@@ -1,0 +1,14 @@
+172.16.201.248 - - [25/Apr/2018:13:12:53 +0530] "OPTIONS /SHW-rest/rest/superadmin/getSubtechnnologies HTTP/1.1" 200 -
+172.16.201.248 - - [25/Apr/2018:13:12:54 +0530] "GET /SHW-rest/rest/superadmin/getPersonalTraits HTTP/1.1" 200 253
+172.16.201.248 - - [25/Apr/2018:13:12:54 +0530] "GET /SHW-rest/rest/rating/id/1682 HTTP/1.1" 200 575
+172.16.201.248 - - [25/Apr/2018:13:12:56 +0530] "GET /SHW-rest/rest/superadmin/getSubtechnnologies HTTP/1.1" 200 1391
+172.16.201.248 - - [25/Apr/2018:13:12:56 +0530] "GET /SHW-rest/rest/skill/getSkillLevel HTTP/1.1" 200 547
+172.16.201.248 - - [25/Apr/2018:13:12:57 +0530] "GET /SHW-rest/rest/superadmin/getSubtechnnologies HTTP/1.1" 200 1391
+172.16.201.248 - - [25/Apr/2018:13:17:41 +0530] "GET /SHW-rest/rest/panelEvaluation/1682/getTraitsRating HTTP/1.1" 200 770
+172.16.201.248 - - [25/Apr/2018:13:17:42 +0530] "GET /SHW-rest/rest/panelEvaluation/1682/getEvaluation HTTP/1.1" 200 360
+172.16.201.248 - - [25/Apr/2018:13:17:44 +0530] "GET /SHW-rest/rest/panelEvaluation/1682/getSkillsRating HTTP/1.1" 200 1019
+172.16.201.248 - - [25/Apr/2018:13:18:00 +0530] "GET /SHW-rest/rest/superadmin/getPersonalTraits HTTP/1.1" 200 253
+172.16.201.248 - - [25/Apr/2018:13:18:00 +0530] "GET /SHW-rest/rest/superadmin/getSubtechnnologies HTTP/1.1" 200 1391
+172.16.201.248 - - [25/Apr/2018:13:18:00 +0530] "GET /SHW-rest/rest/skill/getSkillLevel HTTP/1.1" 200 547
+172.16.201.248 - - [25/Apr/2018:13:18:00 +0530] "GET /SHW-rest/rest/superadmin/getSubtechnnologies HTTP/1.1" 200 1391
+172.16.201.248 - - [25/Apr/2018:13:18:00 +0530] "GET /SHW-rest/rest/rating/id/1682 HTTP/1.1" 200 575

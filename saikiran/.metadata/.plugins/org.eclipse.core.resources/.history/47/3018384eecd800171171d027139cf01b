@@ -1,0 +1,9 @@
+package com.sai.generics;
+
+public class Example8 {
+	public static void main(String[] args) {
+		Node<Integer> a = new Node<Integer>(10,null);
+		Node<Integer> b = new Node<Integer>(10,null);
+		Node<Integer> c = new Node<Integer>(10,null);
+	}
+}

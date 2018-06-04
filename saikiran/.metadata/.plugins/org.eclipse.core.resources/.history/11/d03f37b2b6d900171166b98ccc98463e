@@ -1,0 +1,15 @@
+package com.sai.bestCodingPractices.five;
+
+public class Account{
+	boolean isPasswordAlphanumeric(String password){
+		
+		boolean isDigitOrSymbolFound = false;
+		boolean isLetterFound = false;
+		for(int i=0;i<password.length();i++){
+			char c=password.charAt(i);
+			if(Character.isLowerCase(c) || Character.isUpperCase(c))
+				letter_found=true;
+			elsedg_sym_found=true;
+		}
+	return (isLetterFound) && (isDigitOrSymbolFound);
+}

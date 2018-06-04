@@ -1,0 +1,24 @@
+package com.prokarma.sourcerer.dto;
+
+public class SkillLevel {
+	private int skillId;
+	private String skillLevel;
+	public int getSkillId() {
+		return skillId;
+	}
+	public void setSkillId(int skillId) {
+		this.skillId = skillId;
+	}
+	public String getSkillLevel() {
+		return skillLevel;
+	}
+	public void setSkillLevel(String skillLevel) {
+		this.skillLevel = skillLevel;
+	}
+	@Override
+	public String toString() {
+		return "SkillLevel [skillId=" + skillId + ", skillLevel=" + skillLevel + "]";
+	}
+	
+
+}

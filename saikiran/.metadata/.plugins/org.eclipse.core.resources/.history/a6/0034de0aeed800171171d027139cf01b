@@ -1,0 +1,20 @@
+package com.saikiran.threads;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class ThreadsExample4 {
+	public static void main(String[] args) throws IOException {
+		FileWriter fileWritter = new FileWriter("D:\\saikiran\\newEclipse\\ThreadsAssignment\\input2");
+		BufferedWriter bw = new BufferedWriter(fileWritter);
+		for(int j=0;j<100;j++)
+		for(int i=0;i<10;i++) {
+			Thread t = new Thread(new ThreadDemo(), "thread " + i+1);
+			t.start();
+ 			bw.append(t.getName()+"\n");
+		}
+		bw.close();
+		fileWritter.close();
+	}
+}

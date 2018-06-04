@@ -1,0 +1,36 @@
+package com.sai.bestCodingPractices.two;
+
+public class Shape
+{
+	final static int TYPELINE=0;
+	final static int TYPERECTANGLE=1;
+	final static int TYPECIRCLE=2;
+	int shape Type;
+	Point p1;
+	Point p2;
+	int radius;
+	public int getType(){
+		return shapeType;
+	}
+	public void setShapeType(int shapeType){
+		this.shapeType=shapeType;
+	}
+	public Point getP1(){
+		return p1;
+	}
+	public void setP1(Point p1){
+		this.p1=p1;
+	}
+	publicPointgetP2(){
+	returnp2;
+	}
+	publicvoidsetP2(Pointp2){
+	this.p2=p2;
+	}
+	publicintgetRadius(){
+	returnradius;
+	}
+	publicvoidsetRadius(intradius){
+	this.radius=radius;
+	}
+}

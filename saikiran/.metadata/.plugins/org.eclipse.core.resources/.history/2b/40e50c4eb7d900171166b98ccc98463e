@@ -1,0 +1,24 @@
+package com.sai.bestCodingPractices.five;
+
+import java.util.Scanner;
+
+public class Account{
+	public static void main(String[] args) {
+		Scanner read = new Scanner(System.in);
+		String password = read.nextLine();
+		System.out.println(isPasswordAlphanumeric(password));
+	}
+	
+	
+	public static boolean isPasswordAlphanumeric(String password){
+		boolean isDigitOrSymbolFound = false;
+		boolean isLetterFound = false;
+		for(int i=0;i<password.length();i++){
+			char c=password.charAt(i);
+			if(Character.isLowerCase(c) || Character.isUpperCase(c))
+				isLetterFound = true;
+			isDigitOrSymbolFound = true;
+		}
+	return (isLetterFound) && (isDigitOrSymbolFound);
+	}
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <filter>
+  	<filter-name>DemoFilter</filter-name>
+  	<display-name>DemoFilter</display-name>
+  	<description></description>
+  	<filter-class>com.servlet3.DemoFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>DemoFilter</filter-name>
+  	<url-pattern>/DemoFilter</url-pattern>
+  </filter-mapping>
+ <!--  <servlet>
+  	<servlet-name>Demo</servlet-name>
+  	<description></description>
+  	<servlet-class>com.servlet3.Demo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Demo</servlet-name>
+  	<url-pattern>/Demo</url-pattern>
+  </servlet-mapping> -->
+</web-app>

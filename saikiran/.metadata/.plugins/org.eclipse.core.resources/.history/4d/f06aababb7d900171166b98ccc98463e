@@ -1,0 +1,30 @@
+package com.sai.bestCodingPractices.six;
+
+import java.util.*;
+
+public class FoodDB{
+	//findallfoodswhosenamescontainboththekeywords.returns
+	//aniteratoronthesefoods.
+	public Iterator (String cName,String name){
+		//itcontainsallthefoodstobereturned.
+		TreeMap foodTree=new TreeMap();
+		Iterator foodList;
+		Foodfood;
+		foodList=getAllRecords();
+		while(foodList.hasNext()){
+		food=(Food)foodList.next();
+		//doitsnamescontainbothkeywords?
+		if((name==null||//nullor""meansnokeyisspecified
+		name.equals("")||
+		food.getName().indexOf(name)!=-1)){
+		foodTree.put(food.getFoodKey(),food);
+		}
+		}
+		returnfoodTree.values().iterator();
+		}
+		private Iterator getAllRecords(){
+		//TODOAuto-generatedmethodstub
+		return null;
+	}
+}
+

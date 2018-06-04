@@ -1,0 +1,5 @@
+package com.prokarma.sourcerer.controller;
+
+public class Candidate {
+
+}

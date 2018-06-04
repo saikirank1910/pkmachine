@@ -1,0 +1,17 @@
+package com.saikiran.threads;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
+public class ThreadDemo implements Runnable {
+	private String myName;
+	public void run() {
+		String myName ;
+		myName = Thread.currentThread().getName();
+		this.myName = myName;
+		System.out.println(myName+" created");
+	}
+	public String getMyName() {
+		return myName;
+	}
+}

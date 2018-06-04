@@ -1,0 +1,11 @@
+package com.sai.bestCodingPractices.three;
+
+public class Chinesse implements CurrencyFormat{
+
+	@Override
+	public void translateCurrency() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

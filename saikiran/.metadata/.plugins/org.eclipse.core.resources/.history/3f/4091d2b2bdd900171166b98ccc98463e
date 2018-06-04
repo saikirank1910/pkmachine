@@ -1,0 +1,20 @@
+package com.sai.bestCodingPractices.seven;
+import java.math.BigDecimal;
+import java.util.*;
+public class Order{
+	String orderId;
+	Restaurant placeRestaurantOrder;
+	Customer placeCustomerOrder;
+	String addressType;
+	String otherAddress;
+	Map orderItems<String,Integer>;
+	public double getTotalAmount(){
+		BigDecimal totalAmount=new BigDecimal("0.00");
+		Iterator traversingOrderedList=orderItems.values().iterator();
+		while(traversingOrderedList.hasNext()){
+			OrderItem addAmount=(OrderItem)traversingOrderedList.next();
+			totalAmount=totalAmount.add(new BigDecimal(String.valueOf(addAmount.getAmount())));
+		}
+		return totalAmount.doubleValue();
+	}
+}

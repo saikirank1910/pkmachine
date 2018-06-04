@@ -1,0 +1,14 @@
+package com.prokarma.sourcerer.service;
+
+import com.prokarma.sourcerer.dto.User;
+
+public interface UserService {
+<<<<<<< .mine
+	public void get();
+||||||| .r27
+=======
+
+
+	void userDetails(User user);
+>>>>>>> .r28
+}

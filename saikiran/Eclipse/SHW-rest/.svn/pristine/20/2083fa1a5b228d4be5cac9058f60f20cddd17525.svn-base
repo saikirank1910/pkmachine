@@ -1,0 +1,142 @@
+package com.prokarma.sourcerer.service.impl;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.prokarma.sourcerer.dao.UserDao;
+import com.prokarma.sourcerer.dto.Subtechnology;
+import com.prokarma.sourcerer.dto.User;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration({ "classpath:application-context.xml" })
+public class UserImplTest {
+
+	@Mock
+	UserDao userdaoimpl;
+	
+	private MockMvc mockMvc;
+	
+	@InjectMocks
+	UserServiceImpl userserviceimpl =new UserServiceImpl();
+	
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		mockMvc = MockMvcBuilders.standaloneSetup(this.userserviceimpl).build();
+	}
+@Test
+public void whenUserCredentialsAreGivenToService_ReturnUserObject() throws Exception{
+	User user =new User();
+	user.setPassword("Sourcerer");
+	User dbUser=new User();
+	dbUser.setPassword("Sourcerer");
+	when(userdaoimpl.getUser(user)).thenReturn(dbUser);
+	assertEquals(dbUser,userserviceimpl.getUserService(user));	 
+}
+
+@Test
+public void whenUserCredentialsAreGivenToInsertToService_ReturnTrue() throws Exception{
+
+     when(userdaoimpl.userDetails(any(User.class))).thenReturn(true);
+     assertThat(userserviceimpl.userDetails(insertTrueDetails()),is(true));
+}
+ 
+private User insertTrueDetails() {
+    User user =new User();
+    user.setFirstName("Mouni");
+    user.setLastName("Yellisetty");
+    user.setUserName("mounikay");
+    user.setPassword("ymounika");
+    user.setEmail("ymounika@prokarma.com");
+    return user;
+}
+
+@Test
+public void whenUserCredentialsAreGivenToInsertToService_ReturnFalse() throws Exception{
+
+    when(userdaoimpl.userDetails(any(User.class))).thenReturn(false);
+    assertThat(userserviceimpl.userDetails(insertFalseDetails()),is(false));
+}
+
+private User insertFalseDetails() {
+    User user =new User();
+    user.setFirstName("Mouni");
+    user.setLastName("Yellisetty");
+    user.setUserName("mounikay");
+    return user;
+}
+
+List<User> listOfAllUsers = new ArrayList<User>(); 
+
+public void getAllUserDetails() {	
+	User userDetails1 = new User();
+	userDetails1.setFirstName("Hiring1");
+	userDetails1.setLastName("Wizard1");
+	userDetails1.setUserName("HW1");
+	userDetails1.setPassword("wizard1");
+	userDetails1.setRoleID(2);
+	userDetails1.setEmail("hiringWizard1@prokarma.com");
+	User userDetails2 = new User();
+	userDetails2.setFirstName("Hiring2");
+	userDetails2.setLastName("Wizard2");
+	userDetails2.setUserName("HW2");
+	userDetails2.setPassword("wizard2");
+	userDetails2.setRoleID(2);
+	userDetails2.setEmail("hiringWizard2@prokarma.com");
+	listOfAllUsers.add(userDetails1);
+	listOfAllUsers.add(userDetails2);
+}
+
+
+@Test
+public void getAllUserDetails_Returnlist() {
+	getAllUserDetails();
+	when(userdaoimpl.getAllUsers()).thenReturn(listOfAllUsers);
+	List<User> listofAllUsers= userserviceimpl.getAllUsersService();
+	assertEquals(listOfAllUsers, listofAllUsers);
+}
+
+
+@Test
+public void testEditUser_pass() {
+	when(userdaoimpl.editUser(any(User.class))).thenReturn(true);
+	assertThat(userserviceimpl.editUserService(any(User.class)), is(true));	
+}
+
+@Test
+public void testEditUser_fail() {
+	when(userdaoimpl.editUser(any(User.class))).thenReturn(false);
+	assertThat(userserviceimpl.editUserService(any(User.class)), is(false));	
+}
+
+
+@Test
+public void testDeleteUser_pass() {
+	when(userdaoimpl.deleteUser(any(User.class))).thenReturn(true);
+	assertThat(userserviceimpl.deleteUserService(any(User.class)), is(true));	
+}
+
+@Test
+public void testDeleteUser_fail() {
+	when(userdaoimpl.deleteUser(any(User.class))).thenReturn(false);
+	assertThat(userserviceimpl.deleteUserService(any(User.class)), is(false));	
+}
+}

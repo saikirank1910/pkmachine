@@ -1,0 +1,117 @@
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <h3 class="text-on-pannel text-primary">
+                <strong class="text-uppercase"> SkillSet </strong>
+            </h3>
+
+            <ul>
+                <li ng-repeat="tech in $ctrl.subTechnologies">
+                    <span ng-bind="tech"></span>
+                    <div class="container">
+                        <div class="btn-group" data-toggle="buttons">
+                            <label for="" class="btn btn-default">
+                                <input type="radio">Ex
+                            </label>
+                            <label for="" class="btn btn-default">
+                                <input type="radio">ADV
+                            </label>
+                            <label for="" class="btn btn-default">
+                                <input type="radio">IN
+                            </label>
+                            <label for="" class="btn btn-default">
+                                <input type="radio">BG
+                            </label>
+                            <label for="" class="btn btn-default">
+                                <input type="radio">NA
+                            </label>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div align="center">
+    Add new skill to rate
+    <br>
+    <br> type here to search skills
+    <br>
+    <input type="text" ng-model="test">
+    <input type="button" value="OK" ng-click="$ctrl.addTechnology(test)">
+    <br>
+    <br>
+</div>
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <h3 class="text-on-pannel text-primary">
+                <strong class="text-uppercase"> Personal Traits </strong>
+            </h3>
+            <li ng-repeat="traits in $ctrl.personalTraits">
+                <span ng-bind="traits"></span>
+                <div class="container">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label for="" class="btn btn-default">
+                            <input type="radio">Ex
+                        </label>
+                        <label for="" class="btn btn-default">
+                            <input type="radio">ADV
+                        </label>
+                        <label for="" class="btn btn-default">
+                            <input type="radio">IN
+                        </label>
+                        <label for="" class="btn btn-default">
+                            <input type="radio">BG
+                        </label>
+                        <label for="" class="btn btn-default">
+                            <input type="radio" checked="checked">NA
+                        </label>
+                    </div>
+                </div>
+            </li>
+
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <h3 class="text-on-pannel text-primary">
+                    <strong class="text-uppercase"> Overall Details </strong>
+                </h3>
+                SkillLevel:
+                <br>
+                <input type="text"> OverAll Rating :
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default">Ex</button>
+                    <button type="button" class="btn btn-default">ADV</button>
+                    <button type="button" class="btn btn-default">IN</button>
+                    <button type="button" class="btn btn-default">BG</button>
+                </div>
+                <br>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <h3 class="text-on-pannel text-primary">
+                <strong class="text-uppercase"> Final Comments </strong>
+            </h3>
+            Overall Comments:
+            <textarea rows="5" cols="50">
+           comments
+            </textarea>
+
+        </div>
+    </div>
+</div>
+<div align="center">
+    <input type="button" value="submit">
+
+</div>

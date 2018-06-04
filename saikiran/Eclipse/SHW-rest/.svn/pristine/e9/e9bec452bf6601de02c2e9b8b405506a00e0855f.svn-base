@@ -1,0 +1,90 @@
+package com.prokarma.sourcerer.controller;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.prokarma.sourcerer.dto.Panel;
+import com.prokarma.sourcerer.dto.PanelTraitsRating;
+import com.prokarma.sourcerer.service.PanelService;
+@RunWith(SpringJUnit4ClassRunner.class)
+
+@ContextConfiguration({"classpath:application-context.xml"})
+public class PanelControllerTest {
+
+	private MockMvc mockMvc;
+	@InjectMocks
+	@Autowired
+	private PanelController panelController ;
+	
+	@Mock
+	PanelService panelServiceImpl;
+	
+	
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		mockMvc = MockMvcBuilders.standaloneSetup(this.panelController).build();
+	}
+	
+	@Test
+	public void testaddPanel_withStatusOk() throws Exception {
+		String addPanelJson = "{" + "\"panelid\": \"2\"," + "\"panel_member\": \"abcd\"," + "\"email\": \"abc@gmail.com\"," + "\"technology\": \"java\"" + "}";
+		
+		when(panelServiceImpl.panelService((Panel)any(Panel.class))).thenReturn(true);
+
+		mockMvc.perform(post("/panel/addPanel").contentType(MediaType.APPLICATION_JSON).content(addPanelJson)
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isAccepted());	
+	}
+	@Test
+	public void testaddPanel_withStatusError() throws Exception {
+		String addPanelJson = "{" + "\"panelid\": \"2\"," + "\"panel_member\": \"abcd\"," + "\"email\": \"abc@gmail.com\"," + "\"technology\": \"java\"" + "}";
+		
+		when(panelServiceImpl.panelService((Panel)any(Panel.class))).thenReturn(false);
+
+		mockMvc.perform(post("/panel/addPanel").contentType(MediaType.APPLICATION_JSON).content(addPanelJson)
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isBadRequest());	
+	}
+	
+//	@Test
+//	public void testgetPanelMembers_withStatusOk() throws Exception {
+//		List<Panel> listOfPanelMembers= new ArrayList<Panel>();
+//		Panel panel=new Panel();
+//		panel.setPanelid(3);
+//		panel.setPanel_member("xyz");
+//		panel.setEmail("abc@gmail.com");
+//		panel.setTechnology("java");
+//		
+//		listOfPanelMembers.add(panel);
+//		
+//		when(panelServiceImpl.getPanelMembers(panel).thenReturn(listOfPanelMembers));
+//		
+//		MvcResult result= mockMvc.perform(get("/panel/getPanel")).andExpect(status().isOk()).andReturn();
+//	    
+//		String responseSkillRating=  result.getResponse().getContentAsString();
+//			
+//		assertEquals("[{\"Panelid\":3,\"Panel_member\":xyz,\"Email\":abc@gmail.com,\"Technology\":java\"}]", responseSkillRating);
+//
+//	}
+}

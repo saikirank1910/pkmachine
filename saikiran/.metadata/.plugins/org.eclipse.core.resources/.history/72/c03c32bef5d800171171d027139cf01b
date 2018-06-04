@@ -1,0 +1,16 @@
+package com.sai.exception;
+//Write a program to throw IllegalArgumentException if the given number is negative value and caller should catch that exception 
+//and print exception message
+
+import java.util.*;
+public class Exception8 throws IllegalArgumentException{
+	public static void main(String[] args) {
+		Scanner read =new Scanner(System.in);
+		int n = read.nextInt();
+		check(n);
+	}
+	public static void check(int n) {
+		if(n<0)
+			throw new IllegalArgumentException();
+	}
+}

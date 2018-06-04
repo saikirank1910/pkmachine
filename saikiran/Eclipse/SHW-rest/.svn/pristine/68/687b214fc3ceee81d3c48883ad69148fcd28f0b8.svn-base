@@ -1,0 +1,123 @@
+package com.prokarma.sourcerer.controller;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.prokarma.sourcerer.dto.PanelEvaluation;
+import com.prokarma.sourcerer.service.PanelEvaluationService;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+
+@ContextConfiguration({"classpath:application-context.xml"})
+
+public class PanelEvaluationControllerTest {
+	
+	private MockMvc mockMvc;
+	@InjectMocks
+	@Autowired
+	private PanelEvaluationController panelEvaluationController ;
+	
+	@Mock
+	private PanelEvaluationService  panelEvaluationService;
+	
+	
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		mockMvc = MockMvcBuilders.standaloneSetup(this.panelEvaluationController).build();
+	}
+	
+	@Test
+	public void testsubmitSkillsRating_withStatusOk() throws Exception {
+		String skillRatingJson = "[{" + "\"cid\": \"2\"," + "\"pid\": \"2\"," + "\"skillId\": \"7\"," + "\"ratingId\": \"4\"" + "}]";
+	
+		when(panelEvaluationService.addSkillsRating(any(List.class))).thenReturn(true);
+
+		mockMvc.perform(post("/panelEvaluation/submitSkillsRating").contentType(MediaType.APPLICATION_JSON).content(skillRatingJson)
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isAccepted());
+
+		
+	}
+	@Test
+	public void testsubmitSkillsRating_withStatusError() throws Exception {
+		String skillRatingJson = "[{"  + "\"cid\": \"2\","  + "\"pid\": \"2\"," + "\"skillId\": \"7\"," +  "}]";
+	
+		when(panelEvaluationService.addSkillsRating(any(List.class))).thenReturn(false);
+
+		mockMvc.perform(post("/panelEvaluation/submitSkillsRating").contentType(MediaType.APPLICATION_JSON).content(skillRatingJson)
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isBadRequest());
+
+		
+	}
+
+	@Test
+	public void testsubmitTraitsRating_withStatusOk() throws Exception {
+		String panelTraitsJson = "[{" + "\"cid\": \"2\"," + "\"pid\": \"2\"," + "\"skillId\": \"7\"," + "\"ratingId\": \"4\"" + "}]";
+	
+		when(panelEvaluationService.addTraitsRating(any(List.class))).thenReturn(true);
+
+		mockMvc.perform(post("/panelEvaluation/submitTraitsRating").contentType(MediaType.APPLICATION_JSON).content(panelTraitsJson)
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isAccepted());
+
+		
+	}
+	
+	@Test
+	public void testsubmitTraitsRating_withStatusError() throws Exception {
+		String panelTraitsJson = "[{" + "\"cid\": \"2\"," + "\"pid\": \"2\"," + "\"skillId\": \"7\"," +  "}]";
+	
+		when(panelEvaluationService.addTraitsRating(any(List.class))).thenReturn(false);
+
+		mockMvc.perform(post("/panelEvaluation/submitTraitsRating").contentType(MediaType.APPLICATION_JSON).content(panelTraitsJson)
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isBadRequest());
+
+		
+	}
+	
+	@Test
+	public void testsubmitEvaluation_withStatusOk() throws Exception {
+		String panelEvaluationJson = "{" + "\"panelId\": \"2\"," + "\"candidateId\": \"2\"," + "\"comment\": \"commentary\"," +  "\"final_results\": \"finalresults\"," +  "\"overall_rating\": \"good\"," +  "\"status\": \"selected\" " +  "}";
+	
+		when(panelEvaluationService.addEvaluation((PanelEvaluation) any(PanelEvaluation.class))).thenReturn(true);
+
+		mockMvc.perform(post("/panelEvaluation/submitEvaluation").contentType(MediaType.APPLICATION_JSON).content(panelEvaluationJson)
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isAccepted());
+
+		
+	}
+	
+	@Test
+	public void testsubmitEvaluation_withStatusError() throws Exception {
+		String panelEvaluationJson = "{" + "\"panelId\": \"2\"," + "\"candidateId\": \"2\"," + "\"comment\": \"commentary\"," +  "\"final_results\": \"finalresults\"," +  "\"overall_rating\": \"good\"," +  "}";
+	
+		when(panelEvaluationService.addEvaluation((PanelEvaluation) any(PanelEvaluation.class))).thenReturn(false);
+
+		mockMvc.perform(post("/panelEvaluation/submitEvaluation").contentType(MediaType.APPLICATION_JSON).content(panelEvaluationJson)
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isBadRequest());
+
+		
+	}
+	
+	
+	
+	
+	
+
+}

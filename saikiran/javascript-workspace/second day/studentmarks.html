@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Student Details
+		</title>
+	</head>
+	<body onload="javascript:createTable()">   
+    <form>  
+		<h2 align="center"> Enter Student Marks!</h2> 
+		<table cellspacing="5px" cellpadding="5%"; align="center" border="1">  
+			   <tr>  
+					  <td  align="right" >Enter Student Name:</td>  
+					  <td><input type="text" id="nameOfStudent" /></td>  
+			   </tr>    
+			   <tr>  
+					  <td align="right">Enter Student Id:</td>  
+					  <td><input type="text" id="idOfStudent" /></td>  
+			   </tr>  
+			   <tr>  
+					  <td align="right">Subject1:</td>  
+					  <td><input type="number" id="Subject1" /></td>  
+			   </tr>  
+			   <tr>  
+					  <td align="right">Subject2:</td>  
+					  <td><input type="number" id="Subject2" /></td>  
+			   </tr>  
+			   <tr>  
+					  <td align="right">Subject3:</td>  
+					  <td><input type="number" id="Subject3"/></td>  
+			   </tr>    
+			   <tr>  
+					  <td align="right">Subject4:</td>  
+					  <td><input type="number" id="Subject4" /></td>  
+			   </tr>  
+				<tr>  
+					  <td align="right">Total</td>  
+					  <td><output type="number" id="total" value="0.0"/></td>  
+			   </tr>    
+			   <tr>  
+					  <td align="right">Average</td>  
+					  <td><output type="number" id="average" value="0.0"/></td>  
+			   </tr> 			   
+			   <tr> 
+					  <td align="center"><input type="reset" value="reset"/></td>  
+					  <td align="center"> <input type="button" value="Submit" onclick="calculate();"/>  </td> 
+			   </tr>  
+		</table>
+    </form>  
+</body>  
+<script>
+	function calculate(){
+		var studentId = document.getElementById('idOfStudent').value;
+		var studentName = document.getElementById('nameOfStudent').value;
+		var sub1 = Number(document.getElementById('Subject1').value);
+		var sub2 = Number(document.getElementById('Subject2').value);
+		var sub3 = Number(document.getElementById('Subject3').value);
+		var sub4 = Number(document.getElementById('Subject4').value);
+		var total = sub1+sub2+sub3+sub4;
+		var avg = total/4;
+		document.getElementById("total").value= total;
+		document.getElementById("average").value= avg;
+		
+		var bdy = document.getElementsByTagName('body')[0];
+		var tbl = document.getElementById('tableStudent');
+		   
+		var tr = document.createElement('tr');
+        var td = document.createElement('td');
+		var text = document.createTextNode(studentId);
+		td.appendChild(text);
+		tr.appendChild(td);
+
+        td = document.createElement('td');
+        text = document.createTextNode(studentName);
+        td.appendChild(text);
+		tr.appendChild(td);
+
+        td = document.createElement('td');
+        text = document.createTextNode(sub1);
+        td.appendChild(text);
+		tr.appendChild(td);
+
+        td = document.createElement('td');
+        text = document.createTextNode(sub2);
+        td.appendChild(text);
+		tr.appendChild(td);
+
+        td = document.createElement('td');
+        text = document.createTextNode(sub3);
+        td.appendChild(text);
+		tr.appendChild(td);
+
+        td = document.createElement('td');
+        text = document.createTextNode(sub4);
+        td.appendChild(text);
+		tr.appendChild(td);
+
+        td = document.createElement('td');
+        text = document.createTextNode(total);
+        td.appendChild(text);
+		tr.appendChild(td);
+
+        td = document.createElement('td');
+        text = document.createTextNode(avg);
+        td.appendChild(text);
+		tr.appendChild(td);
+		
+		tbl.appendChild(tr);
+		bdy.appendChild(tbl);
+	}
+	function createTable(){
+		var bdy = document.getElementsByTagName('body')[0];
+		var tbl = document.createElement('table');
+		tbl.setAttribute ('id','tableStudent');
+		tbl.setAttribute ('align','center');
+		tbl.setAttribute ('border','1');
+		var th = document.createElement('tr');
+        var td = document.createElement('th');
+		var text = document.createTextNode('StudentId');
+		td.appendChild(text);
+		th.appendChild(td);
+
+        td = document.createElement('th');
+        text = document.createTextNode('StudentName');
+        td.appendChild(text);
+		th.appendChild(td);
+
+        td = document.createElement('th');
+        text = document.createTextNode('Subject1');
+        td.appendChild(text);
+		th.appendChild(td);
+
+        td = document.createElement('th');
+        text = document.createTextNode('Subject2');
+        td.appendChild(text);
+		th.appendChild(td);
+
+        td = document.createElement('th');
+        text = document.createTextNode('Subject3');
+        td.appendChild(text);
+		th.appendChild(td);
+
+        td = document.createElement('th');
+        text = document.createTextNode('Subject4');
+        td.appendChild(text);
+		th.appendChild(td);
+
+        td = document.createElement('th');
+        text = document.createTextNode('Total');
+        td.appendChild(text);
+		th.appendChild(td);
+
+        td = document.createElement('th');
+        text = document.createTextNode('Average');
+        td.appendChild(text);
+		th.appendChild(td);
+		
+		tbl.appendChild(th);
+		bdy.appendChild(tbl);
+	}
+</script>
+</html>

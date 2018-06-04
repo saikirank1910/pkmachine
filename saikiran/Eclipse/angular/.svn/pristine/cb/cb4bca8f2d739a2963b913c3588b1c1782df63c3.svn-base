@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <title>my customized filter</title>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  
+  
+  </head>
+
+  <body ng-app="myApp1">
+  <div ng-controller="myController as useFilter">
+    <p>
+      {{ useFilter.user | makeUppercase }}
+    </p>
+
+  </div>
+  <script>
+  var mod9 = angular.module('myApp1',[]);  
+
+mod9.filter('makeUppercase', function () {
+  return function (item) {
+    return item.toUpperCase();
+  };
+});  
+
+  mod9.controller('myController', function () {
+  this.user = 'kataram sai kiran';
+});
+
+
+
+
+    </script>
+  </body>
+
+</html>

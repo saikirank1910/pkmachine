@@ -1,0 +1,19 @@
+package com.saikiran.threads;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
+public class ThreadDemo extends Thread {
+	private String myName;
+	FileWriter fileWritter = new FileWriter("D:\\saikiran\\newEclipse\\ThreadsAssignment\\input.txt");
+	BufferedWriter bw = new BufferedWriter(fileWritter);
+	public void run() {
+		String myName ;
+		myName = Thread.currentThread().getName();
+		this.myName = myName;
+		System.out.println(myName+" created");
+	}
+	public String getMyName() {
+		return myName;
+	}
+}

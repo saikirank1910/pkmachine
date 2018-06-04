@@ -1,0 +1,39 @@
+package com.prokarma.sourcerer.controller;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.prokarma.sourcerer.service.CandidateSelfRatingService;
+
+public class CandidateSelfRatingControllerTest {
+	
+	private MockMvc mockMvc;
+	
+	@InjectMocks
+	private CandidateSelfRatingController controller = new CandidateSelfRatingController();
+	
+	@Mock
+	private CandidateSelfRatingService candidateSelfRatingService; 
+
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		mockMvc = MockMvcBuilders.standaloneSetup(this.candidateSelfRatingService).build();
+	}
+	@Test
+	public void getTechnologiesForCandidateIdTest() {
+		mockMvc.perform(post("/rating/id/7")
+				.param("cid",7);
+	}
+}

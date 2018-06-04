@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        WEEK END TASK-11
+    </title>
+    <script src="operations.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#add").click(function () {
+                $("#id01").toggle();
+            });
+            $("#edit").click(function () {
+                $("#id02").toggle();
+                editDataInTableAndRemoveItFromJson()
+            });
+            $("#display").click(function () {
+                var radios = document.getElementsByName("taskDetails");
+                for (var i = 0; i < radios.length; i++) {
+                    if (radios[i].type === 'radio' && radios[i].checked) {
+                        break;
+                    }
+                }
+                if (i == radios.length) {
+                    alert("please select a radio button");
+                }
+                else {
+                    var json = JSON.stringify(array[i]);
+                    alert("Json String: " + json);
+                }
+            });
+            $("#delete").click(function () {
+                var radios = document.getElementsByName("taskDetails");
+                for (var i = 0; i < radios.length; i++) {
+                    if (radios[i].type === 'radio' && radios[i].checked) {
+                        break;
+                    }
+                }
+                if (i == radios.length) {
+                    alert("please select a radio button");
+                }
+                if (i > -1) {
+                    array.splice(i, 1);
+                }
+                var row = document.getElementById(tobeDeletedRow.id);
+                row.parentNode.removeChild(row);
+                localStorage.setItem("count", count);
+                localStorage.setItem("array", JSON.stringify(array));
+            });
+            $("#addTable").click(function () {
+                addDataIntoTable();
+                $("#id01").toggle();
+            });
+            $("#editTable").click(function () {
+                editData();
+                $("#id02").toggle();
+            });
+            $("#video").click(function () {
+                $("#id03").toggle();
+            });
+            $("#audio").click(function () {
+                $("#id04").toggle();
+            });
+        });
+    </script>
+</head>
+
+<body onload="loadData();" id="weekEnd">
+    <div>
+        <Form id="addingtaskdetails">
+            <table>
+                <tr>
+                    <table id="addDetails" cellspacing="5px" cellpadding="5%" ; align="center" border="1" padding="20px">
+                        <tr>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Assignee
+                            </th>
+                            <th>
+                                Estimated Hours
+                            </th>
+                            <th>
+                                Start Date
+                            </th>
+                            <th>
+                                EndDate
+                            </th>
+                            <th>
+                                Select
+                            </th>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <table align="center">
+                        <td colspan="7" align="center">
+                            <input id="add" type="button" value="ADD" class="button" />
+                            <input id="edit" type="button" value="EDIT" class="button" />
+                            <input id="delete" type="button" value="DELETE" class="button" />
+                            <input id="display" type="button" value="DISPLAY AS JSON STRING" class="button" />
+                            <input id="video" type="button" value="PLAY VIDEO" class="button" />
+                            <input id="audio" type="button" value="PLAY AUDIO" class="button" />
+                        </td>
+                    </table>
+                </tr>
+            </table>
+        </Form>
+    </div>
+    <div>
+        <form>
+            <table align="center">
+                <tr>
+                    <td>
+                        <table id="id01" cellspacing="5px" cellpadding="5%" ; align="left" border="1" padding="30px">
+                            <tr>
+                                <th colspan="2">
+                                    Add Task Details
+                                </th>
+                            </tr>
+                            <tr>
+                                <td align="right" class="style1">Task Title:</td>
+                                <td class="style1">
+                                    <input type="text" id="addTaskTitle" onkeydown="return alphaOnly(event);" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Task Description:</td>
+                                <td>
+                                    <input type="text" id="addTaskDescription" onkeydown="return alphaOnly(event);" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Assignee/Person:</td>
+                                <td>
+                                    <input type="text" id="addTaskAssignee" onkeydown="return alphaOnly(event);" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Estimated Hours:</td>
+                                <td>
+                                    <input type="number" id="addEstimatedHours" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Start Date:</td>
+                                <td>
+                                    <input type="date" id="addStartDate" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">End Date</td>
+                                <td>
+                                    <input type="date" id="addEndDate" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <input type="reset" value="Submit" class="button" id="addTable" /> </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table id="id02" cellspacing="5px" cellpadding="5%" ; align="right" border="1">
+                            <tr>
+                                <th colspan="2">
+                                    Edit Task Details
+                                </th>
+                            </tr>
+                            <tr>
+                                <td align="right" class="style1">Task Title:</td>
+                                <td class="style1">
+                                    <output type="text" id="editTaskTitle" onkeydown="return alphaOnly(event);" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Task Description:</td>
+                                <td>
+                                    <input type="text" id="editTaskDescription" onkeydown="return alphaOnly(event);" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Assignee/Person:</td>
+                                <td>
+                                    <input type="text" id="editTaskAssignee" onkeydown="return alphaOnly(event);" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Estimated Hours:</td>
+                                <td>
+                                    <input type="number" id="editEstimatedHours" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Start Date:</td>
+                                <td>
+                                    <input type="date" id="editStartDate" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">End Date</td>
+                                <td>
+                                    <input type="date" id="editEndDate" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <input type="reset" value="Submit" class="button" id="editTable" /> </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <!-- <td>
+                       <table id="id03">
+                           <tr>
+                               <td>
+                                   <output type="text" id="jsontextvalue"/>
+                               </td>
+                           </tr>
+                       </table>
+                    </td> -->
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="id03" align="center">
+        <video width="500" height="400" controls>
+            <source src="Oppo.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div id="id04" align="center">
+        <audio controls>
+            <source src="demo.mp3" type="audio/mp3">
+        </audio>
+    </div>
+</body>
+</html>

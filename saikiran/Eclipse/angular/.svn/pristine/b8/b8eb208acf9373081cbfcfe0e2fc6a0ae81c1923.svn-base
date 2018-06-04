@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+
+<body ng-app="myModule1">
+    <div  ng-controller="addName">
+        First Name:
+        <input type="text" ng-model="firstName">
+        <br> Last Name:
+        <input type="text" ng-model="lastName">
+        <br>
+        <br> Full Name: {{firstName + " " + lastName}}
+        <br>
+        <br> UpperCase: {{ firstName + " " + lastName | uppercase}}
+    </div>
+    <div ng-controller="data">
+      <h1 align="center">bringing data from controller<br></h1>
+        <ul>
+            <li ng-repeat="x in names ">
+              {{ x.name + ' , ' + x.empId }}
+            </li>
+        </ul>
+    </div>
+     <div ng-controller="data">
+    <h1 align="center">sorting data with emp id<br></h1>
+     <button ng-click="orderByMe('name')" > sort by empid</button>
+        <ul>
+            <li ng-repeat="x in names | orderBy : myOrderBy ">
+              {{ x.name + ' , ' + x.empId }}
+            </li>
+        </ul>
+    </div>
+    
+    <div ng-controller="data">
+       <h1 align="center"> Search Data from the below data<br></h1>
+     <br>
+      Search: <input align="center" type="text" ng-model="search">
+      <p align="center" ng-repeat="output in names | filter : search" >
+        {{ output.name+' , '+output.empId }}
+      </p>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

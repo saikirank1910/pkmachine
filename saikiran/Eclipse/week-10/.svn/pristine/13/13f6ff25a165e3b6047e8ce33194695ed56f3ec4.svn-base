@@ -1,0 +1,6 @@
+com\weekend\assignment10\maintask\MainTaskBO.class
+com\weekend\assignment10\dbsettings\DBSettings.class
+com\weekend\assignment10\maintask\AbstractTask.class
+com\weekend\assignment10\maintask\MainTask.class
+com\weekend\assignment10\maintask\MainTaskDao.class
+com\weekend\assignment10\dbsettings\ConnectionFactory.class

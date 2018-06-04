@@ -1,0 +1,40 @@
+package com.prokarma.sourcerer.utils;
+
+import org.springframework.stereotype.Component;
+
+import com.prokarma.sourcerer.dto.Candidate;
+import com.prokarma.sourcerer.dto.Email;
+import com.prokarma.sourcerer.dto.PanelAssignee;
+import com.prokarma.sourcerer.dto.User;
+
+@Component
+public class GenerateMessage {
+	private String toEmail="noreplyshw@gmail.com";
+	public Email sendEmailToCandidate(Candidate candidate) {
+		Email email = new Email();
+		email.setTo(candidate.getEmail());
+		email.setFrom(toEmail);
+		email.setSubject("Successfully Registered for the Interview process @ProKarma");
+		email.setMessage("Dear " + candidate.getCname()
+				+ ", Congratulations!! We are glad to inform you that you have been successfully registered for attending the interview process in our Company.Please follow the URL to give your self evaluation process http://localhost:9000/#!/self. The token ID which is mandatory to attend the interview process is "
+				+ candidate.getToken() + ".Regards,Team Prokarma.");
+
+		return email;
+	}
+	public Email sendEmailToPanel(PanelAssignee panelAssignee) {
+		Email email = new Email();
+		email.setTo(panelAssignee.getPanelEmail());
+		email.setFrom(toEmail);
+		email.setSubject("Interview scheduled");
+		email.setMessage("Hello");
+		return email;
+	}
+	public Email sendForgotPasswordToUser(User user) {
+		Email email = new Email();
+		email.setTo(user.getEmail());
+		email.setFrom(toEmail);
+		email.setSubject("request for password");
+		email.setMessage("Hi user, you just requested for password your password is "+user.getPassword());
+		return email;
+	}
+}

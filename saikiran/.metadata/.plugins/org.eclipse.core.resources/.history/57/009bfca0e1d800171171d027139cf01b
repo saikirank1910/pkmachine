@@ -1,0 +1,18 @@
+package com.saikiran.threads;
+import java.io.*;
+import java.util.*;
+
+
+public class ThreadsExample2 {
+	public static void main(String[] args) throws IOException {
+
+		FileWriter fileWritter = new FileWriter("D:\\saikiran\\newEclipse\\ThreadsAssignment\\input.txt");
+		BufferedWriter bw = new BufferedWriter(fileWritter);
+		for(int i=0;i<10;i++) {
+			Thread t = new Thread(new ThreadDemo());
+			t.start();
+		}
+		bw.close();
+		fileWritter.close();
+	}
+}

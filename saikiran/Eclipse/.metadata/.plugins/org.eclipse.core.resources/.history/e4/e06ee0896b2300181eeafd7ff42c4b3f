@@ -1,0 +1,7 @@
+package com.prokarma.sourcerer.service.impl;
+
+import com.prokarma.sourcerer.service.UserService;
+
+public class UserImpl implements UserService {
+
+}

@@ -1,0 +1,13 @@
+package com.sai.bestCodingPractices.two;
+
+public interface Shape
+{
+	public int getType();
+	public void setShapeType();
+	public void getPoint();
+	public void setPoint();
+	public void getPoint1();
+	public void setPoint1();
+	public int getRadius();
+	public void setRadius();
+}

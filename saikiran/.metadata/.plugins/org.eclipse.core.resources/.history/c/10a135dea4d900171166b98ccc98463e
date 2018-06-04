@@ -1,0 +1,184 @@
+package com.weekend.assignment2;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
+
+public class MainConsole {
+	public static void main(String[] args) throws IOException,AgeHandleException {
+		
+		FileWriter fileWritter = new FileWriter("D:\\saikiran\\newEclipse\\WeekEndAssignment-2\\textfile\\Input.txt",true);
+	    FileReader fileReader = new FileReader("D:\\saikiran\\newEclipse\\WeekEndAssignment-2\\textfile\\Input.txt");
+//		FileOutputStream file = new FileOutputStream("D:\\saikiran\\newEclipse\\WeekEndAssignment-2\\textfile\\Input.txt",true); 
+//		FileInputStream file1 = new FileInputStream("D:\\saikiran\\newEclipse\\WeekEndAssignment-2\\textfile\\Input.txt"); 
+		String countNumber[]= {"first","second","third","fourth","fifth","sixth","eighth","nineth","tenth"};
+		Scanner read = new Scanner(System.in);
+		Scanner integerRead = new Scanner(System.in);
+		String projectTitle="",projectHeadName="",nameOfTeamHead,nameOfSubTask="",nameOfTeamMember;
+		int noOfTeamsInMainTask=0,ageOfProjectHead=0,ageOfTeamHead = 0,time,subTaskTime=0,mainTaskTime=0;
+		//MainTask[] task=null;
+		List<MainTask> listOfMainTasks = null;
+		ArrayList<ArrayList<SubTask>> listOfSubTasks = null;
+		//SubTask[][] subTask=null;
+		int n=1;
+		while(n!=3) {
+			System.out.println("1)To Create a main Task 2)Display the tasks which are created 3)exit..!");
+			 
+			n=integerRead.nextInt();
+			if(n==1) {
+			    mainTaskTime = 0;
+				//task = new MainTask[100];
+				listOfMainTasks = new ArrayList<MainTask>();
+				listOfSubTasks = new ArrayList<ArrayList<SubTask>>();
+				//subTask = new SubTask[100][100]; 
+				
+				System.out.println("ENTER THE PROJECT TITLE:");
+				projectTitle = read.nextLine(); 
+				
+				System.out.println("Enter the project head name:");
+				projectHeadName = read.nextLine();
+				
+				
+				System.out.println("enter the age of "+projectHeadName);
+				try {
+					ageOfProjectHead = integerRead.nextInt();
+					if(ageOfProjectHead<30) {
+						throw new AgeHandleException();
+					}
+					else {
+						System.out.println(projectHeadName+" is eligible to handle team");
+					}
+				}
+				catch(AgeHandleException e) 
+				{
+					System.out.println(projectHeadName+" is not eligible to handle the main task "+e);
+					ExceptionCheck(ageOfProjectHead,projectHeadName);
+					
+				}
+				System.out.println("How many sub-tasks do you wanted to create for this main-task?");
+					noOfTeamsInMainTask = integerRead.nextInt();
+					for(int i=0;i<noOfTeamsInMainTask;i++) {
+						System.out.println("enter the name of the "+countNumber[i]+" Team head:");
+						nameOfTeamHead = read.nextLine();
+						System.out.println("enter the age of the "+countNumber[i]+" person");
+						try {
+							ageOfTeamHead = integerRead.nextInt();
+							
+							if(ageOfTeamHead<20 || ageOfTeamHead>30)
+							{
+								throw new AgeHandleException(); 
+							}
+						}
+						catch(AgeHandleException e){
+							System.out.println("age conditions did not meet"+e);
+							if(ageOfTeamHead<20 || ageOfTeamHead>30) {
+							System.out.println(nameOfTeamHead+" is not eligible to handle the main task please assign another person:");
+							i--;
+							continue;
+							}
+						}
+						System.out.println("Enter the sub task name:");
+						nameOfSubTask = read.nextLine();
+						
+						MainTask a1 =new MainTask(i,nameOfTeamHead,ageOfTeamHead,nameOfSubTask,projectTitle,projectHeadName,noOfTeamsInMainTask,ageOfProjectHead);
+						listOfMainTasks.add(a1);
+					}
+					
+					
+					for(int i=0;i<noOfTeamsInMainTask;i++) {
+						listOfMainTasks.get(i).printDetails();
+						System.out.println("enter the time for "+countNumber[i]+" sub task: ");
+						subTaskTime = integerRead.nextInt();
+						System.out.println("time taken for Sub-Task is: "+subTaskTime);
+						mainTaskTime = mainTaskTime + subTaskTime;
+						listOfMainTasks.get(i).setTime(subTaskTime);
+					}	
+					System.out.println("time taken for Main-Task is: "+mainTaskTime);
+					//System.out.println("Inserting data:");
+					
+//				    DataOutputStream dataIn = new DataOutputStream(file); 
+				    String projectDetails,mainTaskDetails="",subTaskDetails="",finalDetails;
+				    projectDetails= projectTitle + " is the main-task name and the main-task head is " + projectHeadName +" it consists of "+ noOfTeamsInMainTask +" sub-tasks\n";   
+				    for(int i=0;i<noOfTeamsInMainTask;i++) {
+						mainTaskDetails = mainTaskDetails + listOfMainTasks.get(i).returnDetails()+"\n";
+						subTaskDetails = subTaskDetails+listOfMainTasks.get(i).returnHours()+"\n";
+					}
+					subTaskDetails = subTaskDetails+"Time taken for Main-Task is: "+mainTaskTime+"\n";
+//					System.out.println(projectDetails);
+//					System.out.println(mainTaskDetails);
+//					System.out.println(subTaskDetails);
+					finalDetails = projectDetails+mainTaskDetails+subTaskDetails;
+//					dataIn.writeChars("!!"+"\n");
+//					dataIn.writeChars(projectTitle+"\n");
+//					dataIn.writeChars(finalDetails);
+					BufferedWriter bw = new BufferedWriter(fileWritter);
+					bw.append("\n"+"!"+"\n");
+					bw.append(projectTitle+"\n");
+					bw.append(finalDetails);
+					bw.flush();
+					bw.close();
+				}
+			if(n==2) {
+				BufferedReader br = new BufferedReader(fileReader);
+				TreeMap<String,String> treeMap=new TreeMap<String,String>();
+				  String line,key="",value="";
+				    while ((line = br.readLine()) != null) {
+				      // System.out.println(line);
+				    	if(line.contains("!")) {
+				        	treeMap.put(key,value);
+				        	key=br.readLine();
+				        	value="";
+				        	//System.out.println(value);
+				        }
+				        else {
+				        	value=value+line+"\n";
+				        }				        	
+				    }
+				    //System.out.println(value);
+				    treeMap.put(key,value);
+				    for(Map.Entry print:treeMap.entrySet())
+				    {  
+				    	System.out.println("enter something to print Task details");
+				    	String ch;
+				    	ch=read.nextLine();
+				    	System.out.println(print.getValue());  
+				    } 
+				    br.close();
+			}
+			
+			if(n==3) {
+				System.out.println("bbye....!");
+				break;
+			}
+			if(n>4)
+				System.out.println("Enter correct option:");
+		}
+		read.close();
+		integerRead.close();
+		fileReader.close();
+		fileWritter.close();
+	}
+	public static void ExceptionCheck(int ageOfProjectHead,String projectHeadName) {
+		Scanner read = new Scanner(System.in);
+		Scanner integerRead = new Scanner(System.in);
+		while(ageOfProjectHead<30) {
+			System.out.println("Enter the project head name:");
+			projectHeadName = read.nextLine();
+			
+			System.out.println("enter the age of "+projectHeadName);
+			ageOfProjectHead = integerRead.nextInt();
+			try {
+				throw new AgeHandleException();
+			}
+			catch(AgeHandleException e1) {
+				System.out.println(projectHeadName+" is not eligible to handle the main task"+e1);
+				ExceptionCheck(ageOfProjectHead, projectHeadName);
+			}
+		}
+		read.close();
+		integerRead.close();
+	}
+}

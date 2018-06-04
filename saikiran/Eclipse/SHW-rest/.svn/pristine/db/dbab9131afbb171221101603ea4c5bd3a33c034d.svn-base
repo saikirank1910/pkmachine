@@ -1,0 +1,36 @@
+package com.prokarma.sourcerer.dto;
+
+public class CandidateSelfRating {
+	public int cid;
+	public int technolgyId;
+	public int ratingId;
+	public String technologyName;
+	public String getTechnologyName() {
+		return technologyName;
+	}
+	public void setTechnologyName(String technologyName) {
+		this.technologyName = technologyName;
+	}
+	public int getCid() {
+		return cid;
+	}
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
+	public int getTechnolgyId() {
+		return technolgyId;
+	}
+	public void setTechnolgyId(int technolgyId) {
+		this.technolgyId = technolgyId;
+	}
+	public int getRatingId() {
+		return ratingId;
+	}
+	public void setRatingId(int ratingId) {
+		this.ratingId = ratingId;
+	}
+	@Override
+	public String toString() {
+		return "CandidateSelfRating [cid=" + cid + ", technolgyId=" + technolgyId + ", ratingId=" + ratingId+",";
+	}
+}

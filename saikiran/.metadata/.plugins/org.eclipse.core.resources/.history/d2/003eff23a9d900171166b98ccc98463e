@@ -1,0 +1,16 @@
+package com.sai.bestCodingPractices;
+
+public class MovieRental{
+	private String bookTitle;
+	private String author;
+	private Date rentDate;
+	private Date dueDate;
+	privatedoublerentalFee;
+	publicbooleanisOverdue(){
+	Datenow=newDate();
+	returndueDate.before(now);
+	}
+	publicdoublegetTotalFee(){
+	returnisOverdue()?1.2*rentalFee:rentalFee;
+	}
+}

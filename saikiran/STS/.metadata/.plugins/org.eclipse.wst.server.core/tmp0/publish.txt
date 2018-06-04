@@ -1,0 +1,4 @@
+#Tomcat publish data
+#Thu Mar 08 19:31:14 IST 2018
+org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\Proakrma\\.m2\\repository\\org\\springframework\\spring-web\\4.3.0.RELEASE\\spring-web-4.3.0.RELEASE.jar=D\:\\sts-bundle\\pivotal-tc-server-developer-3.2.8.RELEASE\\base-instance\\wtpwebapps\\sourcerer-rest\\WEB-INF\\lib\\spring-web-4.3.0.RELEASE.jar
+org.eclipse.jst.jee.server\:sourcerer-rest=D\:\\sts-bundle\\pivotal-tc-server-developer-3.2.8.RELEASE\\base-instance\\wtpwebapps\\sourcerer-rest

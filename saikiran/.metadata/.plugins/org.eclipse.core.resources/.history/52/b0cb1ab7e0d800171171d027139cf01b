@@ -1,0 +1,13 @@
+package com.saikiran.threads;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
+public class ThreadDemo extends Thread {
+	public void run() {
+		String myName ;
+		myName = Thread.currentThread().getName();
+		this.myName = myName;
+		System.out.println(myName+" created");
+	}
+}

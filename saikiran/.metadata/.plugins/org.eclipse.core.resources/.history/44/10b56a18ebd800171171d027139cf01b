@@ -1,0 +1,6 @@
+package com.sai.generics;
+
+public class Node<T> {
+	private T data;
+	
+}

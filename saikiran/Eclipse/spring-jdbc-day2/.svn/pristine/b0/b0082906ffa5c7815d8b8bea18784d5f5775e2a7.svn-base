@@ -1,0 +1,9 @@
+com\pkrm\dao\UserRoleMapDao.class
+com\pkrm\dao\PersonDao.class
+com\pkrm\person\service\PersonService.class
+com\pkrm\person\RoleTable.class
+com\pkrm\person\MainConsole.class
+com\pkrm\person\UserRoleMap.class
+com\pkrm\person\Person.class
+com\pkrm\dao\RoleTableDao.class
+com\pkrm\dao\RoleTableDao$1.class

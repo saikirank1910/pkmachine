@@ -1,0 +1,399 @@
+<form ng-submit="$ctrl.submitRating()">
+
+  <div class="container-fluid" style="margin-bottom:45px">
+    <input type="button" value="Skill Rating Definitions" class="btn btn-primary btn-rt" data-toggle="modal" data-trigger="focus"
+      data-target="#mySkill" style="background-color:cadetblue" />
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">
+        <i>Skill Score</i>
+      </legend>
+      <div class="row" ng-model="$ctrl.accordion">
+        <div class="btn-group col-sm-4 col-xs-12 panel-group" ng-repeat="list in $ctrl.lists">
+          <br>
+          <!-- <div class="panel panel-primary">
+            <div class="collapsed" data-toggle="collapse" data-parent="#panels" data-target="#{{$index}}">
+              <h4>{{list.subTechnology}}</h4>
+            </div>
+            <div id="{{$index}}" class="panel-collapse collapse">
+              <li ng-repeat="description in list.splitDescription">
+                {{description}}
+              </li>
+            </div>
+          </div>   -->
+          <div class="btn-group" dropdown>
+            <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+              {{list.subTechnology}}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li ng-repeat="description in list.splitDescription">
+                {{description}}
+              </li>
+            </ul>
+          </div>
+
+          <br>
+          <br>
+
+          <br>
+          <label class="btn btn-primary btn-radio" ng-class="{'active': list.rating == '5'}">
+            <input type="radio" data-ng-model="list.rating" value="5" ng-required="!list.rating"> EX
+          </label>
+          <label class="btn btn-primary btn-radio" ng-class="{'active': list.rating == '4'}">
+            <input type="radio" data-ng-model="list.rating" value="4" ng-required="!list.rating"> ADV
+          </label>
+          <label class="btn btn-primary btn-radio" ng-class="{'active': list.rating == '3'}">
+            <input type="radio" data-ng-model="list.rating" value="3" ng-required="!list.rating"> IN
+          </label>
+          <label class="btn btn-primary btn-radio" ng-class="{'active': list.rating == '2'}">
+            <input type="radio" data-ng-model="list.rating" value="2" ng-required="!list.rating"> BG
+          </label>
+          <label class="btn btn-primary btn-radio" ng-class="{'active': list.rating == '1'}">
+            <input type="radio" data-ng-model="list.rating" value="1" ng-required="!list.rating"> NA
+          </label>
+        </div>
+      </div>
+
+      <div class="ui-widget">
+        <label for="tags">Add technology </label>
+        <input type="text" id="tags" ng-model="$ctrl.addTechnology">
+        <input type="button" value="Add" class="btn btn-primary btn-rt" ng-click="$ctrl.addToSkills()"></input>
+      </div>
+
+    </fieldset>
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">
+        <i>Personal Traits</i>
+      </legend>
+      <div class="row">
+        <div class="btn-group col-sm-4" ng-repeat="traits in $ctrl.personalTraits">
+          <br>
+          <div>
+            <b>{{traits.personalTrait}}</b>
+          </div>
+          <br>
+          <label class="btn btn-primary btn-radio" ng-class="{'active': traits.rating == '5'}">
+            <input type="radio" data-ng-model="traits.rating" value="5" ng-required="!traits.rating"> EX
+          </label>
+          <label class="btn btn-primary btn-radio" ng-class="{'active': traits.rating == '4'}">
+            <input type="radio" data-ng-model="traits.rating" value="4" ng-required="!traits.rating"> ADV
+          </label>
+          <label class="btn btn-primary btn-radio" ng-class="{'active': traits.rating == '3'}">
+            <input type="radio" data-ng-model="traits.rating" value="3" ng-required="!traits.rating"> IN
+          </label>
+          <label class="btn btn-primary btn-radio" ng-class="{'active': traits.rating == '2'}">
+            <input type="radio" data-ng-model="traits.rating" value="2" ng-required="!traits.rating"> BG
+          </label>
+          <label class="btn btn-primary btn-radio" ng-class="{'active': traits.rating == '1'}">
+            <input type="radio" data-ng-model="traits.rating" value="1" ng-required="!traits.rating"> NA
+          </label>
+        </div>
+      </div>
+    </fieldset>
+    <div style="width:100%">
+      <div style="width:48%;float:left">
+        <fieldset class="scheduler-border">
+          <legend class="scheduler-border">
+            <i>Overall Details</i>
+          </legend>
+          <div>
+            <b>SkillLevel</b>
+            <br>
+            <select ng-options="temp as temp for temp in $ctrl.skillLevel" data-required="true" data-fieldname="This Field" class="slds-select"
+              name="Skilllevel" ng-model="$ctrl.evaluation.skillLevel" style="width:60%;height:28px" required>
+              <option value="">Select Skill Level</option>
+            </select>
+          </div>
+          <div class="row" style="padding:20px">
+            <div>
+              <b>OverAll Rating</b>
+            </div>
+            <br>
+            <div class="btn-group col-sm-9">
+              <label class="btn btn-primary btn-radio" ng-class="{'active': $ctrl.evaluation.overall_rating == 'EX'}">
+                <input type="radio" data-ng-model="$ctrl.evaluation.overall_rating" value="EX" ng-required="!$ctrl.evaluation.overall_rating"> EX
+              </label>
+              <label class="btn btn-primary btn-radio" ng-class="{'active': $ctrl.evaluation.overall_rating == 'GOOD'}">
+                <input type="radio" data-ng-model="$ctrl.evaluation.overall_rating" value="GOOD" ng-required="!$ctrl.evaluation.overall_rating"> GOOD
+              </label>
+              <label class="btn btn-primary btn-radio" ng-class="{'active': $ctrl.evaluation.overall_rating == 'AVG'}">
+                <input type="radio" data-ng-model="$ctrl.evaluation.overall_rating" value="AVG" ng-required="!$ctrl.evaluation.overall_rating"> AVG
+              </label>
+              <label class="btn btn-primary btn-radio" ng-class="{'active': $ctrl.evaluation.overall_rating == 'POOR'}">
+                <input type="radio" data-ng-model="$ctrl.evaluation.overall_rating" value="POOR" ng-required="!$ctrl.evaluation.overall_rating"> POOR
+              </label>
+            </div>
+          </div>
+          <div>
+            <div>
+              <b>Status</b>
+            </div>
+            <br>
+            <div class="btn-group col-sm-12">
+              <label class="btn btn-primary btn-radio" ng-class="{'active': $ctrl.evaluation.status == 'select'}">
+                <input type="radio" data-ng-model="$ctrl.evaluation.status" value="select" ng-required="!$ctrl.evaluation.status"> Select
+              </label>
+              <label class="btn btn-primary btn-radio" ng-class="{'active': $ctrl.evaluation.status == 'waitlist'}">
+                <input type="radio" data-ng-model="$ctrl.evaluation.status" value="waitlist" ng-required="!$ctrl.evaluation.status"> Waitlist
+              </label>
+              <label class="btn btn-primary btn-radio" ng-class="{'active': $ctrl.evaluation.status == 'reject'}">
+                <input type="radio" data-ng-model="$ctrl.evaluation.status" value="reject" ng-required="!$ctrl.evaluation.status"> Reject
+              </label>
+              <label class="btn btn-primary btn-radio" ng-class="{'active': $ctrl.evaluation.status == 'database for future'}">
+                <input type="radio" data-ng-model="$ctrl.evaluation.status" value="database for future" ng-required="!$ctrl.evaluation.status"> Database for future
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div style="width:50%;float:right">
+        <fieldset class="scheduler-border">
+          <legend class="scheduler-border">
+            <i>Final Comments</i>
+          </legend>
+          <label>Comments</label>
+          <textarea data-ng-model="$ctrl.evaluation.comment" spellcheck="true" rows="10" cols="90" required></textarea>
+        </fieldset>
+      </div>
+      <input type="submit" value="Submit" class="btn btn-primary btn-rt"></input>
+    </div>
+  </div>
+</form>
+<div class="modal fade" id="mySkill" role="dialog">
+  <form class="modal-content animate">
+    <div class="container" style="background-color:whitesmoke;text-align:center;width:90%;padding:3%">
+      <span style="float:right;" onclick="document.getElementById('mySkill').style.display='none'" class="close" title="Close Modal"
+        data-dismiss="modal">&times;</span>
+      <div class="modal-content">
+
+        <header>
+          Skill Rating Definitions
+        </header>
+        <p>
+          <br>Rate the candidate's proficiency level in each category based on the rating definitions below</p>
+        <table>
+          <tr>
+            <th class="rating"> Rating </th>
+            <th class="proficiencylevel"> Proficiency level </th>
+            <th class="description"> Description </th>
+            <th class="qualifiers"> Qualifiers </th>
+          </tr>
+          <tr>
+            <td>NA</td>
+            <td>Not Applicable</td>
+            <td></td>
+            <td></td>
+          </tr>
+
+
+          <tr>
+            <td>BG</td>
+            <td>Beginner(basic knowledge)</td>
+            <td>Common knowledge or an understanding of basic techniques and concepts</td>
+            <td>You demonstrate an introductory understanding and ability,and with guidance can perform skill/competency in a
+              few,simple situations.
+              <br>You can direct people to the appropriate source for the further information.
+            </td>
+          </tr>
+          <tr>
+            <td>IN</td>
+            <td>Intermediate(limited Experience)</td>
+            <td>Ability to complete basic tasks based on knowkledge gained in a training course and/or hands on experience.</td>
+            <td>You can understand and can discuss terminology,concepts,principles,and issues related to this competency but
+              are expected to need help when performing this task.
+              <br>You utilize the full range of reference and resource materials in this competency.
+            </td>
+          </tr>
+          <tr>
+            <td>ADV</td>
+            <td>Advanced(applied theory)</td>
+            <td>Ability to perform the actions associated with skill/competency without assistance.
+              <br> Recognised within immediate organisation as ""a person to ask"" when difficult questions arise regarding this
+              skill.
+            </td>
+            <td>You have consistenly practical /relevant ideas and perspectives on process or practice improvements which may
+              easily be implemented.
+              <br>You are capable of coaching others in this competency by translating complex nuances relating to this competency
+              into easy to understand terms.
+              <br> You participate in senior level discussions regarding this competency.
+              <br>You assist in the development of reference and resource materials in this competency. </td>
+          </tr>
+          <tr>
+            <td>EX</td>
+            <td>Expert(recognised authority)</td>
+            <td>Known as an expert in this area. Provide guidance,troubleshoot ,and answer questions related to this area of
+              expertise and the field where the skill is used.</td>
+            <td>You have demonstrated consistent excellence in applying this competency across multiple projects and/or organisations.
+              <br>You are considered the "go to" person in this area within/or outside prokarma.You createnew applications for
+              and/or lead the development of reference and resource materials in this competency.
+              <br> You are able to diagram or expalin the relevant process elements and issues in relation to organisational
+              issues and trends in sufficient detail during discussions and presentations.</td>
+          </tr>
+        </table>
+      </div>
+  </form>
+  </div>
+  <style>
+    input[type=text] {
+      width: 15%;
+      padding: 7px 0px;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .btn-radio>input[type=radio] {
+      position: absolute;
+
+      clip: rect(0, 0, 0, 0);
+      pointer-events: none;
+    }
+
+    fieldset {
+      border-radius: 8px;
+    }
+
+    legend {
+      background: #fff;
+    }
+
+    legend.scheduler-border {
+      width: inherit;
+      /* Or auto */
+      padding: 0 10px;
+      /* To give a bit of padding on the left and right */
+      border-bottom: none;
+    }
+
+    fieldset.scheduler-border {
+      border: 1px groove #ddd !important;
+      padding: 0 1.4em 1.4em 1.4em !important;
+      margin: 0 0 1.5em 0 !important;
+      -webkit-box-shadow: 0px 0px 0px 0px #000;
+      box-shadow: 0px 0px 0px 0px #000;
+    }
+
+    table {
+      width: 90%;
+      margin: 40px;
+      font-size: 10px;
+      table-layout: fixed;
+      word-break: break-word;
+      border-collapse: collapse;
+      border: 1px solid lightskyblue
+    }
+
+    td {
+      padding: 10px;
+      width: 20%;
+      border: 1px solid lightskyblue
+    }
+
+    td:first-child {
+      font-weight: bold;
+      font-size: 20px;
+      text-align: center;
+      color: rgb(10, 10, 82)
+    }
+
+    tr td:nth-of-type(2) {
+      text-align: center;
+    }
+
+    thead+tbody td:first-child {
+      font-weight: lighter;
+    }
+
+    th {
+      background-color: lightblue;
+      border: 1px solid lightskyblue;
+      padding: 10px;
+    }
+
+    th.rating,
+    th.proficiencylevel {
+      width: 20%
+    }
+
+    th.description {
+      width: 40%
+    }
+
+    th.qualifiers {
+      width: 60%
+    }
+
+    tr {
+      border-bottom: 1pt solid lightskyblue;
+    }
+
+    .selected {
+      background-color: MediumSeaGreen;
+      font-weight: bold
+    }
+
+    /* The Close Button */
+
+    .close {
+      position: relative;
+      top: -40px;
+      right: -10px;
+      margin: 0px;
+      color: #000;
+      font-size: 35px;
+      font-weight: bold;
+    }
+
+    /* Close button on hover */
+
+    .close:hover,
+    .close:focus {
+      color: red;
+      cursor: pointer;
+    }
+
+    header {
+      background: repeating-linear-gradient(45deg, rgb(85, 134, 136),
+      cadetblue 1%,
+      cadetblue 1%,
+      cadetblue 2%);
+      padding: 1%;
+      text-align: center;
+      font-weight: bold;
+      font-size: 25px
+    }
+  </style>
+
+
+  <script>
+    var getAllTechnologies = new XMLHttpRequest();
+    getAllTechnologies.open("GET", "http://172.16.201.248:1910/SHW-rest/rest/superadmin/getSubtechnnologies", true);
+    getAllTechnologies.setRequestHeader("Content-type", "application/json");
+    getAllTechnologies.send();
+    var particularTechnologyOfCandidate = new XMLHttpRequest();
+    particularTechnologyOfCandidate.open("GET", "http://172.16.201.248:1910/SHW-rest/rest/rating/id/" + sessionStorage.getItem('cid'), true);
+    particularTechnologyOfCandidate.setRequestHeader("Content-type", "application/text");
+    particularTechnologyOfCandidate.send();
+    setTimeout(function () {
+      var list1 = JSON.parse(getAllTechnologies.responseText);
+      var temp1 = [];
+      for (var j = 0; j < list1.length; j++) {
+        temp1[j] = list1[j].subTechnology;
+      }
+      var list2 = JSON.parse(particularTechnologyOfCandidate.responseText);
+      var temp2 = [];
+      for (var j = 0; j < list2.length; j++) {
+        temp2[j] = list2[j].subTechnology;
+      }
+      let temp = temp1.filter(x => !temp2.includes(x));
+      $(document).ready(function () {
+        $("#tags").autocomplete({
+          source: temp
+        });
+      });
+    }, 400);
+
+
+
+  </script>

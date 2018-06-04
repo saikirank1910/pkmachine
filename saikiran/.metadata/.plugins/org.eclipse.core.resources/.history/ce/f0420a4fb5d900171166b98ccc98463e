@@ -1,0 +1,10 @@
+package com.sai.bestCodingPractices.three;
+
+public class Chinesse implements CurrencyFormat{
+
+	@Override
+	public int  translateCurrency(int n) {
+		System.out.println("something like RMB 1,200");
+	}
+
+}

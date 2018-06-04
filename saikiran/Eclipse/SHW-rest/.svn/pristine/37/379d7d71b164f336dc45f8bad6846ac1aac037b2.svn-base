@@ -1,0 +1,68 @@
+package com.prokarma.sourcerer.utils;
+
+import org.springframework.stereotype.Component;
+
+import com.prokarma.sourcerer.dto.Candidate;
+import com.prokarma.sourcerer.dto.Email;
+import com.prokarma.sourcerer.dto.PanelAssignee;
+import com.prokarma.sourcerer.dto.PanelEvaluation;
+import com.prokarma.sourcerer.dto.User;
+
+@Component
+public class GenerateMessage {
+	private String toEmail = "skataram@prokarma.com";
+
+	public Email sendEmailToCandidate(Candidate candidate) {
+		Email email = new Email();
+		email.setTo(candidate.getEmail());
+		email.setFrom(toEmail);
+		email.setSubject("Successfully Registered for the Interview process @ProKarma");
+		email.setMessage("Dear " + candidate.getCname()
+				+ ", Congratulations!! We are glad to inform you that you have been successfully registered for attending the interview process in our Company.Please follow the URL to give your self evaluation process http://localhost:9000/#!/self. The token ID which is mandatory to attend the interview process is "
+				+ candidate.getToken() + ".Regards,Team Prokarma.");
+
+		return email;
+	}
+
+	public Email sendEmailToPanel(PanelAssignee panelAssignee) {
+		Email email = new Email();
+		email.setTo(panelAssignee.getPanelEmail());
+		email.setFrom(toEmail);
+		email.setSubject("Interview scheduled");
+		email.setMessage("Hi " + panelAssignee.getPanelName()
+				+ ", You are requested to take the interview for the Candidate and your token is "
+				+ panelAssignee.getToken()
+				+ ". Please login in over this URL http://localhost:9000/#!/panelMemberAuthentication and submit your feedback");
+		return email;
+	}
+
+	public Email sendForgotPasswordToUser(User user) {
+		Email email = new Email();
+		email.setTo(user.getEmail());
+		email.setFrom(toEmail);
+		email.setSubject("request for password");
+		email.setMessage("Hi user, you just requested for password. Your password is " + user.getPassword());
+		return email;
+	}
+
+	public Email sendMailToSuperAdminRegardingPanelFeedbackStatus(PanelEvaluation panelEvaluation) {
+		Email email = new Email();
+		email.setTo("skataram@prokarma.com");
+		email.setFrom(toEmail);
+		email.setSubject("Panel Member submited feedback");
+		email.setMessage("Hi Admin, " + panelEvaluation.getPanelMemberName() + " submitted feedback on "
+				+ panelEvaluation.getCandidateName() + " and his STATUS his " + panelEvaluation.getStatus()
+				+ " his COMMENTS are " + panelEvaluation.getComment());
+		return email;
+	}
+
+	public Email sendEmailToAdminRegardingResgistration(User user) {
+		Email email = new Email();
+		email.setTo(user.getEmail());
+		email.setFrom(toEmail);
+		email.setSubject("Greetings!! You are an admin now");
+		email.setMessage("Hi " + user.getFirstName() + ", Your credentials are USERNAME: " + user.getUserName()
+				+ " PASSWORD: " + user.getPassword());
+		return email;
+	}
+}

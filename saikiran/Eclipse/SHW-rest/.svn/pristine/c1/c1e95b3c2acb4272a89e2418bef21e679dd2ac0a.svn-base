@@ -1,0 +1,176 @@
+package com.prokarma.sourcerer.dao.impl;
+
+import static org.junit.Assert.*;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+import com.prokarma.sourcerer.dao.UserDao;
+import com.prokarma.sourcerer.dto.Subtechnology;
+import com.prokarma.sourcerer.dto.User;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration({ "classpath:application-context.xml" })
+@Transactional
+@Ignore
+public class UserDaoImplTest {
+	@Autowired
+	private UserDao userdao;
+	@Autowired
+	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	
+	@Test
+	public void whenUserCredentialsAreGivenToDAO_ReturnUserDetailsFromDataBase() throws Exception {
+		User userloginDetails =new User();
+		userloginDetails.setUserName("IamSuperAdmin");
+		userloginDetails.setPassword("superadmin");
+		userdao.getUser(userloginDetails);
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("firstName","IamSuper");
+		params.addValue("lastName","Admin");
+		params.addValue("userName", "IamSuperAdmin");
+		params.addValue("password", "superadmin");
+		params.addValue("roleID", 2);
+		params.addValue("email", "superadmin@prokarma.com");
+	 namedParameterJdbcTemplate.update("insert into USERDETAILS (USERID,FIRSTNAME,LASTNAME,USERNAME,PASSWORD,ROLLID,EMAIL) values(userid_seq.nextVal,:firstName,:lastName,:userName,:password,:roleID,:email)", params);
+	 User getUserDetails=userdao.getUser(userloginDetails);
+	 assertEquals("IamSuperAdmin",getUserDetails.getUserName());
+	 assertEquals("superadmin",getUserDetails.getPassword());
+		
+	}
+
+	@Test
+	public void whenUserCredentialsAreGivenToDaoToInsert_ReturnTrue() throws Exception{
+		
+		User user = new User();
+	    user.setFirstName("Admin");
+	    user.setLastName("Sourcerer");
+	    user.setUserName("adminSourcerer");
+	    user.setPassword("sourcerer");
+	    user.setEmail("admin@prokarma.com");
+	    userdao.userDetails(user);
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("username","adminSourcerer");
+		User addedUser = namedParameterJdbcTemplate.queryForObject(
+		"select * from USERDETAILS where userName = :username ", params,
+		new RowMapper<User>() {
+		public User mapRow(ResultSet resultset, int index) throws SQLException {
+		User resultUser = new User();
+		resultUser.setFirstName(resultset.getString(2));
+		resultUser.setLastName(resultset.getString(3));
+		resultUser.setUserName(resultset.getString(5));
+		resultUser.setPassword(resultset.getString(4));
+		resultUser.setEmail(resultset.getString(7));
+		return resultUser;
+		}
+		});
+		assertEquals(user.getUserName(),addedUser.getUserName());
+		assertEquals(user.getPassword(),addedUser.getPassword());
+		}
+	
+	@Test
+	public void getAllUsersOfRoleID2_ReturnListofUsers() {
+		User userDetails1 = new User();
+		userDetails1.setFirstName("Hiring1");
+		userDetails1.setLastName("Wizard1");
+		userDetails1.setUserName("HW1");
+		userDetails1.setPassword("wizard1");
+		userDetails1.setRoleID(2);
+		userDetails1.setEmail("hiringWizard1@prokarma.com");
+		User userDetails2 = new User();
+		userDetails2.setFirstName("Hiring2");
+		userDetails2.setLastName("Wizard2");
+		userDetails2.setUserName("HW2");
+		userDetails2.setPassword("wizard2");
+		userDetails2.setRoleID(2);
+		userDetails2.setEmail("hiringWizard2@prokarma.com");
+		userdao.userDetails(userDetails1);
+		userdao.userDetails(userDetails2);
+		List<User> listOfAllUsers = userdao.getAllUsers();
+		assertNotNull(listOfAllUsers);
+
+	}
+	
+	
+	@Test
+	public void editUser_Returntrue() {
+		User userDetails = new User();
+		userDetails.setFirstName("Hiring1");
+		userDetails.setLastName("Wizard1");
+		userDetails.setUserName("HW1");
+		userDetails.setPassword("wizard1");
+		userDetails.setEmail("hiringWizard1@prokarma.com");
+
+		assertEquals(true, userdao.userDetails(userDetails));
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("username", userDetails.getUserName());
+
+		User addedUser = namedParameterJdbcTemplate.queryForObject(
+				"select * from USERDETAILS where USERNAME=:username",
+				params, new RowMapper<User>() {
+				
+					public User mapRow(ResultSet resultset, int index) throws SQLException {
+						User resultUser = new User();
+						resultUser.setFirstName(resultset.getString(2));
+		                resultUser.setLastName(resultset.getString(3));
+		                resultUser.setUserName(resultset.getString(5));
+		                resultUser.setRoleID(resultset.getInt(6));
+		                resultUser.setEmail(resultset.getString(7));
+						return resultUser;
+					}
+				});
+		
+		User editedUser = new User();
+		editedUser.setFirstName("Hiring2");
+		editedUser.setLastName(addedUser.getLastName());
+		editedUser.setPassword(addedUser.getPassword());
+		editedUser.setUserName(addedUser.getUserName());
+		editedUser.setEmail(addedUser.getEmail());
+
+		assertEquals(true, userdao.editUser(editedUser));
+	}
+	
+	@Test
+	public void deleteUser_Returntrue() {
+		User userDetails = new User();
+		userDetails.setFirstName("Hiring1");
+		userDetails.setLastName("Wizard1");
+		userDetails.setUserName("HW1");
+		userDetails.setPassword("wizard1");
+		userDetails.setEmail("hiringWizard1@prokarma.com");
+
+		assertEquals(true, userdao.userDetails(userDetails));
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("username", userDetails.getUserName());
+
+		User addedUser = namedParameterJdbcTemplate.queryForObject(
+				"select * from USERDETAILS where USERNAME=:username",
+				params, new RowMapper<User>() {
+				
+					public User mapRow(ResultSet resultset, int index) throws SQLException {
+						User resultUser = new User();
+						resultUser.setFirstName(resultset.getString(2));
+		                resultUser.setLastName(resultset.getString(3));
+		                resultUser.setUserName(resultset.getString(5));
+		                resultUser.setRoleID(resultset.getInt(6));
+		                resultUser.setEmail(resultset.getString(7));
+						return resultUser;
+					}
+				});
+		
+
+		assertEquals(true, userdao.deleteUser(addedUser));
+	}
+}

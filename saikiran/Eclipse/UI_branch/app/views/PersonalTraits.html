@@ -1,0 +1,107 @@
+<form ng-submit="$ctrl.submit(personalTraits)" name="personalTraits">
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Add Traits</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-3">Personal Trait</div>
+						<div class="col-sm-5">
+							<input type="hidden" ng-model="$ctrl.trait.traitId">
+							<input type="text" style="padding:3px;" ng-model="$ctrl.trait.personalTrait" name="personalTrait" class="form-inputcontrol"
+							 required/>
+							<span class="has-error" style="color:red;font-size:15px;text-align:center" ng-show="personalTraits.$dirty">
+
+								<span ng-show="personalTraits.personalTrait.$error.required">Fill the Personal traits</span>
+
+							</span>
+						</div>
+						<div class="col-sm-4">
+							<input type="submit" value="{{!$ctrl.trait.traitId ? 'Add' : 'Update'}}" class="btn btn-primary btn-rt" id="traitsAddedAlert"/>
+							<input type="button" value="Reset" ng-click="$ctrl.reset(personalTraits)" class="btn btn-primary btn-rt" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<div class="alert alert-success" role="alert" id="traitsAdded" style="display:none;width:50%;margin-left:25%">
+    <strong>Personal trait added successfully</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="alert alert-warning" role="alert" id="traitsDeleted" style="display:none;width:50%;margin-left:25%">
+    <strong>Personal traits deleted successfully</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="alert alert-success" role="alert" id="traitsUpdated" style="display:none;width:50%;margin-left:25%">
+		<strong>Personal traits updated successfully</strong>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+<div class="bs-example" data-example-id="panel-without-body-with-table">
+	<div class="panel panel-primary" style="max-width:50%;margin-left:25%;margin-bottom:4%">
+		<div class="panel-heading">
+			<h3 class="panel-title">Personal Traits Stack</h3>
+		</div>
+		<table class="table table-bordered table-striped table-hover">
+			<thead>
+				<th>Personal Traits</th>
+				<th>Action</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="trait in $ctrl.allTraits">
+					<td>
+						<span ng-bind="trait.personalTrait"></span>
+					</td>
+					<td>&nbsp;
+						<a class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click="$ctrl.toEdit(trait)" title="Edit"></a>&nbsp;&nbsp;&nbsp;
+						<a class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="$ctrl.usertoDelete(trait)" data-toggle="modal" data-trigger="focus"
+						 data-target="#subView" title="Delete"></a>
+					</td>
+					<div class="modal fade" id="subView" role="dialog" style="margin-top:250px">
+						<div class="modal-dialog modal-sm">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<center>
+										<h4 class="panel-title">Are you sure to delete</h4>
+									</center>
+								</div>
+								<div class="modal-body">
+									<center>
+										<button type="button" class="btn btn-default btn-primary custom-width" data-dismiss="modal" ng-model="$ctrl.deleteTrait"
+										 ng-click="$ctrl.toDelete($ctrl.deleteTrait)" id="traitsDeletedAlert">
+											<span class="glyphicon glyphicon-trash">Delete</span>
+										</button>
+										<button type="button" class="btn btn-default btn-primary custom-width" data-dismiss="modal">
+											<span class="glyphicon glyphicon-remove">Cancel</span>
+										</button>
+									</center>
+								</div>
+							</div>
+						</div>
+					</div>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!-- <script>
+    $(document).ready(function(){
+        $("#traitsAddedAlert").click(function(){
+            $("#traitsUpdated").show();
+            setTimeout(function() { $("#traitsUpdated").hide(); }, 2500);
+        });
+        $("#traitsDeletedAlert").click(function(){
+            $("#traitsDeleted").show();
+            setTimeout(function() { $("#traitsDeleted").hide(); }, 2500);
+        });
+    });
+</script> -->

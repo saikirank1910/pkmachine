@@ -1,0 +1,55 @@
+<html>
+	<script>
+		function myFunction(){
+			var username = document.getElementById('userName').value;
+			var password = document.getElementById('password').value;
+			//alert('username is: '+username+' password is: '+password);
+			var firstCharacter = password[0];
+			if(password.length<8){
+				alert("please enter more than or equal to eight characters");
+			}
+			else{
+				if(!isNaN(firstCharacter)){
+					alert("the first number should not be a number");
+				}
+				else{
+					//to check if it contains atleast one numeric value
+					for(var i=0;i<password.length;i++){
+						if(!isNaN(password[i]))
+						  break;
+					}
+					if(i==password.length){
+						alert("the password should contain atleast one number");
+					}
+					else{
+					//to check if it contains atleast a special character
+						var specialChars = "<>@!#$%^&*()_+[]{}?:;|'\"\\,./~`-=";
+						var checkForSpecialChar = function(string){
+						 for(i = 0; i < specialChars.length;i++){
+						   if(string.indexOf(specialChars[i]) > -1){
+							   return true
+							}
+						 }
+						 return false;
+						}
+						if(checkForSpecialChar(password)){
+						    alert('username is: '+username+' password is: '+password);
+						} else {
+							alert("the password should contain atleast one special character");
+						}
+					}
+				}
+			}
+		}
+	</script>
+	<body>
+		<form align="center">
+			User Name:
+			<input type="text" id="userName" /><br>
+			Password:
+			<input type="password" id="password" /><br>
+			Submit:
+			<input type="submit" value="SUBMIT" onclick="myFunction();"/>
+		</form>
+	</body>
+</html>

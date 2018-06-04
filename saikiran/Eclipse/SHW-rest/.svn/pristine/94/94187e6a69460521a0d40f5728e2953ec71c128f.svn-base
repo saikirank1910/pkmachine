@@ -1,0 +1,111 @@
+package com.prokarma.sourcerer.controller;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.prokarma.sourcerer.dto.Candidate;
+import com.prokarma.sourcerer.service.CandidateService;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration({ "classpath:application-context.xml" })
+
+public class CandidateControllerTest {
+	private MockMvc mockMvc;
+	@InjectMocks
+	private CandidateController candidateController = new CandidateController();
+
+	@Mock
+	private CandidateService candidateService;
+
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		mockMvc = MockMvcBuilders.standaloneSetup(this.candidateController).build();
+	}
+
+	@Test
+	public void getCandidatesToBeAssignedTest() throws Exception {
+		List<Candidate> listOfCandidate = new ArrayList<Candidate>();
+		Candidate candidate = new Candidate();
+		candidate.setCid(1);
+		candidate.setCname("Hello");
+		candidate.setEmail("dummy@gmail.com");
+		candidate.setIsVisited(0);
+		candidate.setPhoneNumber(9951194899L);
+		candidate.setTechnologyName("java");
+		candidate.setProfile(null);
+		listOfCandidate.add(candidate);
+		when(candidateService.getCandidatesToBeAssigned()).thenReturn(listOfCandidate);
+
+		MvcResult result = mockMvc.perform(get("/candidate/candidatesToBeAssigned")).andExpect(status().isOk())
+				.andReturn();
+		String responseCandidates = result.getResponse().getContentAsString();
+		assertEquals(
+				"[{\"cid\":1,\"cname\":\"Hello\",\"profile\":null,\"email\":\"dummy@gmail.com\",\"phoneNumber\":9951194899,\"technologyName\":\"java\",\"token\":0,\"isVisited\":0}]",
+				responseCandidates);
+	}
+
+	@Test
+	public void getCandidatesWhoAreRegisteredTest() throws Exception {
+		List<Candidate> listOfCandidate = new ArrayList<Candidate>();
+		Candidate candidate = new Candidate();
+		candidate.setCid(1);
+		candidate.setCname("Hello");
+		candidate.setEmail("dummy@gmail.com");
+		candidate.setIsVisited(0);
+		candidate.setPhoneNumber(9951194899L);
+		candidate.setTechnologyName("java");
+		candidate.setProfile(null);
+		listOfCandidate.add(candidate);
+		when(candidateService.getCandidatesWhoAreRegistered()).thenReturn(listOfCandidate);
+
+		MvcResult result = mockMvc.perform(get("/candidate/candidatesRegistered")).andExpect(status().isOk())
+				.andReturn();
+		String responseCandidates = result.getResponse().getContentAsString();
+		assertEquals(
+				"[{\"cid\":1,\"cname\":\"Hello\",\"profile\":null,\"email\":\"dummy@gmail.com\",\"phoneNumber\":9951194899,\"technologyName\":\"java\",\"token\":0,\"isVisited\":0}]",
+				responseCandidates);
+	}
+
+	@Test
+	@Ignore
+	public void getCandidatesWhoAreAssignedTest() throws Exception {
+		List<Candidate> listOfCandidate = new ArrayList<Candidate>();
+		Candidate candidate = new Candidate();
+		candidate.setCid(1);
+		candidate.setCname("Hello");
+		candidate.setEmail("dummy@gmail.com");
+		candidate.setIsVisited(0);
+		candidate.setPhoneNumber(9951194899L);
+		candidate.setTechnologyName("java");
+		candidate.setProfile(null);
+		listOfCandidate.add(candidate);
+		when(candidateService.getCandidatesForSecondopinion()).thenReturn(listOfCandidate);
+
+		MvcResult result = mockMvc.perform(get("/candidate/candidatesAssignedToPanel")).andExpect(status().isOk())
+				.andReturn();
+		String responseCandidates = result.getResponse().getContentAsString();
+		assertEquals(
+				"[{\"cid\":1,\"cname\":\"Hello\",\"profile\":null,\"email\":\"dummy@gmail.com\",\"phoneNumber\":9951194899,\"technologyName\":\"java\",\"token\":0,\"isVisited\":0}]",
+				responseCandidates);
+	}
+
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			WEEK END TASK
+        </title>
+        <style>
+             #id01{
+                display:none;
+            }
+            #id02{
+                display:none;
+            } 
+            #id03{
+                display:none;
+            } 
+        </style>
+        <script src="operations.js"></script>
+        <script src="hide.js"></script>
+	</head>
+	<body  onload="loadData();" id="weekEnd">   
+    <div>   
+        <form>  
+            <table align="center">
+                <tr>
+                    <td>
+                        <table id="id01" cellspacing="5px" cellpadding="5%"; align="left" border="1" padding="30px">  
+                            <tr>
+                                <th colspan="2">
+                                    Add Task Details
+                                </th>
+                            </tr>
+                            <tr>  
+                                    <td  align="right" class="style1">Task Title:</td>  
+                                    <td class="style1"><input type="text" id="addTaskTitle" /></td>  
+                            </tr>    
+                            <tr>  
+                                    <td align="right">Task Description:</td>  
+                                    <td><input type="text" id="addTaskDescription" /></td>  
+                            </tr>  
+                            <tr>  
+                                    <td align="right">Assignee/Person:</td>  
+                                    <td><input type="text" id="addTaskAssignee" /></td>  
+                            </tr>  
+                            <tr>  
+                                    <td align="right">Estimated Hours:</td>  
+                                    <td><input type="text" id="addEstimatedHours" /></td>  
+                            </tr>  
+                            <tr>  
+                                    <td align="right">Start Date:</td>  
+                                    <td><input type="date" id="addStartDate" /></td>  
+                            </tr>    
+                            <tr>  
+                                    <td align="right">End Date</td>  
+                                    <td><input type="date" id="addEndDate" /></td>  
+                            </tr>        
+                            <tr> 
+                                    <td colspan="2"  align="center"> <input type="reset" value="Submit" onclick="addDataIntoTable();myFunction1();"/>  </td> 
+                            </tr>  
+                        </table> 
+                    </td>
+                    <td>
+                        <table  id="id02" cellspacing="5px" cellpadding="5%"; align="right" border="1"> 
+                                <tr>
+                                    <th colspan="2">
+                                        Edit Task Details
+                                    </th>
+                                </tr> 
+                                <tr>  
+                                    <td  align="right" class="style1">Task Title:</td>  
+                                    <td class="style1"><output type="text" id="editTaskTitle" /></td>  
+                                </tr>    
+                                <tr>  
+                                    <td align="right">Task Description:</td>  
+                                    <td><input type="text" id="editTaskDescription" /></td>  
+                                </tr>  
+                                <tr>  
+                                    <td align="right">Assignee/Person:</td>  
+                                    <td><input type="text" id="editTaskAssignee" /></td>  
+                                </tr>  
+                                <tr>  
+                                    <td align="right">Estimated Hours:</td>  
+                                    <td><input type="text" id="editEstimatedHours" /></td>  
+                                </tr>  
+                                <tr>  
+                                    <td align="right">Start Date:</td>  
+                                    <td><input type="date" id="editStartDate" /></td>  
+                                </tr>    
+                                <tr>  
+                                    <td align="right">End Date</td>  
+                                    <td><input type="date" id="editEndDate" /></td>  
+                                </tr>        
+                                <tr> 
+                                    <td colspan="2"  align="center"> <input type="reset" value="Submit" onclick="editData();myFunction2();"/>  </td> 
+                                </tr>  
+                        </table> 
+                    </td>
+                    <td>
+                       <table id="id03">
+                           <tr>
+                               <td>
+                                   <output type="text" id="jsontextvalue"/>
+                               </td>
+                           </tr>
+                       </table>
+                    </td>
+                </tr>    
+            </table>  
+        </form>  
+    </div>
+    <div>
+        <Form id="addingtaskdetails">
+        <table id="addDetails"cellspacing="5px" cellpadding="5%"; align="center" border="1" padding="30px">  
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Assignee
+                </th>
+                <th>
+                    Estimated Hours
+                </th>
+                <th>
+                    Start Date
+                </th>
+                <th>
+                    EndDate
+                </th>
+                <th>
+                    Select
+                </th>
+            </tr>
+        </table>
+            <table align="center">
+                <td colspan="7" align="center">
+                    <input type="button" value="ADD" onclick="myFunction1();"/>
+                    <input type="button" value="EDIT" onclick="myFunction2();editDataInTableAndRemoveItFromJson();"/>
+                    <input type="button" value="DELETE" onclick="deleterow();"/>
+                    <input type="button" value="DISPLAY AS JSON STRING" onclick="myFunction3();displayJsonString();"/>
+                </td>
+            </table>
+        </Form>
+    </div>
+</body>  
+</html>

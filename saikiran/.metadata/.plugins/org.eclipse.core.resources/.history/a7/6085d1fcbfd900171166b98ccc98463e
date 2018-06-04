@@ -1,0 +1,16 @@
+package com.sai.bestCodingPractices.two;
+
+public interface Shape
+{
+	public int getType(){
+	}
+		publicvoidsetShapeType(intshapeType){
+		this.shapeType=shapeType;
+		}
+		publicPointgetP1(){
+		returnp1;
+		}
+		publicvoidsetP1(Pointp1){
+		this.p1=p1;
+		}
+}

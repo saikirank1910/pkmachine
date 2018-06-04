@@ -1,0 +1,82 @@
+/**
+ * 
+ */
+package com.prokarma.sourcerer.controller;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.prokarma.sourcerer.dto.Subtechnology;
+import com.prokarma.sourcerer.service.TasksService;
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration({"classpath:application-context.xml"})
+
+public class TasksControllerTest {
+
+	private MockMvc mockMvc;
+	@InjectMocks
+	private TasksController tasksController=new TasksController() ;
+	
+	@Mock
+	private TasksService tasksService;
+	
+	
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		mockMvc = MockMvcBuilders.standaloneSetup(this.tasksController).build();
+	}
+	
+	@Test
+	public void testGetTechnoligies_withStatusOk() throws Exception {
+	List<String> technologies= new ArrayList<String>();
+	technologies.add("java");
+	when(tasksService.getTechnologies()).thenReturn(technologies);
+
+	MvcResult result = mockMvc.perform(get("/superadmin/getTechnnologies")).andExpect(status().isOk()).andReturn();
+
+	
+	   String responseTechnologies=result.getResponse().getContentAsString();
+		
+		assertEquals("["+"\"java"+"\"]", responseTechnologies);
+	}
+	
+	@Test
+	public void testGetsubTechnologies_withStatusOk() throws Exception {
+		List<Subtechnology> subtechnologies = new ArrayList<Subtechnology>();
+		Subtechnology firstSubtechnology = new Subtechnology();
+		firstSubtechnology.setId(1);
+		firstSubtechnology.setTechnology("java");
+		firstSubtechnology.setSubtechnology("oops");
+		subtechnologies.add(firstSubtechnology);
+		
+		when(tasksService.getSubtechnologies()).thenReturn(subtechnologies);
+		MvcResult result= mockMvc.perform(get("/superadmin/getSubtechnnologies")).andExpect(status().isOk()).andReturn();
+		String  responseSubtechnologies=result.getResponse().getContentAsString();
+		
+		assertEquals("[{\"technology\":\"java\",\"id\":1,\"subtechnology\":\"oops\"}]", responseSubtechnologies);
+		
+	}
+	
+
+}

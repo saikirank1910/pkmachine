@@ -1,0 +1,40 @@
+package com.prokarma.sourcerer.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.prokarma.sourcerer.dao.PersonalTraitsDao;
+import com.prokarma.sourcerer.dto.PersonalTrait;
+import com.prokarma.sourcerer.service.PersonalTraitsService;
+@Service
+public class PersonalTraitsServiceImpl implements PersonalTraitsService {
+
+	@Autowired
+	PersonalTraitsDao  personalTraitsDaoImpl;
+	
+	
+	public List<PersonalTrait> getPersonalTraits() {
+		
+		return personalTraitsDaoImpl.getPersonalTraits();
+	}
+
+	
+	public boolean addTrait(PersonalTrait personalTrait) {
+		
+		return personalTraitsDaoImpl.addPersonalTrait(personalTrait);
+	}
+
+	
+	public boolean editTrait(PersonalTrait personalTrait) {
+		return personalTraitsDaoImpl.editPersonalTrait(personalTrait);
+	}
+
+	
+	public boolean deleteTrait(PersonalTrait personalTrait) {
+
+		return personalTraitsDaoImpl.deletePersonalTrait(personalTrait);
+	}
+
+}

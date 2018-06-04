@@ -1,0 +1,11 @@
+package com.sai.bestCodingPractices;
+
+public class Person {
+	String firstName;
+	String personLastName;
+	String personTelCountryCode;
+	
+	String contactPersonMobileCountryCode;
+	String contactPersonMobileAreaCode;
+	String contactPersonMobileLocalNumber;
+}

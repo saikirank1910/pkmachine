@@ -1,0 +1,11 @@
+package com.sai.bestCodingPractices.three;
+
+import java.util.Map;
+
+class Currency {
+    private Map<Integer, currency> commandMap; // injected in, or obtained from a factory
+    public void handleRequest(int action) {
+        Command command = commandMap.get(action);
+        command.execute();
+    }
+}

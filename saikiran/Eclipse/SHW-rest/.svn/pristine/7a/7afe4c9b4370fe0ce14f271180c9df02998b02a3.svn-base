@@ -1,0 +1,44 @@
+package com.prokarma.sourcerer.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.prokarma.sourcerer.dto.Panel;
+import com.prokarma.sourcerer.dto.PanelAssignee;
+import com.prokarma.sourcerer.service.PanelAssigneeService;
+import com.prokarma.sourcerer.utils.SMTP;
+
+@RestController
+@RequestMapping("/panelAssignee")
+public class PanelAssigneeController {
+	
+	@Autowired
+	private PanelAssigneeService panelAssigneeServiceImpl;
+	
+	@RequestMapping(value = "/panellogin", method = RequestMethod.POST)
+	public ResponseEntity<PanelAssignee> authenticateUser(@RequestBody PanelAssignee panelAssignee) {
+		PanelAssignee PanelAssigneeFromDB = panelAssigneeServiceImpl.verifyPanel(panelAssignee);
+		System.out.println(PanelAssigneeFromDB);
+		if(panelAssignee.getToken()==PanelAssigneeFromDB.getToken() && PanelAssigneeFromDB.getIsVisited()==0)
+		{
+			return new ResponseEntity<PanelAssignee>(PanelAssigneeFromDB,HttpStatus.OK);
+		}
+		return new ResponseEntity<PanelAssignee>(HttpStatus.BAD_REQUEST);
+	}
+	@RequestMapping(value = "/savePanel", method = RequestMethod.POST)
+	public ResponseEntity<Void> savePanel(@RequestBody PanelAssignee panelAssignee){
+		boolean result = panelAssigneeServiceImpl.savePanelMember(panelAssignee);
+		if(result)
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		return new ResponseEntity<Void>(HttpStatus.BAD_GATEWAY);
+	}
+	
+	
+	
+	
+}

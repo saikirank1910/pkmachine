@@ -1,0 +1,73 @@
+package com.prokarma.sourcerer.controller;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.prokarma.sourcerer.dto.Panel;
+import com.prokarma.sourcerer.dto.User;
+import com.prokarma.sourcerer.service.PanelService;
+
+@RestController
+@RequestMapping("/panel")
+public class PanelController {
+
+	@Autowired
+	PanelService panelimpl;
+
+	@RequestMapping(value = "/addPanel", method = RequestMethod.POST)
+	public ResponseEntity<Object> addPanel(@RequestBody Panel panel) throws SQLException {
+		System.out.println(panel);
+		boolean success = panelimpl.panelService(panel);
+		if (success) {
+			return new ResponseEntity<Object>(HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+		}
+
+	}
+
+	@RequestMapping(value = "/getPanel", method = RequestMethod.POST)
+	public ResponseEntity<List<Panel>> getPanelMembers(@RequestBody Panel panel) {
+		System.out.println(panel.getTechnology());
+		return new ResponseEntity<List<Panel>>(panelimpl.getPanelMembers(panel), HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/getAllPanelDetails", method = RequestMethod.GET, produces = { "application/JSON" })
+
+	public ResponseEntity<List<Panel>> getAllUsers() {
+		List<Panel> listOfPanelDetails = panelimpl.getPanelDetails();
+		return new ResponseEntity<List<Panel>>(listOfPanelDetails, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/editPanelDetails", method = RequestMethod.POST)
+	public ResponseEntity<Void> editUser(@RequestBody Panel panel) {
+		Boolean result = panelimpl.editPanelDetails(panel);
+		if (result == true) {
+			return new ResponseEntity<Void>(HttpStatus.CREATED);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+
+	}
+
+	@RequestMapping(value = "/deletePanelDetails", method = RequestMethod.POST)
+	public ResponseEntity<Void> deleteUser(@RequestBody Panel panel) {
+		Boolean result = panelimpl.deletePanelMember(panel);
+		if (result == true) {
+			return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		}
+		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+
+	}
+
+}

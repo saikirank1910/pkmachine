@@ -1,0 +1,16 @@
+package com.prokarma.de;
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+import com.prokarma.sourcerer.dao.impl.CandidateDaoImpl;
+import com.prokarma.sourcerer.dto.Candidate;
+
+public class MAin {
+	public static void main(String[] args) {
+
+		
+	}
+}

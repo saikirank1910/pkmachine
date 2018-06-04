@@ -1,0 +1,9 @@
+package com.sai.generics;
+
+public class Util {
+	//public static compare()
+	public static <T> void showType(T t) {
+		System.out.println("T class name: "+t.getClass().getName());
+	}
+	public static <T> t
+}

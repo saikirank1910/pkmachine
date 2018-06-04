@@ -1,0 +1,79 @@
+<html>
+<head>
+	<title>Calculator</title>
+</head>
+<body >
+	<form name="calculator" >
+	<table cellspacing="5px" cellpadding="5%" border="1" align="center">
+		<tr>
+			<td>
+				<input type="button" value="1" onclick="capture(1);">
+			</td>
+			<td>
+				<input type="button" value="2" onclick="capture(2);">
+			</td>
+			<td>	
+				<input type="button" value="3" onclick="capture(3);">
+			</td>
+			<td>
+				<input type="button" value="+" onclick="capture('+');">
+			</td>
+		</tr> 
+		<tr>
+			<td>
+				<input type="button" value="4" onclick="capture(4);">
+			</td>
+			<td>
+				<input type="button" value="5" onclick="capture(5);">
+			</td>
+			<td>	
+				<input type="button" value="6" onclick="capture(6);">
+			</td>
+			<td>
+				<input type="button" value="-" onclick="capture('-');">
+			</td>
+		</tr> 
+		<tr>
+			<td>
+				<input type="button" value="7" onclick="capture(7);">
+			</td>
+			<td>
+				<input type="button" value="8" onclick="capture(8);">
+			</td>
+			<td>	
+				<input type="button" value="9" onclick="capture(9);">
+			</td>
+			<td>
+				<input type="button" value="*" onclick="capture('*');">
+			</td>
+		    </tr> 
+			<tr>
+			<td>
+				<input type="button" value="/" onclick="capture('/');">
+			</td>
+			<td>
+				<input type="button" value="0" onclick="capture(0);">
+			</td>
+			<td>
+				<input type="reset" value="C" >
+			</td>
+			<td>
+				<input type="button" value="=" onclick="calculate();">
+			</td>
+		 </tr>
+		 <tr> 
+			 <td colspan="2"  align="right">value:</td> 
+			 <td colspan="2" > <output type="text" id="answer"/> </td> 
+	     </tr> 
+	</table>
+	</form>
+</body>
+<script>
+	function capture(string){
+		document.getElementById("answer").value = document.getElementById("answer").value+string;
+	}
+	function calculate(){
+		document.getElementById("answer").value = eval(document.getElementById("answer").value);
+	}
+</script>
+</html>

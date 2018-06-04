@@ -1,0 +1,6 @@
+package com.sai.bestCodingPractices.two;
+
+public interface Shape
+{
+	
+}

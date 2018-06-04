@@ -1,0 +1,8 @@
+package com.saikiran.threads;
+
+public class ThreadsExample1 {
+	public static void main(String[] args) {
+		Thread thread = new Looping();
+		thread.start();
+	}
+}

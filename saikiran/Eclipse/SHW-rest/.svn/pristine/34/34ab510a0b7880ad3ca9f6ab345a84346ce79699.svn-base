@@ -1,0 +1,18 @@
+package com.prokarma.sourcerer.controller;
+
+import static org.junit.Assert.*;
+
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+@RunWith(SpringJUnit4ClassRunner.class)
+@Ignore
+public class PanelControllerTest {
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}

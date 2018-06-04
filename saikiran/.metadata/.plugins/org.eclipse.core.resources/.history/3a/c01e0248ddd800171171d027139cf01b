@@ -1,0 +1,19 @@
+package com.saikiran.threads;
+
+public class ThreadDemo {
+	public void run() {
+		for(int i=1;i<=100;i++) {
+			if(i%10==0) {
+				System.out.println(i);
+				try {
+					sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else
+				System.out.println(i);
+		}
+	}
+}

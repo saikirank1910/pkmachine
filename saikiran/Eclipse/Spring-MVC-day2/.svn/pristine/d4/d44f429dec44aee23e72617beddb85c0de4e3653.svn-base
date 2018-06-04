@@ -1,0 +1,32 @@
+package com.prokarma.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.prokarma.dao.EmployeeDao;
+import com.prokarma.pojo.Employee;
+
+@Component
+public class Service {
+	@Autowired
+	private EmployeeDao employeeDao;
+
+	public List<Employee> getList() {
+		return employeeDao.getList();
+	}
+
+	public void addEmp(Employee employee) {
+		employeeDao.addEmployee(employee);
+	}
+
+	public List<Employee> getEmpById(int id) {
+		return employeeDao.getEmpById(id);
+	}
+
+	public void deleteEmp(int id) {
+		employeeDao.deleteEmp(id);
+	}
+
+}

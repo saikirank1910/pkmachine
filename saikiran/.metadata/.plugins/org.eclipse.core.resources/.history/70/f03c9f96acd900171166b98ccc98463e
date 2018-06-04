@@ -1,0 +1,6 @@
+package com.sai.bestCodingPractices;
+
+class Organization{
+	String id;
+	String name;
+}

@@ -1,0 +1,250 @@
+<!-- <style>
+    input[type=text],
+    select {
+        width: 50%;
+        padding: 7px 0px;
+        display: inline-block;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    label {
+        margin: 0 35px;
+    }
+</style> -->
+<!-- <div class="modal fade" id="assignView" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Technology</h4>
+            </div>
+            <div class="modal-body">
+                <form class="container" style="width:50%;background:whitesmoke;border-radius: 5px" ng-submit="$ctrl.assignPanel()">
+                    <br/>
+                    <div class="well">
+                        <div class="row">
+                        CandidateID:<input type="text" ng-model="$ctrl.entry.cid" style="margin:0 29px" disabled>
+                        </div>
+                        Candidate Name:
+                        <input type="text" ng-model="$ctrl.entry.cname" disabled>
+                        <br/>
+                        <label>Technology:</label>
+                        <input type="text" ng-model="$ctrl.entry.technologyName" style="margin:0 32px" disabled>
+                    </div>
+                    <div class="well">
+                        <div>Technical Round <span ng-bind="$ctrl.entry.round"></span></div>
+                        
+                        <label>Panel:</label>
+                        <select style="margin:0 73px" ng-model="$ctrl.panelName" ng-options="panel.panel_member for panel in $ctrl.panels" required></select>
+                        <br/>
+                        <br/>
+                        <label>Mode Of Interview</label>
+                        <select ng-model="$ctrl.mode" required>
+                            <option>Face to Face</option>
+                            <option>Skype</option>
+                            <option>Telephone</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary" style="margin:0 320px">Assign</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <center>
+        <table class="table table-bordered table-striped" style="width:60%">
+            <thead>
+                <tr>
+                    <th>CandidateID</th>
+                    <th>Candidate Name</th>
+                    <th>email</th>
+                    <th>Technology</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="candidate in $ctrl.toBeAssigned">
+                    <td><span ng-bind="candidate.cid"></span></td>
+                    <td><span ng-bind="candidate.cname"></span></td>
+                    <td><span ng-bind="candidate.email"></span></td>
+                    <td><span ng-bind="candidate.technologyName"></span></td>
+                    <td><span>Self Evaluation Submitted</span></td>
+                    <td><input type="button" class="btn btn-primary" value="Assign to Round 1" ng-click="$ctrl.displayToFirstRound(candidate)"></td>
+                </tr>
+                <tr ng-repeat="candidate in $ctrl.forSecondOpinion">
+                    <td><span ng-bind="candidate.cid"></span></td>
+                    <td><span ng-bind="candidate.cname"></span></td>
+                    <td><span ng-bind="candidate.email"></span></td>
+                    <td><span ng-bind="candidate.technologyName"></span></td>
+                    <td><span>Second Opinion - TR 1</span></td>
+                    <td><input type="button" class="btn btn-primary" value="Reassign to TR 1" ng-click="$ctrl.displayToSecondOpinion(candidate)"></td>
+                </tr>
+                <tr ng-repeat="candidate in $ctrl.forSecondRound">
+                    <td><span ng-bind="candidate.cid"></span></td>
+                    <td><span ng-bind="candidate.cname"></span></td>
+                    <td><span ng-bind="candidate.email"></span></td>
+                    <td><span ng-bind="candidate.technologyName"></span></td>
+                    <td><span>Selected - TR 1</span></td>
+                    <td><input type="button" class="btn btn-primary" value="Assign to Round 2" ng-click="$ctrl.displayToSecondRound(candidate)"></td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+</div> -->
+<div class="alert alert-success" role="alert" id="PanelAssigneeAdded" style="display:none;width:50%;margin-left:25%">
+    <strong>Candidate assigned to a panel</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="bs-example" data-example-id="panel-without-body-with-table">
+    <div class="panel panel-primary" style="max-width: 70%;margin-left:15%;margin-bottom:5%">
+        <div class="panel-heading">
+            <h3 class="panel-title">Assignation Panel List</h3>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>CandidateID</th>
+                    <th>Candidate Name</th>
+                    <th>Email-ID</th>
+                    <th>Technology</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="candidate in $ctrl.toBeAssigned">
+                    <td>
+                        <span ng-bind="candidate.cid"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="candidate.cname"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="candidate.email"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="candidate.technologyName"></span>
+                    </td>
+                    <td>
+                        <span>Self Evaluation Submitted</span>
+                    </td>
+                    <td>
+                        <input type="button" class="btn btn-primary" value="Assign to Round 1" ng-click="$ctrl.displayToFirstRound(candidate)" id="PanelAssigneeAddedAlert">
+                    </td>
+                </tr>
+                <tr ng-repeat="candidate in $ctrl.forSecondOpinion">
+                    <td>
+                        <span ng-bind="candidate.cid"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="candidate.cname"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="candidate.email"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="candidate.technologyName"></span>
+                    </td>
+                    <td>
+                        <span>Second Opinion - TR 1</span>
+                    </td>
+                    <td>
+                        <input type="button" class="btn btn-primary" value="Reassign to TR 1" ng-click="$ctrl.displayToSecondOpinion(candidate)"
+                            id="PanelAssigneeAddedAlert">
+                    </td>
+                </tr>
+                <tr ng-repeat="candidate in $ctrl.forSecondRound">
+                    <td>
+                        <span ng-bind="candidate.cid"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="candidate.cname"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="candidate.email"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="candidate.technologyName"></span>
+                    </td>
+                    <td>
+                        <span>Selected - TR 1</span>
+                    </td>
+                    <td>
+                        <input type="button" class="btn btn-primary" value="Assign to Round 2" ng-click="$ctrl.displayToSecondRound(candidate)" id="PanelAssigneeAddedAlert">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal fade" id="assignView" role="dialog" style="margin-top:10%">
+    <div class="modal-dialog modal-md">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <center>
+                    <h4 class="panel-title">Person Assignation Form</h4>
+                </center>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-6">CandidateID</div>
+                    <div class="col-sm-6">
+                        <span ng-bind="$ctrl.entry.cid" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">Candidate Name</div>
+                    <div class="col-sm-6">
+                        <span ng-bind="$ctrl.entry.cname" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">Technology</div>
+                    <div class="col-sm-6">
+                        <span ng-bind="$ctrl.entry.technologyName" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">Technical Round </div>
+                    <div class="col-sm-6">
+                        <span ng-bind="$ctrl.entry.round"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">Panel</div>
+                    <div class="col-sm-6">
+                        <select ng-model="$ctrl.panelName" ng-options="panel.panel_member for panel in $ctrl.panels" required></select>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-6"> Mode Of Interview</div>
+                    <div class="col-sm-6">
+                        <select ng-model="$ctrl.mode" required>
+                            <option>Face to Face</option>
+                            <option>Skype</option>
+                            <option>Telephone</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="$ctrl.assignPanel()" id="PanelAssigneeAddedAlert">Assign</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+package com.prokarma.sourcerer.dao.impl;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
+import org.springframework.stereotype.Component;
+
+import com.prokarma.sourcerer.dao.PanelEvaluationDao;
+import com.prokarma.sourcerer.dto.PanelEvaluation;
+import com.prokarma.sourcerer.dto.PanelSkillsRating;
+import com.prokarma.sourcerer.dto.PanelTraitsRating;
+
+@Component
+public class PanelEvaluationDaoImpl implements PanelEvaluationDao {
+	private String addEvaluationSql = "insert into panel_feedback values(eval_seq.nextVal,:candidateId,:panelId,:comments,:skillLevel,:overrallRating,:status)";
+	private String addSkillsRatingSql = "insert into panel_feedback_detail_skills(pfdsid,tsid,ratingid,panelid,cid) values (skill_seq.nextval,:skillId,:ratingId,:pid,:cid)";
+	private String addTraitsRatingSql = "insert into personal_traits_rating(ptrid,ratingid,skillid,cid,pid) values (traits_seq.nextval,:ratingId,:skillId,:cid,:pid)";
+	private String changePanelStatusSql = "update panel_assignee set isvisited=:visited where pid=:pid and cid=:cid";
+	private String getskillRatingSql = "select p.ratingid,t.TECHNICLESUBSKILL from PANEL_FEEDBACK_DETAIL_SKILLS p,techinicle_sub_skills t,PANEL_ASSIGNEE c where p.tsid=t.tsskillid and p.cid=c.cid and p.cid=:cid and c.round=1";
+	private String getTraitsRatingSql = "select b.ratingid,a.personal_traits from PERSONAL_TRAITS_RATING b, PERSONAL_TRAITS a,PANEL_ASSIGNEE c where b.skillid=a.traitid and b.cid=:cid and c.round=1";
+	private String getEvaluationDetailsSql = "select a.commnets,a.skilllevel,a.overall_rating,a.status from panel_feedback a,PANEL_ASSIGNEE b where a.CANDIDATEID =b.cid and a.CANDIDATEID=:cid and b.round=1 and a.status='select'";
+
+	@Autowired
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+	public Boolean addEvaluation(PanelEvaluation panelEvaluation) {
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("candidateId", panelEvaluation.getCandidateId());
+		params.addValue("panelId", panelEvaluation.getPanelId());
+		params.addValue("comments", panelEvaluation.getComment());
+		params.addValue("skillLevel", panelEvaluation.getSkillLevel());
+		params.addValue("overrallRating", panelEvaluation.getOverall_rating());
+		params.addValue("status", panelEvaluation.getStatus());
+		int result = namedParameterJdbcTemplate.update(addEvaluationSql, params);
+		if (result != 1)
+			return false;
+		return true;
+	}
+
+	public Boolean addSkillsRating(List<PanelSkillsRating> list) {
+		SqlParameterSource[] batch = SqlParameterSourceUtils.createBatch(list.toArray());
+		int[] updatesRows = namedParameterJdbcTemplate.batchUpdate(addSkillsRatingSql, batch);
+		if (updatesRows.length == 0) {
+			return false;
+		}
+		return true;
+	}
+
+	public Boolean addTraitsRating(List<PanelTraitsRating> list) {
+		SqlParameterSource[] batch = SqlParameterSourceUtils.createBatch(list.toArray());
+		int[] updatesRows = namedParameterJdbcTemplate.batchUpdate(addTraitsRatingSql, batch);
+		if (updatesRows.length == 0) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean changePanelStatus(PanelEvaluation panelEvaluation) {
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("cid", panelEvaluation.getCandidateId());
+		params.addValue("pid", panelEvaluation.getPanelId());
+		params.addValue("visited", 1);
+
+		int result = namedParameterJdbcTemplate.update(changePanelStatusSql, params);
+		if (result == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public List<PanelSkillsRating> getskillRating(int candidateId) {
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("cid", candidateId);
+		return namedParameterJdbcTemplate.query(getskillRatingSql, params, new RowMapper<PanelSkillsRating>() {
+			public PanelSkillsRating mapRow(ResultSet resultset, int index) throws SQLException {
+				PanelSkillsRating rating = new PanelSkillsRating();
+				rating.setRatingId(resultset.getInt(1));
+				rating.setTechnologyName(resultset.getString(2));
+				return rating;
+			}
+
+		});
+	}
+
+	public List<PanelTraitsRating> getTraitsRating(int candidateId) {
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("cid", candidateId);
+		return namedParameterJdbcTemplate.query(getTraitsRatingSql, params, new RowMapper<PanelTraitsRating>() {
+			public PanelTraitsRating mapRow(ResultSet resultset, int index) throws SQLException {
+				PanelTraitsRating rating = new PanelTraitsRating();
+				rating.setRatingId(resultset.getInt(1));
+				rating.setTraitName(resultset.getString(2));
+				return rating;
+			}
+
+		});
+	}
+
+	public PanelEvaluation getEvaluationDetails(int candidateId) {
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("cid", candidateId);
+		return namedParameterJdbcTemplate.queryForObject(getEvaluationDetailsSql, params, new RowMapper<PanelEvaluation>() {
+
+			public PanelEvaluation mapRow(ResultSet resultSet, int index) throws SQLException {
+				final PanelEvaluation evaluationList = new PanelEvaluation();
+				evaluationList.setComment(resultSet.getString(1));
+				evaluationList.setSkillLevel(resultSet.getString(2));
+				evaluationList.setOverall_rating(resultSet.getString(3));
+				evaluationList.setStatus(resultSet.getString(4));
+				return evaluationList;
+			}
+
+		});
+	}
+
+}

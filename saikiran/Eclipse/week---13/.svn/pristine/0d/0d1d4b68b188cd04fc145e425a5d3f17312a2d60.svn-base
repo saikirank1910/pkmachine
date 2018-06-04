@@ -1,0 +1,101 @@
+package com.pkrm.person.service;
+
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.pkrm.dao.PersonDao;
+import com.pkrm.dao.RoleTableDao;
+import com.pkrm.dao.UserRoleMapDao;
+import com.pkrm.person.Person;
+import com.pkrm.person.RoleTable;
+import com.pkrm.person.UserRoleMap;
+
+@Path("/Person")
+public class PersonService {
+	
+	@Autowired
+	private RoleTableDao roleTableDao;
+
+	@Autowired
+	private PersonDao personDao;
+
+	@Autowired
+	private UserRoleMapDao roleMapDao;
+
+	private int roleId;
+
+	private int userId;
+
+	public PersonService() {
+		
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false, rollbackFor = Exception.class)
+	@POST
+	@Path("/addPerson")
+	public Response insertMainTaskDetails(@DefaultValue("0") @FormParam("id") int id,
+			@FormParam("userName") String userName, @FormParam("firstName") String firstName,
+			@FormParam("lastName") String lastName, @FormParam("role") String roleName) {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("jdbc-context.xml");
+		Person person = new Person();
+		RoleTable roleTable = new RoleTable();
+		person.setRole(roleTable);
+		person.setUserid(id);
+		person.setUserName(userName);
+		person.setFirstName(firstName);
+		person.setLastName(lastName);
+		person.getRole().setName(roleName);
+		System.out.println(person);
+
+		RoleTable roleTableId = context.getBean(RoleTableDao.class).getRoleId(person.getRole().getName());
+		System.out.println(">>>>>>>>>>>>>>>>>>>"+roleTableId.getId());
+
+		context.getBean(PersonDao.class).save(person);
+		roleId = roleTableId.getId();
+		userId = person.getUserid();
+
+		UserRoleMap roleMap = new UserRoleMap();
+
+		roleMap.setRoleId(roleId);
+		roleMap.setUserId(userId);
+
+		context.getBean(UserRoleMapDao.class).insert(roleMap);
+		
+
+		return Response.status(200).entity("inserted").build();
+
+	}
+
+	public RoleTableDao getRoleTableDao() {
+		return roleTableDao;
+	}
+
+	public void setRoleTableDao(RoleTableDao roleTableDao) {
+		this.roleTableDao = roleTableDao;
+	}
+
+	
+	/*public void setPersonDao(PersonDao personDao) {
+		this.personDao = personDao;
+	}
+
+	public void setRoleMapDao(UserRoleMapDao roleMapDao) {
+		this.roleMapDao = roleMapDao;
+	}
+
+	public PersonDao getPersonDao() {
+		return personDao;
+	}
+
+	public UserRoleMapDao getRoleMapDao() {
+		return roleMapDao;
+	}*/
+}

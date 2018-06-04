@@ -1,0 +1,13 @@
+package com.pkrm;
+
+public class Employee {
+	private int id;
+	private int name;
+	public int getId() {
+		return id;
+	}
+	public int getName() {
+		return name;
+	}
+	
+}

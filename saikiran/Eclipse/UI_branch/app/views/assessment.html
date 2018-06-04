@@ -1,0 +1,55 @@
+<form ng-submit="$ctrl.submitRating()">
+  <div class="container-fluid">
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">Skill score</legend>
+      <div class="row">     
+        <div class="btn-group col-sm-4 " ng-repeat="list in $ctrl.lists">
+          <br>
+          <div>
+            <b>{{list.subTechnology}}</b>
+          </div>
+          <br>
+          <label class="btn btn-primary btn-radio" ng-class="{'active': list.rating == '5'}">
+            <input type="radio" data-ng-model="list.rating" value="5" ng-required="!list.rating"> EX
+          </label>
+          <label class="btn btn-primary btn-radio" ng-class="{'active': list.rating == '4'}">
+            <input type="radio" data-ng-model="list.rating" value="4" ng-required="!list.rating"> ADV
+          </label>
+          <label class="btn btn-primary btn-radio" ng-class="{'active': list.rating == '3'}">
+            <input type="radio" data-ng-model="list.rating" value="3" ng-required="!list.rating"> IN
+          </label>
+          <label class="btn btn-primary btn-radio" ng-class="{'active': list.rating == '2'}">
+            <input type="radio" data-ng-model="list.rating" value="2" ng-required="!list.rating"> BG
+          </label>
+          <label class="btn btn-primary btn-radio" ng-class="{'active': list.rating == '1'}">
+            <input type="radio" data-ng-model="list.rating" value="1" ng-required="!list.rating"> NA
+          </label>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <input type="submit" value="Submit" class="btn btn-primary btn-rt" style="margin-left:1%"/>
+</form>
+<style>
+  .btn-radio>input[type=radio] {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    pointer-events: none;
+  }
+
+  legend.scheduler-border {
+    width: inherit;
+    /* Or auto */
+    padding: 0 10px;
+    /* To give a bit of padding on the left and right */
+    border-bottom: none;
+  }
+
+  fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow: 0px 0px 0px 0px #000;
+    box-shadow: 0px 0px 0px 0px #000;
+  }
+</style>

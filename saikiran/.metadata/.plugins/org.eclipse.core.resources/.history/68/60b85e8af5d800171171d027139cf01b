@@ -1,0 +1,7 @@
+package com.saikiran.threads;
+//Write a program and use Executors to scan all the C and D drive in your machine and print all the folder names at once 
+public class ThreadsExample5 {
+	public static void main(String[] args) {
+		
+	}
+}

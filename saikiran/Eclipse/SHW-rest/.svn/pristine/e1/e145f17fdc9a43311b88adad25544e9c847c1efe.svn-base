@@ -1,0 +1,75 @@
+package com.prokarma.sourcerer.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+
+import com.prokarma.sourcerer.dao.UserDao;
+import com.prokarma.sourcerer.dto.Email;
+import com.prokarma.sourcerer.dto.User;
+import com.prokarma.sourcerer.service.UserService;
+import com.prokarma.sourcerer.utils.GenerateMessage;
+import com.prokarma.sourcerer.utils.SMTP;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	UserDao userdaoimpl;
+	
+	@Autowired 
+	private SMTP smtp;
+	
+	@Autowired
+	private GenerateMessage generateMessage;
+
+	public User getUserService(User userLoginDetails) {
+		User userDetails = userdaoimpl.getUser(userLoginDetails);
+		try {
+			if (userDetails.getPassword().equals(userLoginDetails.getPassword())) {
+				return userDetails;
+			}
+		} catch (java.lang.NullPointerException exception) {
+			exception.getMessage();
+		}
+		return null;
+	}
+
+	public boolean forgotPassoword(User userDetails) {
+		boolean success = false;
+		try {
+			User userFromDb = userdaoimpl.forgotPassword(userDetails);
+			if (userFromDb.getPassword() != null) {
+				Email toUser = generateMessage.sendForgotPasswordToUser(userFromDb);
+				smtp.sendMail(toUser);
+				return true;
+			}
+		} catch (DataAccessException da) {
+			return success;
+		}
+		return success;
+	}
+
+	public boolean insertUserService(User user) {
+
+		return userdaoimpl.insertUser(user);
+
+	}
+
+	public boolean editUserService(User userDetails) {
+
+		return userdaoimpl.editUser(userDetails);
+	}
+
+	public boolean deleteUserService(User userDetails) {
+
+		return userdaoimpl.deleteUser(userDetails);
+	}
+
+	public List<User> getAllUsersService() {
+		return userdaoimpl.getAllUsers();
+	}
+
+}

@@ -1,0 +1,61 @@
+package com.prokarma.sourcerer.service.impl;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.prokarma.sourcerer.dao.PanelDao;
+import com.prokarma.sourcerer.dto.Candidate;
+import com.prokarma.sourcerer.dto.Panel;
+import com.prokarma.sourcerer.service.PanelService;
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:application-context.xml" })
+public class PanelImplTest {
+	@Mock
+	private PanelDao panelDao;
+	
+	private MockMvc mockMvc;
+	
+	@InjectMocks
+	@Autowired
+	private PanelService panelImpl;
+	
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		mockMvc = MockMvcBuilders.standaloneSetup(this.panelImpl).build();
+	}
+	List<Panel> panelList = new ArrayList<Panel>();
+
+	private List<Panel> buildPanelMembers() {
+		Panel panel1=new Panel();
+		panel1.setEmail("Hello@gmail.com");
+		panel1.setPanelid(1);
+		panelList.add(panel1);
+		return panelList;
+	}
+	@Test
+	public void panelServiceTest_true() {
+		when(panelDao.getPanelMembers(anyString())).thenReturn(buildPanelMembers());
+		Panel obj = new Panel();
+		obj.setTechnology("java");
+		List<Panel> panel = panelImpl.getPanelMembers(obj);
+		assertEquals(buildPanelMembers(), panel);
+	}
+}
+

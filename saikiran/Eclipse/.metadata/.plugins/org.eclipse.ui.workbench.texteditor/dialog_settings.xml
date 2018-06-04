@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="sub tec"/>
+			<item value="noreplyshw@gmail.com"/>
+			<item value="system"/>
+			<item value="isbadrequest"/>
+			<item value="catch"/>
+			<item value="changeCandidateStatus"/>
+			<item value="getCandidateDetails"/>
+			<item value="restrictCandidate"/>
+			<item value="setUserDe"/>
+			<item value="setUser"/>
+			<item value="final_result"/>
+			<item value="final_r"/>
+			<item value="final"/>
+			<item value="TECHINICLESUBSKILL"/>
+			<item value="i"/>
+		</list>
+		<list key="replacehistory">
+			<item value="skataram@prokarma.com"/>
+			<item value=""/>
+			<item value="isNotImplemented"/>
+			<item value="skilllevel"/>
+			<item value="result"/>
+			<item value="week-14"/>
+			<item value="week-15"/>
+			<item value="Spring-MVC-day3"/>
+			<item value="Spring-MVC-day2"/>
+			<item value="logger.info"/>
+			<item value="Employee"/>
+			<item value="logger.error"/>
+			<item value="pstmt"/>
+			<item value="startDate"/>
+			<item value="endDate"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="284" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="390" key="DIALOG_HEIGHT"/>
+		<item value="1049" key="DIALOG_X_ORIGIN"/>
+		<item value="222" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

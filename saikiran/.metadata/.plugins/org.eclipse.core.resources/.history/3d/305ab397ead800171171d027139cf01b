@@ -1,0 +1,8 @@
+package com.sai.generics;
+
+public class Example7 {
+	public static void main(String[] args) {
+		Util.showNumberType(10);
+		Util.showNumberType(11.12);
+	}
+}

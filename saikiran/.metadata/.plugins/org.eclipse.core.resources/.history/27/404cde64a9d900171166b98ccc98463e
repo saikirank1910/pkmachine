@@ -1,0 +1,16 @@
+package com.sai.bestCodingPractices;
+
+publicclassBookRental{
+privateStringbookTitle;
+privateStringauthor;
+privateDaterentDate;
+privateDatedueDate;
+privatedoublerentalFee;
+publicbooleanisOverdue(){
+Datenow=newDate();
+returndueDate.before(now);
+}
+publicdoublegetTotalFee(){
+returnisOverdue()?1.2*rentalFee:rentalFee;
+}
+}

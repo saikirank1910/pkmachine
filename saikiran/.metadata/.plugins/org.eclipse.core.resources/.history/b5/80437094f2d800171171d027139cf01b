@@ -1,0 +1,94 @@
+package com.sai.weekend;
+
+import java.util.Scanner;
+
+public class MainTask extends AbstractTask{
+	private String taskName;
+	private Float estimateHours;
+	private int noOFSubTasks;
+	private String nameOfAssignedPerson;
+	private int age;
+	public MainTask(String taskName, Float estimateHours, int noOFSubTasks, String nameOfAssignedPerson, int age) {
+		this.taskName = taskName;
+		this.estimateHours = estimateHours;
+		this.noOFSubTasks = noOFSubTasks;
+		this.nameOfAssignedPerson = nameOfAssignedPerson;
+		this.age = age;
+	}
+	
+	
+	public static void main(String[] args) {
+		 int noOfPersonsAssigned,age,noOfSubTeam;
+		 String taskName,nameOfPerson,taskMainName,taskHead; 
+		 double subTaskTime,mainTaskTime=0.0d;
+		 Scanner read = new Scanner(System.in);
+		 System.out.println("Enter the main task name:");
+		 taskMainName = read.nextLine();
+		 //System.out.println(taskName);
+		 System.out.println("How many teams you wanted to create?");
+		 noOfPersonsAssigned = read.nextInt();
+		 MainTask[] task = new MainTask[noOfPersonsAssigned];
+		 SubTask[] subTask = null;
+		 for(int i=0; i<noOfPersonsAssigned; i++) {
+			 read.nextLine();
+
+			 System.out.println("enter the name of the "+(i+1)+" subTask head:");
+			 nameOfPerson = read.nextLine();
+			 
+			 System.out.println("enter the age of the "+(i+1)+" person");
+			 age = read.nextInt();
+			 
+			 if(age<20 || age>30)
+			 {
+				 System.out.println(nameOfPerson+" is not eligible to handle the sub task please assign another person:");
+				 i--;
+				 continue;
+			 }
+			 read.nextLine();
+
+			 System.out.println("Enter the sub task name:");
+			 taskName = read.nextLine();
+			 
+			 
+			 System.out.println("Enter number of persons that you wanted to handle in "+taskName+" team:");
+			 noOfSubTeam = read.nextInt();
+			 subTask = new SubTask[noOfSubTeam];
+			 MainTask a1 =new MainTask(taskName,0.0f,noOfSubTeam,nameOfPerson,age);
+			  task[i] = a1;
+		 }
+		 System.out.println("The main task team is constructed...!");
+		 
+		 
+		 for(int i=0; i<noOfPersonsAssigned; i++) {
+			 task[i].printDetailsOfTask();
+		     SubTask sb = new SubTask();
+		     subTask[i] = sb;
+		     //System.out.println("now lets construct sub teams"+(i+1));
+		     subTask[i].addDetailsOfSubTeam(i+1,task[i].noOFSubTasks);
+		     subTaskTime = subTask[i].CalculateHours();
+		     System.out.println("Time taken for subtask is: "+subTaskTime);
+		     mainTaskTime = mainTaskTime + subTaskTime;
+		     subTask[i].printDetailsOfTask();
+		 }
+		 System.out.println("Time taken for maintask is: "+mainTaskTime);
+		 
+		 
+		 
+		 read.close();
+	}
+	
+	int CalculateHours() {
+		return 0;
+	}
+
+
+	@Override
+	void printDetailsOfTask() {
+		// TODO Auto-generated method stub
+		 System.out.println(" person name is " +nameOfAssignedPerson+ " and his team constructs of "+noOFSubTasks+" and the team lead age is "+age);
+		
+	}
+	
+	
+
+}

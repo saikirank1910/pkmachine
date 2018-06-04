@@ -1,0 +1,9 @@
+package com.sai.bestCodingPractices.two;
+
+import java.util.Map;
+
+public class CadApp {
+	void drawShapes(Graphicsgraphics,Shapeshapes[]) {
+		private Map<Integer, getType> commandMap;
+	}
+}

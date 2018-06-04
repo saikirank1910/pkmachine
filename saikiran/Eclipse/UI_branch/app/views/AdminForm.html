@@ -1,0 +1,153 @@
+<div class="panel panel-primary" style="max-width: 50%;margin-left: 27%;">
+    
+    <div class="panel-heading">
+        <h3 class="panel-title">Add User</h3>
+    </div>
+    <div class="panel-body">
+            <form name="adminAddForm" ng-submit="$ctrl.addUser(adminAddForm)">
+        <div class="row">
+            <div class="col-sm-2">First Name</div>
+            <div class="col-sm-4 ">
+                <input type="text" class="form-inputcontrol" name="firstname" required ng-model="$ctrl.userDetails.firstName">
+                <span class="has-error" style="color:red;font-size:15px;text-align:center" ng-show="adminAddForm.firstname.$dirty">
+
+                        <span ng-show="adminAddForm.firstname.$error.required">Required field</span>
+                        
+                        </span>
+            </div>
+            <div class="col-sm-2">Last Name</div>
+            <div class="col-sm-4">
+                <input type="text" class="form-inputcontrol" required name="lastname" ng-model="$ctrl.userDetails.lastName" />
+                <span class="has-error" style="color:red;font-size:15px;text-align:center" ng-show="adminAddForm.lastname.$dirty">
+
+                    <span ng-show="adminAddForm.lastname.$error.required">Required field</span>
+                    
+                    </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2">Email ID</div>
+            <div class="col-sm-4">
+                <input type="email" class="form-inputcontrol" name="email" required ng-model="$ctrl.userDetails.email" />
+                <span class="has-error" style="color:red;font-size:15px;text-align:center" ng-show="adminAddForm.email.$dirty">
+
+                        <span ng-show="adminAddForm.email.$error.required"> Required field</span>
+                        
+                        <span ng-show="adminAddForm.email.$error.email">Invalid Email Format</span>
+                        
+                        </span>  
+            </div>
+            <div class="col-sm-2">User Name</div>
+            <div class="col-sm-4">
+                <input type="text" class="form-inputcontrol"name="username" ng-disabled="$ctrl.userDisabled" required ng-model="$ctrl.userDetails.userName" />
+                <span class="has-error" style="color:red;font-size:15px;text-align:center"  ng-show="adminAddForm.username.$dirty">
+
+                        <span ng-show="adminAddForm.username.$error.required">Required field</span>
+                        
+                        </span>   
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2">Password</div>
+            <div class="col-sm-4">
+                <input type="password" class="form-inputcontrol" name="password" required ng-disabled="$ctrl.passwordDisabled" ng-model="$ctrl.userDetails.password" />
+                <span class="has-error" style="color:red;font-size:15px;text-align:center" ng-show="adminAddForm.password.$dirty">
+
+                        <span ng-show="adminAddForm.password.$error.required">Required field</span>
+                        
+                        <span ng-show="adminAddForm.password.$error.minlength">Password too short!!</span>
+                        
+                        <span ng-show="adminAddForm.password.$error.maxlength">Password Length should be between 8 and 15</span>
+                        
+                        </span>
+            </div>
+            <!-- <div class="col-sm-4">&nbsp;</div> -->
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-primary btn-rt" ng-disabled="addAdminform.$invalid" id="userAddedAlert">
+                  <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>Save
+                </button>
+            <!-- </div>
+            <div class="col-sm-2"> -->
+                <button type="button" class="btn btn-primary btn-rt" ng-disabled="addAdminform.$invalid" ng-click="$ctrl.reset();adminAddForm.$setPristine()" >
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>Reset</button>
+            </div>
+        </div>    
+            </form>
+    </div>
+</div>
+<div class="alert alert-success" role="alert" id="userAdded" style="display:none;width:50%;margin-left:25%">
+    <strong>Admin added successfully</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="alert alert-warning" role="alert" id="userDeleted" style="display:none;width:50%;margin-left:25%">
+    <strong>user deleted successfully</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="alert alert-success" role="alert" id="userEdited" style="display:none;width:50%;margin-left:25%">
+        <strong>user updated successfully</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<div class="bs-example" data-example-id="panel-without-body-with-table">
+    <div class="panel panel-primary" style="max-width: 75%;margin-left:15%;margin-bottom:5%">
+        <div class="panel-heading">
+            <h3 class="panel-title">User List</h3>
+        </div>
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in $ctrl.users">
+                    <td><span ng-bind="user.firstName"></span></td>
+                    <td><span ng-bind="user.lastName"></span></td>
+                    <td><span ng-bind="user.userName"></span></td>
+                    <td><span ng-bind="user.email"></span></td>
+                    <td>&nbsp;
+                            <a class="glyphicon glyphicon-pencil" ng-click="$ctrl.toEdit(user)" title="Edit"></a> &nbsp;&nbsp;&nbsp;
+                            <a class="glyphicon glyphicon-trash" data-toggle="modal" data-trigger="focus" ng-click="$ctrl.userToDelete(user)" data-target="#subView" title="Delete"></a>                                              
+                    </td>
+                <div class="modal fade" id="subView" role="dialog" style="margin-top:250px">
+                    <div class="modal-dialog modal-sm">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <center><h4 class="panel-title">Are you sure to delete</h4></center>
+                            </div>
+                            <div  class="modal-body"><center>
+                                <button  type="button" class="btn btn-default btn-primary custom-width" data-dismiss="modal" ng-model="$ctrl.deleteUser" ng-click="$ctrl.toDelete($ctrl.deleteUser)" id="userDeletedAlert">
+                                    <span class="glyphicon glyphicon-trash" >Delete</span></button>
+                                <button type="button" class="btn btn-default btn-primary custom-width" data-dismiss="modal">
+                                    <span class="glyphicon glyphicon-remove">Cancel</span></button></center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- <script>
+    userEdited
+$(document).ready(function(){
+    $("#userAddedAlert").click(function(){
+        $("#userAdded").show();
+        setTimeout(function() { $("#userAdded").hide(); }, 2500);
+    });
+    $("#userDeletedAlert").click(function(){
+        $("#userDeleted").show();
+        setTimeout(function() { $("#userDeleted").hide(); }, 2500);
+    });
+});
+</script> -->

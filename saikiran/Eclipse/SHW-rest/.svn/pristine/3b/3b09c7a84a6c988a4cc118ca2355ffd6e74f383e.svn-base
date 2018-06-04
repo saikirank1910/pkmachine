@@ -1,0 +1,59 @@
+package com.prokarma.sourcerer.dao.impl;
+
+import static org.junit.Assert.*;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.prokarma.sourcerer.dao.SkillLevelDao;
+import com.prokarma.sourcerer.dto.SkillLevel;
+import com.prokarma.sourcerer.dto.Subtechnology;
+import com.prokarma.sourcerer.service.impl.SkillLevelServiceImpl;
+
+public class SkillLevelDaoImplTest {
+	private MockMvc mockMvc;
+	@Autowired
+	private SkillLevelDao skillLevelDaoimpl;
+	@Autowired
+	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+	
+	@Test
+	public void testAddSkillLevel() {
+		/*SkillLevel skillLevel = new SkillLevel();
+		skillLevel.setSkillId(6);
+		skillLevel.setSkillLevel("design");
+
+		skillLevelDaoimpl.addSkillLevel(skillLevel);
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("skillLevel", skillLevel.getSkillLevel());
+
+		SkillLevel addedSkillLevel = namedParameterJdbcTemplate.queryForObject(
+				"select skillId,skillLevel from skillLevel",
+				params, new RowMapper<SkillLevel>() {
+				
+					public SkillLevel mapRow(ResultSet resultset, int index) throws SQLException {
+						SkillLevel resultTechnology = new SkillLevel();
+						resultTechnology.setSkillId(resultset.getInt(1));
+						resultTechnology.setSkillLevel(resultset.getString(3));
+						
+						return resultTechnology;
+					}
+				});
+		assertEquals(addedSkillLevel.getSkillId(), skillLevel.getSkillId());
+		assertEquals(addedSkillLevel.getSkillLevel(), skillLevel.getSkillLevel());*/
+		
+	}
+}

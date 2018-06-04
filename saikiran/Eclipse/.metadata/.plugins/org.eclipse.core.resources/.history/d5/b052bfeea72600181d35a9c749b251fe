@@ -1,0 +1,44 @@
+package com.prokarma.sourcerer.controller;
+
+import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.prokarma.sourcerer.dao.impl.CandidateDaoImpl;
+import com.prokarma.sourcerer.dto.Candidate;
+
+@RestController
+@RequestMapping("/candidate")
+public class CandidateController {
+
+	@Autowired
+	private CandidateDaoImpl candidateDaoImpl;
+
+	@RequestMapping(value = "/upload", headers=("content-type=multipart/*"), method = RequestMethod.POST)
+	public ResponseEntity getUser(MultipartFile file) {
+		System.out.println("Hello");
+		System.out.println();
+		byte[] bytes = null;
+		try {
+			bytes = file.getBytes();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		Candidate candidate = new Candidate();
+		candidate.setCname("sai");
+		candidate.setEmail("akushkjasn");
+		candidate.setProfile(bytes);
+		candidate.setPhoneNumber((long) 12231231);
+		candidateDaoImpl.save(candidate);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+
+}

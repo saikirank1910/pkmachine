@@ -1,0 +1,19 @@
+package com.pkrm;
+
+public class MainConsole {
+	public static void main(String[] args) {
+		Employee obj = new Employee();
+		obj.setId(123);
+		obj.setName("asf");
+		Employee obj1 = new Employee();
+		obj1.setId(123);
+		obj1.setName("asfasf");
+		Employee obj2 = new Employee();
+		obj2.setId(123);
+		obj2.setName("asfafs");
+		Employee obj3 = new Employee();
+		obj3.setId(123);
+		obj3.setName("asfasfasf a");
+		
+	}
+}

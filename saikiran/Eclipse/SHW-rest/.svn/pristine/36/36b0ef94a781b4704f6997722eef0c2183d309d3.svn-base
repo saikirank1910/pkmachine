@@ -1,0 +1,139 @@
+package com.prokarma.sourcerer.dao.impl;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.prokarma.sourcerer.dao.UserDao;
+import com.prokarma.sourcerer.dto.User;
+
+@Repository
+public class UserDaoImpl implements UserDao {
+	@Autowired
+	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+	public boolean userDetails(User user) {
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("firstName", user.getFirstName());
+		params.addValue("lastName", user.getLastName());
+		params.addValue("userName", user.getUserName());
+		params.addValue("password", user.getPassword());
+		params.addValue("email", user.getEmail());
+		String sql = "insert into USERDETAILS values(userid_seq.nextVal ,:firstName,:lastName,:password,:userName,2,:email)";
+		int result = namedParameterJdbcTemplate.update(sql, params);
+		if (result == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public User getUser(User userLoginDetails) {
+		try {
+			final String sql = "select * from USERDETAILS where USERNAME = :username and PASSWORD = :password";
+			final MapSqlParameterSource params = new MapSqlParameterSource();
+			params.addValue("username", userLoginDetails.getUserName());
+			params.addValue("password", userLoginDetails.getPassword());
+			return namedParameterJdbcTemplate.queryForObject(sql, params, new RowMapper<User>() {
+				public User mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+
+					final User userDetails = new User();
+					userDetails.setUserName(resultSet.getString("USERNAME"));
+					userDetails.setPassword(resultSet.getString("PASSWORD"));
+					userDetails.setRoleID(resultSet.getInt("ROLLID"));
+					return userDetails;
+				}
+
+			});
+		}
+
+		catch (DataAccessException dataaccesssexception) {
+			dataaccesssexception.getMessage();
+			return null;
+		}
+	}
+
+	public User forgotPassword(User userDetails) {
+		final String sql = "select password,email from USERDETAILS where USERNAME = :username and email = :email and rollid=2";
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("username", userDetails.getUserName());
+		params.addValue("email", userDetails.getEmail());
+		return namedParameterJdbcTemplate.queryForObject(sql, params, new RowMapper<User>() {
+			public User mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+				User user = new User();
+				user.setPassword(resultSet.getString(1));
+				user.setEmail(resultSet.getString(2));
+				return user;
+			}
+
+		});
+	}
+
+
+	public boolean editUser(User userDetails) {
+
+		try {
+			final String sql = "update USERDETAILS set FIRSTNAME=:firstname,LASTNAME=:lastname,EMAIL=:email  where USERNAME=:username";
+			final MapSqlParameterSource params = new MapSqlParameterSource();
+			params.addValue("firstname", userDetails.getFirstName());
+			params.addValue("lastname", userDetails.getLastName());
+			params.addValue("username", userDetails.getUserName());
+			params.addValue("email", userDetails.getEmail());
+			int result=namedParameterJdbcTemplate.update(sql, params);
+			System.out.println("Updated user DB Successfully for username:" + userDetails.getUserName());
+			if(result==1) {
+			return true;
+			}
+			return false;
+		} catch (final DataAccessException dataaccessexception) {
+			dataaccessexception.printStackTrace();
+			return false;
+		}
+	}
+
+
+	public boolean deleteUser(User userDetails) {
+		try {
+			final String sql = "delete from USERDETAILS where USERNAME = :username";
+			final MapSqlParameterSource params = new MapSqlParameterSource();
+			params.addValue("username", userDetails.getUserName());
+			namedParameterJdbcTemplate.update(sql, params);
+			return true;
+		} catch (final DataAccessException dataaccessexception) {
+			dataaccessexception.printStackTrace();
+			return false;
+		}
+	}
+
+
+	public List<User> getAllUsers() {
+		return namedParameterJdbcTemplate.query("select * from USERDETAILS where ROLLID=2",new ResultSetExtractor<List<User>>(){  
+
+			public List<User> extractData(ResultSet resultSet) throws SQLException,DataAccessException {
+
+	            List<User> list=new ArrayList<User>();  
+	            while(resultSet.next()) {
+	                final User user = new User();
+	                user.setFirstName(resultSet.getString(2));
+	                user.setLastName(resultSet.getString(3));
+	                user.setUserName(resultSet.getString(5));
+	                user.setRoleID(resultSet.getInt(6));
+	                user.setEmail(resultSet.getString(7));
+	                list.add(user);
+	            }
+				return list;
+	            }
+	    });    
+
+	}
+
+}

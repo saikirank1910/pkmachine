@@ -1,0 +1,20 @@
+package com.saikiran.threads;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+//Write a program to span 10 threads say T1,T2,T3.... and every thread should write its name to the file. This time give the threads priority in spanning order say T1 priority is 1 and T2 priority is 2
+
+
+public class ThreadsExample3{
+	public static void main(String[] args) throws IOException {
+		FileWriter fileWritter = new FileWriter("D:\\saikiran\\newEclipse\\ThreadsAssignment\\input1");
+		BufferedWriter bw = new BufferedWriter(fileWritter);
+		for(int i=0;i<10;i++) {
+			Thread t = new Thread(new ThreadDemo(), "thread " + i);
+			t.start();
+ 			bw.append(t.getName()+"\n");
+		}
+		bw.close();
+		fileWritter.close();
+	}
+}

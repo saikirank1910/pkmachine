@@ -1,0 +1,54 @@
+package com.prokarma.sourcerer.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.prokarma.sourcerer.dao.CandidateDao;
+import com.prokarma.sourcerer.dao.PanelEvaluationDao;
+import com.prokarma.sourcerer.dto.PanelEvaluation;
+import com.prokarma.sourcerer.dto.PanelSkillsRating;
+import com.prokarma.sourcerer.dto.PanelTraitsRating;
+import com.prokarma.sourcerer.service.PanelEvaluationService;
+
+@Component
+public class PanelServiceEvaluationImpl implements PanelEvaluationService {
+
+	@Autowired
+	private PanelEvaluationDao panelEvaluationDao;
+
+	@Autowired
+	private CandidateDao candidateDao;
+
+	public Boolean addEvaluation(PanelEvaluation panelEvaluation) {
+		if (panelEvaluation.getStatus() == "select") {
+			candidateDao.changeCandidateStatus(panelEvaluation);
+		}
+		panelEvaluationDao.changePanelStatus(panelEvaluation);
+		return panelEvaluationDao.addEvaluation(panelEvaluation);
+	}
+
+	public Boolean addSkillsRating(List<PanelSkillsRating> list) {
+
+		return panelEvaluationDao.addSkillsRating(list);
+	}
+
+	public Boolean addTraitsRating(List<PanelTraitsRating> list) {
+
+		return panelEvaluationDao.addTraitsRating(list);
+	}
+
+	public List<PanelSkillsRating> getskillRating(int candidateId) {
+		return panelEvaluationDao.getskillRating(candidateId);
+	}
+
+	public List<PanelTraitsRating> getTraitsRating(int candidateId) {
+		return panelEvaluationDao.getTraitsRating(candidateId);
+	}
+
+	public PanelEvaluation getEvaluationDetails(int candidateId) {
+		return panelEvaluationDao.getEvaluationDetails(candidateId);
+	}
+
+}

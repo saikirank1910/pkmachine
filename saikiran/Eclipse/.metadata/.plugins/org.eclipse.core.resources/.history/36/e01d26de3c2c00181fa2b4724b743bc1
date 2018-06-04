@@ -1,0 +1,49 @@
+package com.prokarma.sourcerer.controller;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.prokarma.sourcerer.dto.CandidateSelfRating;
+import com.prokarma.sourcerer.dto.Subtechnology;
+import com.prokarma.sourcerer.dto.User;
+import com.prokarma.sourcerer.service.CandidateSelfRatingService;
+
+public class CandidateSelfRatingControllerTest {
+	
+	private MockMvc mockMvc;
+	
+	@InjectMocks
+	private CandidateSelfRatingController controller = new CandidateSelfRatingController();
+	
+	@Mock
+	private CandidateSelfRatingService candidateSelfRatingService; 
+
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		mockMvc = MockMvcBuilders.standaloneSetup(this.candidateSelfRatingService).build();
+	}
+	@Test
+	public void submitTechnologyRatingTest() throws Exception {
+		String Json="{" + "\"pid\": \"100\"," + "\"cid\": \"28\"," + "\"skillId\":3," + "\"ratingId\": \"3\""+ "}";
+		when(candidateSelfRatingService.insertSelfRating((List<CandidateSelfRating>)).thenReturn(true);
+
+		mockMvc.perform(post("/admin/editUserDetails").contentType(MediaType.APPLICATION_JSON).content(editUserFormJson)
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+
+	}
+}

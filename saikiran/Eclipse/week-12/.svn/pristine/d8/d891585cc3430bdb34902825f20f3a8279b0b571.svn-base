@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<import resource="jms-context.xml" />
+	
+	
+	<!-- JMS Producer Configuration -->
+	<bean id="jmsConsumerConnectionFactory"
+		class="org.springframework.jms.connection.SingleConnectionFactory">
+		<constructor-arg ref="connectionFactory" />
+	</bean>
+
+	<bean id="messageListener" class="com.pkrm.person.MainConsole.Listener"/>
+	
+	<bean id="listener"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConsumerConnectionFactory" />
+		<property name="destination" ref="sampleQueue" />
+		<property name="messageListener" ref="messageListener" />
+		
+	</bean>
+</beans>

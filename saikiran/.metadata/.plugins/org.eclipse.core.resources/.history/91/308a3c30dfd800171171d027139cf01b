@@ -1,0 +1,13 @@
+package com.saikiran.threads;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
+public class ThreadDemo implements Runnable{
+	FileWriter fileWritter = new FileWriter("D:\\saikiran\\newEclipse\\ThreadsAssignment\\input.txt",true);
+	BufferedWriter bw = new BufferedWriter(fileWritter);
+	public void run() {
+		String myName = Thread.currentThread().getName();
+		System.out.println(myName+" created");
+	}
+}

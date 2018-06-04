@@ -1,0 +1,14 @@
+package com.saikiran.threads;
+
+import java.util.concurrent.Executor;
+
+//Write a program and use Executors to scan all the C and D drive in your machine and print all the folder names at once 
+public class ThreadsExample5 implements Executor{
+	public static void main(String[] args) {
+		
+	}
+	
+	public void execute(Runnable arg0) {
+		
+	}
+}

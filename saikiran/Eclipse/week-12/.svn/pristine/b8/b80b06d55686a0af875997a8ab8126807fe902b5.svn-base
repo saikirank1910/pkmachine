@@ -1,0 +1,44 @@
+package com.pkrm.person.MainConsole;
+
+import java.util.Scanner;
+import java.util.function.Consumer;
+
+import org.apache.log4j.Logger;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.pkrm.person.Person;
+import com.pkrm.person.RoleTable;
+
+public class MainConsole {
+
+	final static Logger logger = Logger.getLogger(Consumer.class);
+
+	public static void main(String[] args) {
+		final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("producer-context.xml");
+		Person person = new Person();
+		RoleTable role = new RoleTable();
+		Producer obj = (Producer) context.getBean("producer");
+		Scanner read = new Scanner(System.in);
+		Scanner readInteger = new Scanner(System.in);
+		System.out.println("Enter the user id:");
+		person.setUserid(readInteger.nextInt());
+
+		System.out.println("Enter username :");
+		person.setUserName(read.nextLine());
+
+		System.out.println("Enter firstname :");
+		person.setFirstName(read.nextLine());
+
+		System.out.println("Enter lastname :");
+		person.setLastName(read.nextLine());
+
+		person.setRole(role);
+
+		System.out.println("enter the role of the person");
+
+		person.getRole().setName(read.nextLine());
+		obj.sendMessage(person);
+
+		context.close();
+	}
+}

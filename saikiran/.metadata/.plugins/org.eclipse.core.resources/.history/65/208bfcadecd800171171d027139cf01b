@@ -1,0 +1,10 @@
+package com.sai.generics;
+
+public class Example8 {
+	public static void main(String[] args) {
+		Node<Integer> a = new Node<Integer>(10,null);
+		Node<String> b = new Node<String>("abcd",null);
+		System.out.println("The type present in a object "+a.getData());
+		System.out.println("The type present in b object "+b.getData());
+	}
+}

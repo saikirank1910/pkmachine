@@ -1,0 +1,70 @@
+package com.prokarma.sourcerer.dao.impl;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Component;
+
+import com.prokarma.sourcerer.dao.SkillLevelDao;
+import com.prokarma.sourcerer.dto.SkillLevel;
+
+@Component
+public class SkillLevelDaoImpl implements SkillLevelDao{
+	@Autowired
+	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	
+	public List<String> getSkillLevels() {
+		List<String> skills = namedParameterJdbcTemplate.query("select skillname from skill_level",
+				new RowMapper<String>() {
+
+					public String mapRow(ResultSet resultset, int index) throws SQLException {
+
+						return resultset.getString(1);
+					}
+
+				});
+		return skills;
+		
+	}
+
+	public boolean addSkillLevel(SkillLevel skillLevel) {
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("skilllevel", skillLevel.getSkillLevel());
+		int rows = namedParameterJdbcTemplate.update("insert into skill_level values(skilllevelid.nextval,:skilllevel)", params);
+		if (rows == 1) {
+			return true;
+		} else
+			return false;
+	}
+
+	public boolean editSkillLevel(SkillLevel skillLevel) {
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("skilllevel", skillLevel.getSkillLevel());
+		params.addValue("id", skillLevel.getSkillId());
+		int rows = namedParameterJdbcTemplate.update(
+				"update skill_level set skillname = :skilllevel  where skillid= :id", params);
+		if (rows == 0) {
+			return false;
+		} else
+			return true;
+	}
+
+	public boolean deleteSkillLevel(int id) {
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("id", id);
+
+		int rows = namedParameterJdbcTemplate.update("delete from skill_level  where skillid= :id", params);
+		if (rows == 0) {
+			return false;
+		} else
+			return true;
+	}
+	
+	
+
+}

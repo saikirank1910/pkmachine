@@ -1,0 +1,9 @@
+package com.saikiran.threads;
+
+public class ThreadDemo extends Thread {
+	public void run() {
+		String myName ;
+		myName = Thread.currentThread().getName();
+		System.out.println(myName+" created");
+	}
+}

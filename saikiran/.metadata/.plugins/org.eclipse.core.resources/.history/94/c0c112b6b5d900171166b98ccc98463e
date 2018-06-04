@@ -1,0 +1,7 @@
+package com.sai.bestCodingPractices.two;
+
+public class CadApp{
+	void drawShapes(Graphics graphics,Shapeshapes[]){
+	
+	}
+}

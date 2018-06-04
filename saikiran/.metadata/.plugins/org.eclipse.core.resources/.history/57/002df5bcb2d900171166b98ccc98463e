@@ -1,0 +1,13 @@
+package com.sai.bestCodingPractices.three;
+
+import java.util.Map;
+
+public class Currency {
+	Map<Integer, CurrencyFormat> currencyMap;
+	public static void main(String[] args) {
+		    public void printMoney(int money) {
+		        CurrencyFormat print = currencyMap.get();
+		        command.execute();
+		    }
+	}
+}

@@ -1,0 +1,27 @@
+package com.sai.bestCodingPractices.seven;
+import java.math.BigDecimal;
+import java.util.*;
+public class Order{
+	String orderId;
+	Restaurant placeRestaurantOrder;
+	Customer placeCustomerOrder;//theorderiscreatedbythiscustomer.
+	//"H":delivertohomeaddressofthecustomer.
+	//"W":delivertoworkaddressofthecustomer.
+	//"O":delivertotheaddressspecifiedhere.
+	String addressType;
+	String otherAddress;//addressifaddressTypeis"O"
+	HashMap orderItems;//orderitems.
+	//getthetotalamountofthisorder.
+	public double getTotalAmount(){
+		//totalamount.
+		BigDecimal amount=new BigDecimal("0.00");
+		//foreachorderitemdo...
+		Iterator iter=orderItems.values().iterator();
+		while(iter.hasNext()){
+			//addtheamountofthenextorderitem.
+			OrderItem oi=(OrderItem)iter.next();
+			amount=amount.add(newBigDecimal(String.valueOf(oi.getAmount())));
+		}
+		return amount.doubleValue();
+	}
+}

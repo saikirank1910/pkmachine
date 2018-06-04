@@ -1,0 +1,22 @@
+<nav class="navbar navbar-inverseTab">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a ng-link="['CandidateSkillScoreInPanel']" class="aFont">Submit Feedback</a>
+                </li>
+                </li>
+                <li>
+                    <a ng-link="['CandidateDetailsInPanel']" class="aFont">Candidate Details</a>
+                </li>
+                <li>
+                    <a ng-link="['CandidateAssessmentPageInPanel']" class="aFont">Candidate Self Evaluation</a>
+                </li>
+                <li ng-if="$ctrl.round==2">
+                    <a ng-link="['Round1']" class="aFont">Round 1</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<ng-outlet></ng-outlet>

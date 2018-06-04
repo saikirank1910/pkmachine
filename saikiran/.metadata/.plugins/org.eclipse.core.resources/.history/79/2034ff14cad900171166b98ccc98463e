@@ -1,0 +1,12 @@
+package com.sai.bestCodingPractices.two;
+
+public class Line implements Shape{
+
+	
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

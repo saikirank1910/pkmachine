@@ -1,0 +1,17 @@
+package com.sai.bestCodingPractices.two;
+
+public class CadApp{
+	void drawShapes(Graphics graphics,Shapeshapes[]){
+	for(inti=0;i<shapes.length;i++){
+		switch(shapes[i].getType()){
+			case Shape.TYPELINE:
+			//graphics.drawLine(shape.getP1().getX(),
+			shape.getP1().getY(),shape.getP2().getX(),shape.getP2().getY());
+			break;
+			case Shape.TYPERECTANGLE:
+			break;
+			case Shape.TYPECIRCLE:
+			break;
+		}
+		}
+}

@@ -1,0 +1,114 @@
+package com.prokarma.sourcerer.dao.impl;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.prokarma.sourcerer.dao.TasksDao;
+import com.prokarma.sourcerer.dto.Subtechnology;
+import com.prokarma.sourcerer.dto.Technology;
+
+@Repository
+public class TasksDaoImpl implements TasksDao {
+	private String getTechnologies_sql = "select technicleskillname from technicle_skills";
+	private String getSubtechnologies_sql = "select m.TECHNICLESKILLNAME,t.tsskillid,t.TECHNICLESUBSKILL from technicle_skills m,techinicle_sub_skills t where m.tskillid=t.tskillid";
+	private String addTechnology_sql = "insert into technicle_skills values(seq_skill.nextval,:technology)";
+	private String addSubtechnology_sql = "insert into techinicle_sub_skills values(seq_subskill.nextval,(select tskillid from technicle_skills where technicleskillname= :technology),:subtechnology )";
+	private String editSubtechnology_sql = "update techinicle_sub_skills set TECHNICLESUBSKILL = :subtechnology  where tsskillid= :id";
+	private String deleteSubtechnology_sql = "delete from techinicle_sub_skills  where tsskillid= :id";
+	private String getSubtechnologiesOfParticularSkill_sql = "select t.tsskillid,t.techniclesubskill from technicle_skills m,techinicle_sub_skills t where m.tskillid=t.tskillid and m.TECHNICLESKILLNAME=:name";
+	@Autowired
+	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+	public List<String> getTechnologies() {
+		List<String> skills = namedParameterJdbcTemplate.query(getTechnologies_sql, new RowMapper<String>() {
+			public String mapRow(ResultSet resultset, int index) throws SQLException {
+				return resultset.getString(1);
+			}
+
+		});
+		return skills;
+	}
+
+	public List<Subtechnology> getSubtechnologies() {
+
+		return namedParameterJdbcTemplate.query(getSubtechnologies_sql, new RowMapper<Subtechnology>() {
+
+			public Subtechnology mapRow(ResultSet resultset, int index) throws SQLException {
+				Subtechnology subTechnology = new Subtechnology();
+				subTechnology.setId(resultset.getInt(2));
+				subTechnology.setTechnology(resultset.getString(1));
+				subTechnology.setSubtechnology(resultset.getString(3));
+				return subTechnology;
+			}
+
+		});
+	}
+
+	public boolean addTechnology(Technology technology) {
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("technology", technology.getName());
+		int rows = namedParameterJdbcTemplate.update(addTechnology_sql, params);
+		if (rows == 0) {
+			return false;
+		} else
+			return true;
+	}
+
+	public boolean addSubtechnology(Subtechnology subTechnology) {
+
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("technology", subTechnology.getTechnology());
+		params.addValue("subtechnology", subTechnology.getSubtechnology());
+		int rows = namedParameterJdbcTemplate.update(addSubtechnology_sql, params);
+		if (rows == 0) {
+			return false;
+		} else
+			return true;
+	}
+
+	public boolean editSubtechnology(Subtechnology subTechnology) {
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("subtechnology", subTechnology.getSubtechnology());
+		params.addValue("id", subTechnology.getId());
+		int rows = namedParameterJdbcTemplate.update(editSubtechnology_sql, params);
+		if (rows == 0) {
+			return false;
+		} else
+			return true;
+	}
+
+	public boolean deleteSubtechnology(int id) {
+
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("id", id);
+
+		int rows = namedParameterJdbcTemplate.update(deleteSubtechnology_sql, params);
+		if (rows == 0) {
+			return false;
+		} else
+			return true;
+	}
+
+	public List<Subtechnology> getSubtechnologiesOfParticularSkill(String name) {
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("name", name);
+		System.out.println(name);
+		return namedParameterJdbcTemplate.query(getSubtechnologiesOfParticularSkill_sql, params,
+				new RowMapper<Subtechnology>() {
+					public Subtechnology mapRow(ResultSet resultset, int index) throws SQLException {
+						Subtechnology subTechnology = new Subtechnology();
+						subTechnology.setId(resultset.getInt(1));
+						subTechnology.setSubtechnology(resultset.getString(2));
+						System.out.println(subTechnology);
+						return subTechnology;
+					}
+				});
+	}
+}

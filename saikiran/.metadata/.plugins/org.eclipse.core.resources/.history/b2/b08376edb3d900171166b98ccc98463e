@@ -1,0 +1,9 @@
+package com.sai.bestCodingPractices.one;
+
+import java.util.Date;
+
+public class MovieRental extends EstimateRent{
+	
+	private String author;
+	
+}

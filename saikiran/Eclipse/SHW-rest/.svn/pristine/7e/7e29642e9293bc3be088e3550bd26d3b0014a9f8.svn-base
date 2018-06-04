@@ -1,0 +1,36 @@
+package com.prokarma.sourcerer.dto;
+
+public class Subtechnology {
+	String technology;
+	int id;
+	String subtechnology;
+
+	public String getTechnology() {
+		return technology;
+	}
+
+	public void setTechnology(String technology) {
+		this.technology = technology;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getSubtechnology() {
+		return subtechnology;
+	}
+
+	public void setSubtechnology(String subtechnology) {
+		this.subtechnology = subtechnology;
+	}
+
+	@Override
+	public String toString() {
+		return "Subtechnology [technology=" + technology + ", id=" + id + ", subtechnology=" + subtechnology + "]";
+	}
+}

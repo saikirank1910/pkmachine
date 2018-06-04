@@ -1,0 +1,53 @@
+package com.prokarma.spring.jms.problem3;
+
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
+
+public class MessageClient {
+	private final JmsTemplate template;
+
+	private Destination responseQueue;
+
+	public MessageClient(JmsTemplate template, Destination responseQueue) {
+		this.template = template;
+		this.responseQueue = responseQueue;
+	}
+
+	public void sendMessage(final String messageText) throws JMSException {
+		template.send(new MessageCreator() {
+
+			public Message createMessage(Session session) throws JMSException {
+				System.out.println("Sent message '" + messageText + "'");
+
+				TextMessage createTextMessage = session
+						.createTextMessage(messageText);
+				createTextMessage.setJMSReplyTo(responseQueue);
+				return createTextMessage;
+			}
+
+		});
+
+		TextMessage receive = (TextMessage) template.receive(responseQueue);
+		System.out.println(receive.getText());
+	}
+
+	public static void main(String[] args) throws InterruptedException,
+			JMSException {
+		final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+				"client-context.xml");
+
+		MessageClient obj = (MessageClient) context.getBean("client");
+		obj.sendMessage("Spring JMS Message Client");
+		Thread.sleep(1000);
+		context.close();
+
+	}
+
+}

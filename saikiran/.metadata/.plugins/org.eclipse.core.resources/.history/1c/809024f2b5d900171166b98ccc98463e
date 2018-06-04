@@ -1,0 +1,24 @@
+package com.sai.bestCodingPractices.four;
+
+public class InuptFilter {
+	InputFilter hexInputFilter(){
+		return new InputFilter(){
+		@Override
+		public CharSequence filter(CharSequence source,intstart,
+		intend,intdstart,intdend){
+		for(inti=start;i<end;i++){
+		if((source.charAt(i)>='0')&&(source.charAt(i)<='9')){
+		returnnull;
+		}
+		if((Character.toUpperCase(source.charAt(i))>='A')
+		&&(Character.toUpperCase(source.charAt(i))<='F')){
+		returnnull;
+		}
+		return"";
+		}
+		returnnull;
+		}
+		};
+		}
+
+}

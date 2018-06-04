@@ -1,0 +1,32 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body ng-app="myApp">
+
+<custom-directive></custom-directive>
+<span custom-directive-attribute></span>
+<div class="customDirectiveClass"></div>
+
+<script>
+var app = angular.module("myApp", []);
+app.directive("customDirective", function() {
+    return {
+      restrict : "E",
+        template : "<h1>SAI KIRAN</h1>"
+    };
+});
+app.directive("customDirectiveAttribute", function() {
+    return {
+      restrict : "A",
+        template : "<h2>KATARAM</h2>"
+    };
+});
+app.directive("customDirectiveClass", function() {
+    return {
+      restrict : "C",
+        template : "<h3>4233</h3>"
+    };
+});
+</script>
+
+</body>
+</html>

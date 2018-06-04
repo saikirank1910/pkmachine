@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
+<fullyQualifiedTypeName name="com.saikiran.threads.ThreadDemo"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.sai.generics.Util"/>
+<fullyQualifiedTypeName name="com.sai.generics.Node"/>
+<fullyQualifiedTypeName name="java.util.concurrent.Executor"/>
+<fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="com.sai.bestCodingPractices.EstimateRent"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="com.sai.bestCodingPractices.three.CurrencyFormat"/>
+<fullyQualifiedTypeName name="com.sai.bestCodingPractices.three.Chinesse"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.util.TreeMap"/>
+<fullyQualifiedTypeName name="java.math.BigDecimal"/>
+<fullyQualifiedTypeName name="com.sai.bestCodingPractices.seven.OrderItem"/>
+<fullyQualifiedTypeName name="java.awt.Point"/>
+<fullyQualifiedTypeName name="com.sai.bestCodingPractices.two.Rectangle"/>
+<fullyQualifiedTypeName name="com.sai.bestCodingPractices.two.Shape"/>
+</qualifiedTypeNameHistroy>

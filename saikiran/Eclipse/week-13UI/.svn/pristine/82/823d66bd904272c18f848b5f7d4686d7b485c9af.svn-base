@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body ng-app="week13" ng-controller="data">
+    <div align="center">
+       Enter User Id to search:
+    <input type="text" ng-model="searchId" />
+    </div>
+    <div>
+        <table class="id01" align="center">
+            <tr>
+                <th>id</th>
+                <th>user name</th>
+                <th>first name</th>
+                <th>last name</th>
+                <th>role name</th>
+            </tr>
+            <tr ng-repeat="x in list | filter:searchId ">
+                <td>{{x.id}}</td>
+                <td>{{x.userName}}</td>
+                <td>{{x.firstName}}</td>
+                <td>{{x.lastName}}</td>
+                <td>{{x.roleName}}</td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <form ng-submit="addToTable()">
+        <table class="id01" align="center">
+            <tr>
+                <th colspan="2">
+                    Add Person
+                </th>
+            </tr>
+            <tr>
+                <td align="right">id:</td>
+                <td class="style1">
+                    <input type="number" ng-model="userDetails.id" />
+                </td>
+            </tr>
+            <tr>
+                <td align="right">user name:</td>
+                <td>
+                    <input type="text" ng-model="userDetails.userName" />
+                </td>
+            </tr>
+            <tr>
+                <td align="right">first name</td>
+                <td>
+                    <input type="text" ng-model="userDetails.firstName" />
+                </td>
+            </tr>
+            <tr>
+                <td align="right">last name</td>
+                <td>
+                    <input type="text" ng-model="userDetails.lastName" />
+                </td>
+            </tr>
+            <tr>
+                <td align="right">user role</td>
+                <td>
+                    <input type="text" ng-model="userDetails.roleName" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Submit" /> </td>
+            </tr>
+        </table>
+    </form>
+    <script src="script.js"></script>
+</body>
+
+</html>

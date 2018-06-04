@@ -1,0 +1,41 @@
+package com.prokarma.sourcerer.dao.impl;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
+import com.prokarma.sourcerer.dao.UserDao;
+import com.prokarma.sourcerer.dto.User;
+
+public class UserDaoImpl implements UserDao{
+	
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+	}
+
+	public NamedParameterJdbcTemplate getNamedParameterJdbcTemplate() {
+		return namedParameterJdbcTemplate;
+	}
+
+
+	public User getUser(String UserName) {
+	      final String sql = "select * from LOGINSUPERADMIN where USERNAME = :username and PASSWORD=:";
+	      final MapSqlParameterSource params = new MapSqlParameterSource();
+	        params.addValue("username", UserName);
+	        return namedParameterJdbcTemplate.queryForObject(sql,params, new RowMapper<User>() {
+
+	            @Override
+	            public User mapRow(final ResultSet resultSet, final int rowNum) throws SQLException {
+	                final User user = new User();
+	                user.setUsername(resultSet.getString("username"));
+	                user.setPassword(resultSet.getString("password"));
+	                return user;
+	            }
+	        });
+	}
+
+}

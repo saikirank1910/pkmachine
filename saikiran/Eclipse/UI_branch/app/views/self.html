@@ -1,0 +1,27 @@
+
+<div class="panel panel-primary" style="max-width: 500px;margin-left: 434px;">
+    <div class="panel-heading">
+        <h3 class="panel-title">Candidate Login</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-3">EMAIL-ID</div>
+            <div class="col-sm-9">
+                <input type="text" required ng-model="$ctrl.email" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">TOKEN NO</div>
+            <div class="col-sm-9">
+                <input type="text" required ng-model="$ctrl.token" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">&nbsp;</div>
+            <div class="col-sm-2">
+                <input type="submit" value="Submit" class="btn btn-primary btn-rt" ng-click="$ctrl.selfAuthentication()" />
+            </div>
+        </div>
+    </div>
+</div>
+<ng-outlet></ng-outlet>

@@ -1,0 +1,34 @@
+package com.pkrm.person;
+
+public class Person {
+	private int userid;
+	private String lastName;
+	private String firstName;
+	private RoleTable role;
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public RoleTable getRole() {
+		return role;
+	}
+	public void setRole(RoleTable role) {
+		this.role = role;
+	}
+	
+	
+}

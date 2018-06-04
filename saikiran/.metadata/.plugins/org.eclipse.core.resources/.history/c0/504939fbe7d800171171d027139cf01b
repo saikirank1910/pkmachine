@@ -1,0 +1,9 @@
+package com.sai.generics;
+
+public class Example5 {
+	public static void main(String[] args) {
+		Pair<Integer, String> p1 = new Pair<Integer,String >(1,"apple");
+		Util.showType(1);
+		Util.showType(apple);
+	}
+}

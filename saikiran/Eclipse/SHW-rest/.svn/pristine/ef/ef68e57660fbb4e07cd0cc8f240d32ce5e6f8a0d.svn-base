@@ -1,0 +1,149 @@
+package com.prokarma.sourcerer.dao.impl;
+
+import static org.junit.Assert.*;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.prokarma.sourcerer.dao.PanelAssigneeDao;
+import com.prokarma.sourcerer.dao.PanelEvaluationDao;
+import com.prokarma.sourcerer.dto.PanelAssignee;
+import com.prokarma.sourcerer.dto.PanelEvaluation;
+import com.prokarma.sourcerer.dto.PanelSkillsRating;
+import com.prokarma.sourcerer.dto.PanelTraitsRating;
+import com.prokarma.sourcerer.dto.User;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration({ "classpath:application-context.xml" })
+@Transactional
+public class PanelEvaluationDaoImplTest {
+
+	@Autowired
+	private PanelEvaluationDao panelEvaluationDao;
+
+	@Autowired
+	private PanelAssigneeDao panelAssigneeDao; 
+	@Autowired
+	
+	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+	@Test
+	public void testAddEvaluation() {
+		PanelEvaluation panelEvaluation = new PanelEvaluation();
+		panelEvaluation.setCandidateId(4231);
+		panelEvaluation.setPanelId(1);
+		panelEvaluation.setComment("Good");
+		panelEvaluation.setSkillLevel("asdfjkhak");
+		panelEvaluation.setOverall_rating("nice");
+		panelEvaluation.setStatus("waitlist");
+		panelEvaluationDao.addEvaluation(panelEvaluation);
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("candidateid", 4231);
+		PanelEvaluation addPanelEvaluation = namedParameterJdbcTemplate.queryForObject(
+				"select * from panel_feedback where candidateid=:candidateid", params,
+				new RowMapper<PanelEvaluation>() {
+					public PanelEvaluation mapRow(ResultSet resultset, int index) throws SQLException {
+						PanelEvaluation resultPanelEvaluation = new PanelEvaluation();
+						resultPanelEvaluation.setCandidateId(resultset.getInt(2));
+						resultPanelEvaluation.setPanelId(resultset.getInt(3));
+						resultPanelEvaluation.setComment(resultset.getString(4));
+						resultPanelEvaluation.setSkillLevel(resultset.getString(5));
+						resultPanelEvaluation.setOverall_rating(resultset.getString(6));
+						resultPanelEvaluation.setStatus(resultset.getString(7));
+						return resultPanelEvaluation;
+					}
+				});
+	}
+
+	List<PanelSkillsRating> panelSkillsRating = new ArrayList<PanelSkillsRating>();
+
+	private void buildPanelSkills() {
+		PanelSkillsRating firstRatingObject = new PanelSkillsRating();
+		firstRatingObject.setCid(4231);
+		firstRatingObject.setPid(33);
+		firstRatingObject.setRatingId(4);
+		firstRatingObject.setSkillId(4);
+		PanelSkillsRating secondRatingObject = new PanelSkillsRating();
+		secondRatingObject.setCid(4232);
+		secondRatingObject.setPid(34);
+		secondRatingObject.setRatingId(3);
+		secondRatingObject.setSkillId(5);
+	}
+
+	@Test
+	public void testAddSkillsRating() {
+		buildPanelSkills();
+		assertEquals(true, panelEvaluationDao.addSkillsRating(panelSkillsRating));
+	}
+
+	List<PanelTraitsRating> panelTraitsRatings = new ArrayList<PanelTraitsRating>();
+
+	private void buildPersonalSkills() {
+		PanelTraitsRating firstTraitObject = new PanelTraitsRating();
+		firstTraitObject.setCid(42);
+		firstTraitObject.setPid(12);
+		firstTraitObject.setRatingId(4);
+		firstTraitObject.setSkillId(4);
+		PanelTraitsRating secondTraitObject = new PanelTraitsRating();
+		secondTraitObject.setCid(43);
+		secondTraitObject.setPid(14);
+		secondTraitObject.setRatingId(3);
+		secondTraitObject.setSkillId(5);
+	}
+
+	@Test
+	public void testAddTraitsRating() {
+		buildPersonalSkills();
+		assertEquals(true, panelEvaluationDao.addTraitsRating(panelTraitsRatings));
+	}
+
+	/*@Test
+	public void testChangePanelStatus() {
+		PanelAssignee panelAssignee=new PanelAssignee();
+		panelAssignee.setPanelId(23);
+		panelAssignee.setCandidateId(3);
+		panelAssignee.setToken(3816);
+		panelAssignee.setIsVisited(1);
+		panelAssignee.setPanelEmail("qwerty@gmail.com");
+		panelAssignee.setModeOfInterview("Face to Face");
+		panelAssigneeDao.savePanelMember(panelAssignee);
+		final MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("cid", panelAssignee.getCandidateId());
+		
+		PanelAssignee addPanelAssignee = namedParameterJdbcTemplate.queryForObject(
+				"select * panel_assignee where cid=:cid",params,new RowMapper<PanelAssignee>() {
+					public PanelAssignee mapRow(ResultSet resultset, int index) throws SQLException {
+						PanelAssignee resultPanelAssignee = new PanelAssignee();
+						resultPanelAssignee.setPanelId(resultset.getInt(2));
+						resultPanelAssignee.setCandidateId(resultset.getInt(3));
+						resultPanelAssignee.setToken(resultset.getInt(4));
+						resultPanelAssignee.setIsVisited(resultset.getInt(5));
+						resultPanelAssignee.setPanelEmail(resultset.getString(6));
+						resultPanelAssignee.setModeOfInterview(resultset.getString(7));
+						return resultPanelAssignee;
+					}
+				});
+		PanelAssignee editPanelAssignee=new PanelAssignee();
+		editPanelAssignee.setPanelId(24);
+		editPanelAssignee.setCandidateId(4);
+		editPanelAssignee.setToken(addPanelAssignee.getToken());
+		editPanelAssignee.setIsVisited(addPanelAssignee.getIsVisited());
+		editPanelAssignee.setPanelEmail(addPanelAssignee.getPanelEmail());
+		editPanelAssignee.setModeOfInterview(addPanelAssignee.getModeOfInterview());
+		
+		assertEquals(true, panelEvaluationDao.changePanelStatus(24));
+	}*/
+}

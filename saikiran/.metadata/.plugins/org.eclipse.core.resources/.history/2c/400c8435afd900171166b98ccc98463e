@@ -1,0 +1,11 @@
+package com.sai.bestCodingPractices.two;
+
+import java.util.Map;
+
+public class CadApp {
+	void drawShapes(Shape shape) {
+		private Map<Integer, shape> shapeMap;
+		Shape shape = shapeMap.get(shape);
+        command.execute();
+	}
+}

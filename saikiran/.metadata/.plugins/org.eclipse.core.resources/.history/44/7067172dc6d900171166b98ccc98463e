@@ -1,0 +1,31 @@
+package com.sai.bestCodingPractices.two;
+
+public class Circle {
+	int shapeType;
+	Point p1,p2;
+	public int getType(){
+		return shapeType;
+	}
+	public void setShapeType(int shapeType){
+		this.shapeType=shapeType;
+	}
+	public int getPoint1(){
+		return p1;
+	}
+	public void setP1(Pointp1){
+		this.p1=p1;
+	}
+		publicPointgetP2(){
+		returnp2;
+		}
+		publicvoidsetP2(Pointp2){
+		this.p2=p2;
+		}
+		publicintgetRadius(){
+		returnradius;
+		}
+		publicvoidsetRadius(intradius){
+		this.radius=radius;
+		}
+
+}

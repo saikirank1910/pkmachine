@@ -1,0 +1,19 @@
+package com.prokarma.sourcerer.dto;
+
+public class PersonalTrait {
+int traitId;
+String personalTrait;
+public int getTraitId() {
+	return traitId;
+}
+public void setTraitId(int traitId) {
+	this.traitId = traitId;
+}
+public String getPersonalTrait() {
+	return personalTrait;
+}
+public void setPersonalTrait(String personalTrait) {
+	this.personalTrait = personalTrait;
+}
+
+}

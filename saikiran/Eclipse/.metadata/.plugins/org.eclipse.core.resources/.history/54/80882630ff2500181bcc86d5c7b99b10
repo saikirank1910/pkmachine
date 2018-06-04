@@ -1,0 +1,32 @@
+package com.prokarma.sourcerer.service.impl;
+
+import java.sql.SQLException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.prokarma.sourcerer.dao.PanelDao;
+import com.prokarma.sourcerer.dto.Panel;
+import com.prokarma.sourcerer.service.PanelService;
+
+@Component
+public class PanelImpl implements PanelService {
+
+	@Autowired
+	PanelDao panelDaoImpl;
+
+@Override
+public boolean panelService(Panel panel) throws SQLException {
+	boolean success = false;
+	try {
+		panelDaoImpl.addPanel(panel);
+		success = true;
+	} catch(Exception e) {
+		success = false;
+		e.printStackTrace();
+	}
+	
+	return success;
+}
+
+}

@@ -1,0 +1,33 @@
+package com.weekend.assignment11.maintask;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class MainTaskBO {
+
+	public int insertMainTaskDetails(String projectTitle, String projectDescription, int noOfTeamsInMainTask,
+			int persid, String startDate, String endDate) throws IOException, SQLException {
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application.xml");
+
+		MainTask mainTask = new MainTask(projectTitle, projectDescription, noOfTeamsInMainTask, persid, 0, startDate,
+				endDate);
+		MainTaskDao mainTaskDao = (MainTaskDao) applicationContext.getBean("mainTaskDao");
+		int result = mainTaskDao.saveMainTask(mainTask);
+		if (result == 0) {
+			return 1;
+		}
+		return 0;
+	}
+
+	public ArrayList<MainTask> getMainTaskDetails() throws ClassNotFoundException, IOException, SQLException {
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application.xml");
+		MainTaskDao mainTaskDao = (MainTaskDao) applicationContext.getBean("mainTaskDao");
+		ArrayList<MainTask> result = mainTaskDao.mainTaskPrint();
+		return result;
+	}
+}

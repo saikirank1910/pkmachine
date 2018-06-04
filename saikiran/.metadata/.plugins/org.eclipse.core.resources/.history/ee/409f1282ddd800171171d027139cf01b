@@ -1,0 +1,8 @@
+package com.saikiran.threads;
+
+public class ThreadDemo implements runnable{
+	public void run() {
+		String myName = Thread.currentThread().getName();
+		System.out.println(myName+" created");
+	}
+}

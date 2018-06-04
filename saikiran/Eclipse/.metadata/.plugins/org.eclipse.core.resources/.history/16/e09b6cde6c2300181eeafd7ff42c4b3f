@@ -1,0 +1,5 @@
+package com.prokarma.sourcerer.dto;
+
+public class User {
+
+}

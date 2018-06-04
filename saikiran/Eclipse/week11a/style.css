@@ -1,0 +1,30 @@
+#id01,#id02{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#id01 td, #id01 th,#id02 td, #id02 th,#addDetails td,#addDetails th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#id01 tr,#id02 tr,#addDetails tr{
+    background-color: #d0e1e4fd;
+}
+
+#id01 tr:hover,#id02 tr:hover,#addDetails tr:hover {
+    background-color: rgba(177, 168, 168, 0.705);
+}
+.button {
+    background-color: rgb(120, 122, 120);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+}

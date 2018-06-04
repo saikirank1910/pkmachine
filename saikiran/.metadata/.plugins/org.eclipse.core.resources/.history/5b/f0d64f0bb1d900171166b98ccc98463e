@@ -1,0 +1,16 @@
+package com.sai.bestCodingPractices.two;
+
+import java.util.Map;
+import java.util.TreeMap;
+
+public class CadApp {
+	void drawShapes(Shape shape) {
+	    Map<Integer, Shape> shapeMap= new TreeMap<Integer,Shape>();
+		Shape createShape = shapeMap.get(shape);
+        
+		createShape.getType();
+        createShape.setShapeType();
+        createShape.getPoint();
+        createShape.setPoint();
+	}
+}

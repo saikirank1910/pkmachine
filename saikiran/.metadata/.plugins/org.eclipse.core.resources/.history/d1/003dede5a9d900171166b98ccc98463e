@@ -1,0 +1,10 @@
+package com.sai.bestCodingPractices;
+
+import java.util.Date;
+
+public class MovieRental{
+	private String bookTitle;
+	private String author;
+	EstimateRent abc = new EstimateRent();
+	abc.
+}

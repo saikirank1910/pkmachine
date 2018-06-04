@@ -1,0 +1,21 @@
+input[type=text], input[type=password] {
+    width: 50%;
+    padding: 7px 0px;
+    display: inline-block;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type=email]{
+    width: 50%;
+    padding: 7px 0px;
+    display: inline-block;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+label{
+    font-size:medium;
+    padding:10px
+}

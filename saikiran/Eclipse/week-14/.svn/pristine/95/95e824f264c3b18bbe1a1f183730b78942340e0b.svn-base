@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+<link rel="stylesheet" href="style.css" />
+<script src="script.js"></script>
+</head>
+
+<body ng-app="week14" ng-controller="data">
+	<div align="center">
+		Enter User Id to search: <input type="text" ng-model="searchId" />
+	</div>
+	<div>
+		<table class="id01" align="center">
+			<tr>
+				<th>id</th>
+				<th>user name</th>
+				<th>role name</th>
+				<th>select</th>
+			</tr>
+			<tr ng-repeat="x in list | filter: { userid : searchId}  | unique:'userid' "
+				id={{$index}}>
+
+				<td>{{x.userid}}</td>
+				<td>{{x.userName}}</td>
+				<td>{{x.roleName}}</td>
+				<td><input type="radio" name="select" value="{{$index}}"
+					ng-change="getRadioButtonIndex(radioButtonValue)"
+					ng-model="$parent.radioButtonValue" id="radio" /></td>
+			</tr>
+		</table>
+	</div>
+	<br>
+	<div align="center">
+		<input type="button" value="ADD" class="button"
+			ng-click="showAddTable=true;" /> <input type="button" value="EDIT"
+			class="button" ng-click="showEditTable=true;" /> <input
+			type="button" value="DELETE" class="button" ng-click="deletePerson()" />
+	</div>
+	<div>
+		<form ng-submit="addToTable();addToDb()">
+			<table class="id01" align="left" cellspacing="5px" cellpadding="5%" border="1" ng-show="showAddTable" style="width:300px;margin-left:400px">
+				<tr>
+					<th colspan="2">Add Person</th>
+				</tr>
+				<tr>
+					<td align="right">id:</td>
+					<td class="style1"><input type="number" name="userid"
+						ng-model="userDetails.userid" required /></td>
+				</tr>
+				<tr>
+					<td align="right">user name:</td>
+					<td><input type="text" name="userName"
+						ng-model="userDetails.userName" required /></td>
+				</tr>
+				<tr>
+					<td align="right">first name</td>
+					<td><input type="text" name="firstName"
+						ng-model="userDetails.firstName" required /></td>
+				</tr>
+				<tr>
+					<td align="right">last name</td>
+					<td><input type="text" name="lastName"
+						ng-model="userDetails.lastName" required /></td>
+				</tr>
+				<tr>
+					<td align="right">user role</td>
+					<td><select ng-model="userDetails.roleName">
+							<option value="lead">Lead</option>
+							<option value="developer">developer</option>
+							<option value="tester">tester</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="submit"
+						value="Submit" class="button" ng-click="showAddTable=false" /></td>
+				</tr>
+			</table>
+		</form>
+
+		<form ng-submit="editTable()">
+			<table class="id01" align="right"  cellspacing="5px" cellpadding="5%" border="1" ng-show="showEditTable" style="width:300px;margin-right:400px">
+				<tr>
+					<th colspan="2">Edit Person</th>
+				</tr>
+				<tr>
+					<td align="right">id:</td>
+					<td class="style1">{{userDetails.userid}}</td>
+				</tr>
+				<tr>
+					<td align="right">user name:</td>
+					<td><input type="text" name="userName"
+						ng-model="userDetails.userName" required /></td>
+				</tr>
+				<tr>
+					<td align="right">first name</td>
+					<td><input type="text" name="firstName"
+						ng-model="userDetails.firstName" required /></td>
+				</tr>
+				<tr>
+					<td align="right">last name</td>
+					<td><input type="text" name="lastName"
+						ng-model="userDetails.lastName" required /></td>
+				</tr>
+				<tr>
+					<td align="right">user role</td>
+					<td><select ng-model="userDetails.roleName">
+							<option value="lead">Lead</option>
+							<option value="developer">developer</option>
+							<option value="tester">tester</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="submit"
+						value="Submit" class="button" ng-click="showEditTable=false" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

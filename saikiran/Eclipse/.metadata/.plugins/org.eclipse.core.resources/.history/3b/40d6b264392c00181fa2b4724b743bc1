@@ -1,0 +1,24 @@
+package com.prokarma.sourcerer.controller;
+
+import static org.junit.Assert.fail;
+
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.test.web.servlet.MockMvc;
+
+import com.prokarma.sourcerer.service.CandidateSelfRatingService;
+
+public class CandidateSelfRatingControllerTest {
+	
+	private MockMvc mockmvc;
+	
+	@InjectMocks
+	private CandidateSelfRatingController controller = new CandidateSelfRatingController();
+	
+	@Mock
+	private CandidateSelfRatingService aks; 
+
+	
+
+}

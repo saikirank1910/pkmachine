@@ -1,0 +1,91 @@
+<div class="alert alert-success" role="alert" id="candidateAdded" style="display:none;width:50%;margin-left:25%">
+    <strong>Candidate added successfully</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="container" style="max-width:500px">
+    <form name="candidateAddForm" enctype="multipart/form-data" ng-submit="$ctrl.uploadFile(candidateAddForm)">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Candidate Form</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-4">Name</div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-inputcontrol" name="name" required ng-model="$ctrl.name" />
+                        <span class="has-error" style="color:red;font-size:15px;text-align:center" ng-show="candidateAddForm.name.$dirty">
+                            <span ng-show="candidateAddForm.name.$error.required">Name is Required </span>
+
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">Email-ID</div>
+                    <div class="col-sm-8">
+                        <input type="email" class="form-inputcontrol" name="email" required ng-model="$ctrl.email" />
+                        <span class="has-error" style="color:red;font-size:15px;text-align:center" ng-show="candidateAddForm.email.$dirty">
+                            <span ng-show="candidateAddForm.email.$error.required">Email is Required </span>
+
+                        </span>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">Phone Number</div>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-inputcontrol" name="phone" required ng-model="$ctrl.number" />
+                        <span class="has-error" style="color:red;font-size:15px;text-align:center" ng-show="candidateAddForm.phone.$dirty">
+                            <span ng-show="candidateAddForm.phone.$error.required">Phone is Required </span>
+
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">Technology Stack</div>
+                    <div class="col-sm-8">
+                        <select type="text" required ng-model="$ctrl.technology" ng-options="tech for tech in $ctrl.technologies" style="width:59%"/>
+
+                        <span class="has-error" style="color:red;font-size:15px;text-align:center" ng-show="candidateAddForm.technology.$dirty" name="technology">
+                            <span ng-show="candidateAddForm.technology.$error.required">Technology is Required </span>
+
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">File Upoload</div>
+                    <div class="col-sm-8">
+                        <input type="file" required file-model="$ctrl.files" name="file"/>
+                        <span class="has-error" style="color:red;font-size:15px;text-align:center" ng-show="candidateAddForm.file.$dirty" name="technology">
+                            <span ng-show="candidateAddForm.file.$error.required">File is Required </span>
+
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">&nbsp;</div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary btn-rt" id="candidateAddedAlert">
+                            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>Save
+                        </button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="reset" value="Reset" class="btn btn-primary btn-lt"  ng-click="reset();candidateAddForm.$setPristine()" >
+                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- <script>
+    $(document).ready(function(){
+        $("#candidateAddedAlert").click(function(){
+            $("#candidateAdded").show();
+            setTimeout(function() { $("#candidateAdded").hide(); }, 2500);
+        });
+    });
+</script> -->

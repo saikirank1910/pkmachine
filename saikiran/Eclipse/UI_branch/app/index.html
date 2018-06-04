@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- <link rel="stylesheet" href="styles/sourcerer.css"> -->
+
+  <!-- endbuild -->
+
+
+</head>
+
+<body ng-app="myNewProjectApp">
+  <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+  <!-- Add your site or application content here -->
+
+  <app-component></app-component>
+
+  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+  <script>
+    !function (A, n, g, u, l, a, r) {
+    A.GoogleAnalyticsObject = l, A[l] = A[l] || function () {
+      (A[l].q = A[l].q || []).push(arguments)    
+}, A[l].l = +new Date, a = n.createElement(g),
+      r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
+    }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+  </script>
+
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/angular-component-router/angular_1_router.js"></script>
+  <script src="bower_components/angular-component-router/ng_route_shim.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <script type="text/javascript">
+    angular.element(document.getElementsByTagName('head')).append(angular.element('<base href="' + window.location.pathname + '" />'));
+  </script>
+
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/app.component.js"></script>
+  <script src="scripts/app.service.js"></script>
+
+  <script src="scripts/login/login.module.js"></script>
+  <script src="scripts/login/login.component.js"></script>
+
+  <script src="scripts/skills/skills.module.js"></script>
+  <script src="scripts/skills/skills.component.js"></script>
+
+  <script src="scripts/SkillLevel/skill.level.module.js"></script>
+  <script src="scripts/SkillLevel/skill.level.component.js"></script>
+
+  <script src="scripts/PersonalTraits/traits.module.js"></script>
+  <script src="scripts/PersonalTraits/traits.component.js"></script>
+
+  <script src="scripts/admin/admin.module.js"></script>
+  <script src="scripts/admin/admin.component.js"></script>
+
+  <script src="scripts/superAdminSelectOptions/superAdminSelectOptions.module.js"></script>
+  <script src="scripts/superAdminSelectOptions/superAdminSelectOptions.component.js"></script>
+
+  <script src="scripts/adminSelectOptions/adminSelectOptions.module.js"></script>
+  <script src="scripts/adminSelectOptions/adminSelectOptions.component.js"></script>
+
+  <script src="scripts/panel/panel.module.js"></script>
+  <script src="scripts/panel/panel.component.js"></script>
+
+
+  <script src="scripts/panelEvaluation/panelEvaluation.module.js"></script>
+  <script src="scripts/panelEvaluation/panelEvaluation.component.js"></script>
+
+
+  <script src="scripts/CandidateDetailsInPanel/CandidateDetailsInPanel.module.js"></script>
+  <script src="scripts/CandidateDetailsInPanel/CandidateDetailsInPanel.component.js"></script>
+
+
+  <script src="scripts/CandidateSkillScoreInPanel/CandidateSkillScoreInPanel.module.js"></script>
+  <script src="scripts/CandidateSkillScoreInPanel/CandidateSkillScoreInPanel.component.js"></script>
+
+
+  <script src="scripts/CandidateAssessmentPageInPanel/CandidateAssessmentPageInPanel.module.js"></script>
+  <script src="scripts/CandidateAssessmentPageInPanel/CandidateAssessmentPageInPanel.component.js"></script>
+
+  <script src="scripts/panelMemberAuthentication/panelMemberAuthentication.module.js"></script>
+  <script src="scripts/panelMemberAuthentication/panelMemberAuthentication.component.js"></script>
+
+  <script src="scripts/candidate/candidate.module.js"></script>
+  <script src="scripts/candidate/candidate.component.js"></script>
+
+  <script src="scripts/self-assessement/assessment.module.js"></script>
+  <script src="scripts/self-assessement/assessment.component.js"></script>
+
+  <script src="scripts/adminPanelAssignee/adminPanelAssignee.module.js"></script>
+  <script src="scripts/adminPanelAssignee/adminPanelAssignee.component.js"></script>
+
+  <script src="scripts/self/self.module.js"></script>
+  <script src="scripts/self/self.component.js"></script>
+
+  <script src="scripts/round1InPanel/round1InPanel.module.js"></script>
+  <script src="scripts/round1InPanel/round1InPanel.component.js"></script>
+
+  <script src="scripts/header/header.module.js"></script>
+  <script src="scripts/header/header.component.js"></script>
+
+  <script src="scripts/footer/footer.module.js"></script>
+  <script src="scripts/footer/footer.component.js"></script>
+
+  <script src="scripts/feedbackSubmitted/feedback.module.js"></script>
+  <script src="scripts/feedbackSubmitted/feedback.component.js"></script>
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+
+  <!-- new changes -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"></script>
+  <!--<script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+
+        <script src="scripts/products/product.module.js"></script>
+        <script src="scripts/products/controllers/products.controller.js"></script>
+        <script src="scripts/products/services/products.service.js"></script>
+        <script src="scripts/products/directives/custom.directive.js"></script>-->
+  <!-- endbuild -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.4.0/ui-bootstrap-tpls.min.js" /> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-growl-2/0.7.9/angular-growl.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-growl-2/0.7.9/angular-growl.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-growl-2/0.7.9/angular-growl.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- <link data-require="bootstrap-css@*" data-semver="3.0.0" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+
+  <script data-require="ui-bootstrap@0.5.0" data-semver="0.5.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js"></script> -->
+  
+</body>
+
+</html>

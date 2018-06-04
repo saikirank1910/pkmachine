@@ -1,0 +1,95 @@
+package com.prokarma.sourcerer.service.impl;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.prokarma.sourcerer.dao.CandidateDao;
+import com.prokarma.sourcerer.dao.PanelEvaluationDao;
+import com.prokarma.sourcerer.dto.PanelEvaluation;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration({ "classpath:application-context.xml" })
+public class PanelServiceEvaluationImplTest {
+
+	@Mock
+	PanelEvaluationDao panelEvaluationDaoImpl;
+	
+	@Mock
+	CandidateDao candidateDaoImpl;
+	
+	private MockMvc mockMvc;
+
+	@InjectMocks
+	PanelServiceEvaluationImpl panelServiceEvaluationImpl =new PanelServiceEvaluationImpl();
+	
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		mockMvc = MockMvcBuilders.standaloneSetup(this.panelServiceEvaluationImpl).build();
+	}
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+	}
+
+	
+	@Test
+	public void testaddSkillsRating_statusOk() {
+	
+		//when(panelEvaluationDaoImpl.changePanelStatus((PanelEvaluation) any(PanelEvaluation.class))).thenReturn(true);
+	//	when(candidateDaoImpl.changeCandidateStatus((PanelEvaluation) any(PanelEvaluation.class)));
+		//assertThat(panelServiceEvaluationImpl.addEvaluation(any(List.class)), is(true));	
+	}
+	@Test
+	public void testaddSkillsRating_statusError() {
+		
+		when(panelEvaluationDaoImpl.addSkillsRating(any(List.class))).thenReturn(false);
+		assertThat(panelServiceEvaluationImpl.addSkillsRating(any(List.class)), is(false));	
+	}
+  
+  
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testaddTraitsRating_statusOk() {
+	
+		when(panelEvaluationDaoImpl.addTraitsRating(any(List.class))).thenReturn(true);
+		assertThat(panelServiceEvaluationImpl.addTraitsRating(any(List.class)), is(true));	
+	}
+	
+	@Test
+	public void testaddTraitsRating_statusError() {
+	
+		when(panelEvaluationDaoImpl.addTraitsRating(any(List.class))).thenReturn(false);
+		assertThat(panelServiceEvaluationImpl.addTraitsRating(any(List.class)), is(false));	
+	}
+	
+	
+	@Test
+	public void testaddEvaluation_statusOk() {
+		
+		when(panelEvaluationDaoImpl.addEvaluation((PanelEvaluation) any(PanelEvaluation.class))).thenReturn(true);
+		assertThat(panelServiceEvaluationImpl.addEvaluation((PanelEvaluation) any(PanelEvaluation.class)), is(true));	
+	}
+	@Test
+	public void testaddEvaluation_statusError() {
+		
+		when(panelEvaluationDaoImpl.addEvaluation((PanelEvaluation) any(PanelEvaluation.class))).thenReturn(false);
+		assertThat(panelServiceEvaluationImpl.addEvaluation((PanelEvaluation) any(PanelEvaluation.class)), is(false));	
+	}
+}

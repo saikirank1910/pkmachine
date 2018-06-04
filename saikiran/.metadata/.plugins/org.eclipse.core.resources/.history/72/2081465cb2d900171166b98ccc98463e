@@ -1,0 +1,12 @@
+package com.sai.bestCodingPractices.three;
+
+public class Portugal implements CurrencyFormat {
+
+	@Override
+	public void translateCurrency() {
+		// TODO Auto-generated method stub
+		System.out.println("something like ESCUDO 1,200");
+
+	}
+
+}

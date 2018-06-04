@@ -1,0 +1,29 @@
+package com.sai.bestCodingPractices;
+
+import java.util.Date;
+
+public class EstimateRent {
+	private Date rentDate;
+	private Date dueDate;
+	private Double rentalFee;
+	public Date getRentDate() {
+		return rentDate;
+	}
+	public void setRentDate(Date rentDate) {
+		this.rentDate = rentDate;
+	}
+	public Date getDueDate() {
+		return dueDate;
+	}
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+	
+	public boolean isOverdue(){
+		Date now = new Date();
+		return dueDate.before(now);
+	}
+	public double getTotalFee(){
+		return isOverdue()?1.2*rentalFee:rentalFee;
+	}
+}

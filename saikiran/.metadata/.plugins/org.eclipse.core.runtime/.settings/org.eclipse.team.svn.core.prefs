@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+externalMigrateFromAuthorizationDatabase/isMigrated=true
+migrateFromAuthorizationDatabase/isMigrated=true
+repositories/60578fb13fcf0017121ff3f36ddc6bf2=60578fb13fcf0017121ff3f36ddc6bf2;https\://svn2.prokarma.com/svn/gtp6b/source;https\://svn2.prokarma.com/svn/gtp6b/source;branches;tags;trunk;true;4362b946-8f2c-4eb2-b30e-d53c0b0900fa;https\://svn2.prokarma.com/svn/gtp6b;;false;;;0

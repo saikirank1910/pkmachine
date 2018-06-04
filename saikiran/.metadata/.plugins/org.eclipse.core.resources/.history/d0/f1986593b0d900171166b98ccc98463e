@@ -1,0 +1,29 @@
+package com.sai.bestCodingPractices.two;
+
+public class Rectangle implements Shape{
+
+	@Override
+	public int getType() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setShapeType() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getPoint() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPoint() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.prokarma.sourcerer.dao.impl;
+
+public class CandidateDao {
+
+}

@@ -1,0 +1,5 @@
+package com.prokarma.sourcerer.service;
+
+public interface UserService {
+ void get();
+}

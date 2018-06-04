@@ -1,0 +1,151 @@
+package com.prokarma.sourcerer.service.impl;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.prokarma.sourcerer.dao.TasksDao;
+import com.prokarma.sourcerer.dto.PersonalTrait;
+import com.prokarma.sourcerer.dto.Subtechnology;
+import com.prokarma.sourcerer.dto.Technology;
+import com.prokarma.sourcerer.service.TasksService;
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:application-context.xml" })
+public class TaksServiceImplTest {
+		
+	@InjectMocks
+	@Autowired
+	TasksService tasksServiceImpl;
+	
+	@Mock
+	private TasksDao tasksDao;
+
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+	}
+	
+	@Test
+	public void testGetTechnologies() {
+		when(tasksDao.getTechnologies()).thenReturn(buildTechnologiesData());
+		List<String> technologies = tasksServiceImpl.getTechnologies();
+		assertEquals(buildTechnologiesData(), technologies);
+	}
+
+	private List<String> buildTechnologiesData() {
+		List<String> strings = new ArrayList<String>();
+		strings.add("JAVA");
+		return strings;
+	}
+
+	List<Subtechnology> subtechnologies = new ArrayList<Subtechnology>(); 
+	private void buildSubtechnologies() {
+
+
+		Subtechnology firstSubtechnology = new Subtechnology();
+		firstSubtechnology.setTechnology("java");
+		firstSubtechnology.setSubTechnology("oops");
+		 Subtechnology secondSubtechnology = new Subtechnology();
+		 secondSubtechnology.setTechnology("java");
+		 secondSubtechnology.setSubTechnology("io");
+		 subtechnologies.add(firstSubtechnology);
+		 subtechnologies.add(secondSubtechnology);
+	}
+
+
+	@Test
+	public void testGetSubtechnologies() {
+		buildSubtechnologies() ;
+		when(tasksDao.getSubtechnologies()).thenReturn(subtechnologies);
+		List<Subtechnology> subTechnologies= tasksServiceImpl.getSubtechnologies();
+		assertEquals(subtechnologies, subTechnologies);
+	}
+	
+	
+	@Test
+	public void testAddtechnology_pass() {
+		when(tasksDao.addTechnology(any(Technology.class))).thenReturn(true);
+		assertThat(tasksServiceImpl.addTechnology(prepareTechnology()), is(true));	
+	}
+	
+	@Test
+	public void testAddtechnologyFail() throws Exception {
+		doThrow(new NullPointerException()).when(tasksDao).addTechnology((Technology) any(Technology.class));
+		Boolean value=tasksServiceImpl.addTechnology(prepareTechnology());
+		assertEquals(false,value);
+		
+	}
+	private Technology prepareTechnology() {
+		Technology technology = new Technology();
+		technology.setName("JAVA");
+		return technology;
+	}
+
+	@Test
+	public void testAddtechnology_fail() {
+		when(tasksDao.addTechnology(any(Technology.class))).thenReturn(false);
+		assertThat(tasksServiceImpl.addTechnology(any(Technology.class)), is(false));	
+	}
+	
+	@Test
+	public void testAddsubtechnology_pass() {
+		when(tasksDao.addSubtechnology(any(Subtechnology.class))).thenReturn(true);
+		assertThat(tasksServiceImpl.addsubtechnology(any(Subtechnology.class)), is(true));	
+	}
+	
+	@Test
+	public void testAddsubtechnologyFail() throws Exception {
+		doThrow(new NullPointerException()).when(tasksDao).addSubtechnology((Subtechnology) any(Subtechnology.class));
+		Boolean value=tasksServiceImpl.addsubtechnology((Subtechnology) any(Subtechnology.class));
+		assertEquals(false,value);
+		
+	}
+	
+	@Test
+	public void testAddsubtechnology_fail() {
+		when(tasksDao.addSubtechnology(any(Subtechnology.class))).thenReturn(false);
+		assertThat(tasksServiceImpl.addsubtechnology(any(Subtechnology.class)), is(false));	
+	}
+	
+	@Test
+	public void testEditsubtechnology_pass() {
+		when(tasksDao.editSubtechnology(any(Subtechnology.class))).thenReturn(true);
+		assertThat(tasksServiceImpl.editSubtechnology(any(Subtechnology.class)), is(true));	
+	}
+	
+	@Test
+	public void testEditsubtechnology_fail() {
+		when(tasksDao.editSubtechnology(any(Subtechnology.class))).thenReturn(false);
+		assertThat(tasksServiceImpl.editSubtechnology(any(Subtechnology.class)), is(false));	
+	}
+	
+	@Test
+	public void testDeletesubtechnology_pass() {
+		when(tasksDao.deleteSubtechnology(anyInt())).thenReturn(true);
+		assertThat(tasksServiceImpl.deleteSubtechnology(anyInt()), is(true));	
+	}
+	
+	@Test
+	public void testDeletesubtechnology_fail() {
+		when(tasksDao.deleteSubtechnology(anyInt())).thenReturn(false);
+		assertThat(tasksServiceImpl.deleteSubtechnology(anyInt()), is(false));	
+	}
+	
+}

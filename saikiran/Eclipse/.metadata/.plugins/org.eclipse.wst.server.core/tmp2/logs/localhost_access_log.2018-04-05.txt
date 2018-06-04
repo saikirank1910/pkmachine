@@ -1,0 +1,17 @@
+127.0.0.1 - - [05/Apr/2018:15:10:14 +0530] "GET / HTTP/1.1" 404 1074
+172.16.201.248 - - [05/Apr/2018:15:10:30 +0530] "OPTIONS /SHW-rest/rest/panelAssignee/panellogin HTTP/1.1" 200 -
+172.16.201.248 - - [05/Apr/2018:15:10:31 +0530] "POST /SHW-rest/rest/panelAssignee/panellogin HTTP/1.1" 204 -
+172.16.201.248 - - [05/Apr/2018:15:11:14 +0530] "POST /SHW-rest/rest/panelAssignee/panellogin HTTP/1.1" 204 -
+172.16.201.248 - - [05/Apr/2018:15:19:06 +0530] "POST /SHW-rest/rest/panelAssignee/panellogin HTTP/1.1" 204 -
+172.16.201.248 - - [05/Apr/2018:15:26:31 +0530] "OPTIONS /SHW-rest/rest/panelAssignee/panellogin HTTP/1.1" 200 -
+172.16.201.248 - - [05/Apr/2018:15:26:31 +0530] "POST /SHW-rest/rest/panelAssignee/panellogin HTTP/1.1" 204 -
+172.16.201.248 - - [05/Apr/2018:15:27:49 +0530] "OPTIONS /SHW-rest/rest/panelAssignee/panellogin HTTP/1.1" 200 -
+172.16.201.248 - - [05/Apr/2018:15:27:49 +0530] "POST /SHW-rest/rest/panelAssignee/panellogin HTTP/1.1" 204 -
+172.16.201.248 - - [05/Apr/2018:15:28:07 +0530] "POST /SHW-rest/rest/panelAssignee/panellogin HTTP/1.1" 204 -
+172.16.201.248 - - [05/Apr/2018:15:28:28 +0530] "POST /SHW-rest/rest/panelAssignee/panellogin HTTP/1.1" 204 -
+172.16.201.248 - - [05/Apr/2018:15:29:24 +0530] "OPTIONS /SHW-rest/rest/panelAssignee/panellogin HTTP/1.1" 200 -
+172.16.201.248 - - [05/Apr/2018:15:29:24 +0530] "POST /SHW-rest/rest/panelAssignee/panellogin HTTP/1.1" 204 -
+172.16.201.75 - - [05/Apr/2018:15:31:10 +0530] "OPTIONS /SHW-rest/rest/panelAssignee/panellogin HTTP/1.1" 200 -
+172.16.201.75 - - [05/Apr/2018:15:31:10 +0530] "POST /SHW-rest/rest/panelAssignee/panellogin HTTP/1.1" 204 -
+172.16.201.75 - - [05/Apr/2018:15:31:42 +0530] "POST /SHW-rest/rest/panelAssignee/panellogin HTTP/1.1" 204 -
+127.0.0.1 - - [05/Apr/2018:15:45:21 +0530] "GET / HTTP/1.1" 404 1074

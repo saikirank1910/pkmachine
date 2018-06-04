@@ -1,0 +1,24 @@
+package com.sai.bestCodingPractices;
+
+class Organization{
+	Stringid;
+	Stringname;
+	StringtelCountryCode;
+	StringtelAreaCode;
+	StringtelLocalNumber;
+	StringfaxCountryCode;
+	StringfaxAreaCode;
+	StringfaxLocalNumber;
+	StringcontactPersonFirstName;
+	StringcontactPersonLastName;
+	StringcontactPersonTelCountryCode;
+	StringcontactPersonTelAreaCode;
+	StringcontactPersonTelNumber;
+	StringcontactPersonFaxCountryCode;
+	StringcontactPersonFaxAreaCode;
+	StringcontactPersonFaxLocalNumber;
+	StringcontactPersonMobileCountryCode;
+	StringcontactPersonMobileAreaCode;
+	StringcontactPersonMobileLocalNumber;
+//...
+}

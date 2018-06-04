@@ -1,0 +1,9 @@
+package com.saikiran.threads;
+
+public class Looping extends Thread{
+	public void run() {
+		for(int i=0;i<100;i++) {
+			
+		}
+	}
+}

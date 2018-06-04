@@ -1,0 +1,62 @@
+package com.prokarma.sourcerer.service.impl;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.prokarma.sourcerer.dao.CandidateDao;
+import com.prokarma.sourcerer.dao.CandidateSelfRatingDao;
+import com.prokarma.sourcerer.dto.Candidate;
+import com.prokarma.sourcerer.dto.Subtechnology;
+import com.prokarma.sourcerer.service.CandidateService;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:application-context.xml" })
+public class CandidateServiceTest {
+	
+	@InjectMocks
+	CandidateService candidateService = new CandidateServiceImpl();
+
+	@Mock
+	private CandidateDao candidateDao;
+
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+	}
+
+	public void getCandidatesToBeAssigned_true() {
+		when(candidateDao.getCandidatesToBeAssigned()).thenReturn(buildCandidates());
+		List<Candidate> candidate = candidateService.getCandidatesToBeAssigned();
+		assertEquals(buildCandidates(), candidate);
+	}
+
+	List<Candidate> candidate = new ArrayList<Candidate>();
+
+	private List<Candidate> buildCandidates() {
+		Candidate candidate1 = new Candidate();
+		candidate1.setCid(1);
+		candidate1.setCname("Sai");
+		candidate1.setEmail("hello@gmail.com");
+
+		Candidate candidate2 = new Candidate();
+		candidate2.setCid(1);
+		candidate2.setCname("Sai");
+		candidate2.setEmail("dummy@gmail.com");
+		candidate.add(candidate1);
+		candidate.add(candidate2);
+		return candidate;
+	}
+}

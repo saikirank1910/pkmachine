@@ -1,0 +1,8 @@
+package com.sai.generics;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Example6 imp{
+	Serializable ser = new Serializable("abcd",new ArrayList<Sring>());
+}

@@ -1,0 +1,12 @@
+
+
+<table cellspacing="5px" cellpadding="5%" ; align="center" border="1" padding="20px">
+  <tr>
+    <th>model</th>
+    <th>price</th>
+  </tr>
+  <tr ng-repeat="product in $ctrl.getProducts($ctrl.brands)">
+    <td>{{product.name}}</td>
+    <td> {{product.cost}}</td>
+  </tr>
+</table>

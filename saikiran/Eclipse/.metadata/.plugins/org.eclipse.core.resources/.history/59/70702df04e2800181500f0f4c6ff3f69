@@ -1,0 +1,69 @@
+package com.prokarma.sourcerer.controller;
+
+import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import com.prokarma.sourcerer.dao.CandidateDao;
+import com.prokarma.sourcerer.dto.Candidate;
+import com.prokarma.sourcerer.service.CandidateService;
+
+@RestController
+@RequestMapping("/candidate")
+public class CandidateController {
+
+	@Autowired
+	private CandidateService candidateService;
+
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	public ResponseEntity<Object> addCandidate(@RequestParam("file") MultipartFile file,
+			@RequestParam("name") String name, @RequestParam("email") String email,
+			@RequestParam("number") String number, @RequestParam("technology") String technology) {
+		byte[] bytes = null;
+		try {
+			bytes = file.getBytes();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		long phoneNumber = 0;
+		try {
+			phoneNumber = Long.parseLong(number);
+			System.out.println(phoneNumber);
+		} catch (NumberFormatException nfe) {
+			System.out.println("NumberFormatException: " + nfe.getMessage());
+		}
+		Candidate candidate = new Candidate();
+		candidate.setCname(name);
+		candidate.setEmail(email);
+		candidate.setProfile(bytes);
+		candidate.setPhoneNumber(phoneNumber);
+		candidate.setTechnologyName(technology);
+		Boolean result = candidateService.saveCandidate(candidate);
+		if (result == false) {
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ResponseEntity<Integer> authenticateUser(@RequestBody Candidate candidate) {
+		Candidate candidateFromDB = candidateService.verifyCandidate(candidate);
+		//System.out.println(candidate.getCid());
+		if(candidate.getToken()==candidateFromDB.getToken())
+		{
+			return new ResponseEntity<Integer>(candidate.getCid(),HttpStatus.OK);
+		}
+		return new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
+
+	}
+
+}
